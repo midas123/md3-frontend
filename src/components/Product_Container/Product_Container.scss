@@ -1,7 +1,23 @@
 .Product_Container {
     width: 85%;
-    float: left;
+    //float: left;
+    margin: auto;
     min-height: 600px;
+    &_Header{
+       margin-top: 50px;
+        .Product_Count {
+            float: left;
+            margin: 0;
+            margin-top: 8px;
+        }
+    }
+
+    &_Header::after{
+        display: block;
+        content: '';
+        clear: both;
+    }
+
     .Product_item {
         float: left;
         width: 25%;
@@ -14,7 +30,8 @@
         cursor: pointer;
 
         img {
-            width: 300px;
+            max-width: 100%;
+            height: auto;
           }
 
     }

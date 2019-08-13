@@ -1,5 +1,8 @@
 import React from 'react';
-import Product from '../Product/Product'
+import Product from '../Product/Product';
+import ContainerHeader from '../P_Container_header/P_Container_header';
+
+import './Product_Container.scss';
 
 class Product_Container extends React.Component {
     constructor(props){
@@ -21,7 +24,8 @@ class Product_Container extends React.Component {
     render(){
         return(
             <div className="Product_Container">
-                 <Product list={this.state.goodsList} />
+                <ContainerHeader productCount={this.state.goodsList.length}/>
+                <Product list={this.state.goodsList} />
             
             
             

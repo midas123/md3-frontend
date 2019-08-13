@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import ProductContainer from './component/Product_Container/Product_Container';
+import ProductContainer from '../Product_Container/Product_Container.js';
 
 class App extends React.Component {
 

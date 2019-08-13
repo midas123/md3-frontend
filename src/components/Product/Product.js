@@ -9,7 +9,7 @@ class Product extends React.Component{
         console.log(goods);
         return(
                <div>
-                   <ul>
+                   
                    {goods.map(goods => {
                        return (
                        <div className="Product_item" key={goods.goods_id}>
@@ -24,7 +24,7 @@ class Product extends React.Component{
                        </div>
                        )
                    })}
-                   </ul>
+                   
                </div>
         );
     }
