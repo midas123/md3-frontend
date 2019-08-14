@@ -6,7 +6,7 @@ const imagePath = process.env.PUBLIC_URL + '/images/goods/';
 class Product extends React.Component{
     render(){
         const goods = this.props.list;
-        console.log(goods);
+
         return(
                <div>
                    

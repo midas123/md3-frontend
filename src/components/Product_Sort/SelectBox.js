@@ -20,6 +20,7 @@ class SelectBox extends React.Component {
     ));
 
     OnChange = e => {
+        console.log("changing");
         this.props.handleOnChange(e.target.value);
     }
     
@@ -27,11 +28,11 @@ class SelectBox extends React.Component {
         const { classes, options } = this.props;
 
         return(
-            <div>
+           
                 <select onChange={e => this.OnChange(e)} className={classes}>
                     {this.createOptions(options)}
                 </select>
-            </div>
+            
         )
         
     }

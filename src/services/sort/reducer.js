@@ -1,11 +1,11 @@
 import { UPDATE_SORT } from './actionTypes';
-import { combineReducers } from 'redux';
+
 
 const initialState = {
   type: ''
 };
 
-function sortReducer(state = initialState, action) {
+export default function sortReducer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_SORT:
         return {
@@ -19,8 +19,3 @@ function sortReducer(state = initialState, action) {
   }
 }
 
-
-
- export default combineReducers({
-   sort: sortReducer
- });
