@@ -9,7 +9,7 @@ class SelectBox extends React.Component {
     };
 
     state = {
-        selected: ''
+        selected: 'newest'
     }
 
     createOptions = options =>

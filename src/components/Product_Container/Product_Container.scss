@@ -1,5 +1,5 @@
 .Product_Container {
-    width: 85%;
+    width: 75%;
     //float: left;
     margin: auto;
     min-height: 600px;
@@ -28,7 +28,7 @@
 
     .Product_item {
         float: left;
-        width: 25%;
+        width: 33.3%;
         position: relative;
         text-align: center;
         box-sizing: border-box;
@@ -43,4 +43,5 @@
           }
 
     }
+    
 }

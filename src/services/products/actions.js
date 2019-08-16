@@ -36,13 +36,17 @@ export const fetchProducts = (sortBy, callback) => dispatch => {
     return fetch('/api/goods/all')
     .then( response =>  response.json())
     .then(json => {
-        var goodsList = json;
+        let goodsList = json;
         console.log(goodsList);
 
         if(!!sortBy){
             goodsList = goodsList.sort(compare[sortBy]);
         }
             
+        if (!!callback) {
+            callback();
+          }
+          
         return dispatch({
             type: FETCH_PRODUCTS,
             payload : goodsList

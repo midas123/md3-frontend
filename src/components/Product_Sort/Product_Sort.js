@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { updateSort } from '../../services/sort/actions';
 
 const sortBy = [
-    { value:'', label: '선택'},
     { value:'newest', label: '최신순'},
     { value:'popularity', label: '인기순'},
     { value:'lowestprice', label: '낮은 가격'},
