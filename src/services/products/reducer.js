@@ -1,7 +1,16 @@
-import { FETCH_PRODUCTS } from './actionType';
+import { FETCH_PRODUCTS, CURRENTPAGE_UPDATE } from './actionType';
 
 const initialState = {
-    goodsList: []
+    goodsList: [],
+    pager : {
+        currentPage: 1,
+        totalPages: 1,
+        startPage: 1,
+        endPage: 5,
+        startIndex: 0,
+        endIndex: 8,
+        pages: null
+    }
 };
 
 export default function(state = initialState, action) {
@@ -9,9 +18,15 @@ export default function(state = initialState, action) {
         case FETCH_PRODUCTS:
             return {
                 ...state,
-                goodsList: action.payload   
+                goodsList: action.payload
             };
-        default:
+        case CURRENTPAGE_UPDATE:
+            return {
+                ...state,
+                pager: action.payload
+            };  
+            
+            default:
             return state;   
     }
 }

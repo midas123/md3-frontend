@@ -6,7 +6,7 @@ class Container_Header extends React.Component {
 
         return(
             <div className="Product_Container_Header">
-                <small className="Product_Count">총({this.props.productCount})개의 상품</small>
+                {/* <small className="Product_Count">총({this.props.productCount})개의 상품</small> */}
                 <Sort/>
             </div>
             

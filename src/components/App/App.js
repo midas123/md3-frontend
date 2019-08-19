@@ -4,7 +4,7 @@ import './App.css';
 import SwiftSlider from 'react-swift-slider'
 
 import Header from '../Header/Header';
-import ProductContainer from '../Product_Container/Product_Container.js';
+import ProductContainer from '../Products_Container/Product_Container.js';
 
 
 

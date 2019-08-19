@@ -1,5 +1,5 @@
 .Product_Container {
-    width: 75%;
+    width: 70%;
     //float: left;
     margin: auto;
     min-height: 600px;
@@ -41,7 +41,13 @@
             max-width: 100%;
             height: auto;
           }
-
+          
+        .product_title {
+            white-space: nowrap; 
+            width: 90%; 
+            overflow: hidden;
+            text-overflow: ellipsis; 
+        }  
     }
     
 }

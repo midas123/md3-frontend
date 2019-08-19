@@ -20,7 +20,6 @@ class Product_Sort extends React.Component{
     };
     
     handleSort = value => {
-        console.log("update sort")
         this.props.updateSort(value);
     };
 
