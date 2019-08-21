@@ -47,6 +47,13 @@
             width: 90%; 
             overflow: hidden;
             text-overflow: ellipsis; 
+        }
+        .add_to_cart {
+            background-color:#6FB3CE;
+            color: white;
+        }
+        .add_to_cart:hover{
+            background: rgb(206, 111, 206);
         }  
     }
     

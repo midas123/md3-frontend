@@ -5,7 +5,7 @@ import SwiftSlider from 'react-swift-slider'
 
 import Header from '../Header/Header';
 import ProductContainer from '../Products_Container/Product_Container.js';
-
+import Cart from '../cart/Cart';
 
 
 const SlideImagePath = process.env.PUBLIC_URL + '/images/slide/';
@@ -24,8 +24,11 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header/>
+        <div className="mainSlider">
         <SwiftSlider data={data}/>
+        </div>
         <ProductContainer/>
+        <Cart/>
       </div>
       );
     }

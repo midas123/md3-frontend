@@ -70,7 +70,7 @@ export const fetchProducts = (sortBy, pager, currentPage, callback) => {
     .then( response =>  response.json())
     .then(json => {
         let goodsList = json;
-        console.log("sortBy: "+ sortBy+" "+"currentPage: "+ currentPage);
+        console.log(goodsList);
         if(!!sortBy){
             goodsList = goodsList.sort(compare[sortBy]);
         }
@@ -100,9 +100,7 @@ export const fetchProducts = (sortBy, pager, currentPage, callback) => {
 };
 
 export const UpdatingCurrentPage = (currentPage, pager) => dispatch => {
-    console.log("UpdatingCurrentPage1:"+currentPage);
      pager.currentPage = currentPage;
-    console.log("pager1: "+pager.currentPage);
     return dispatch({
         type: CURRENTPAGE_UPDATE,
         payload: pager
