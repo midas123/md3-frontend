@@ -18,7 +18,7 @@ function Product(props){
                 console.log("goodsNum: "+ goods.goods_id);
                 props.addProduct(goods)}}>
 
-                장바구니 담기</div>
+                상품 담기</div>
         </div>
     );
 }

@@ -21,7 +21,6 @@ class CartProduct extends React.Component{
 
     render(){
         const { product, removeProduct } = this.props;
-        console.log("@@@@: "+JSON.stringify(product));
         const classes = ['shelf-item'];
     
         if (!!this.state.isMouseOver) {

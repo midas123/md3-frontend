@@ -4,6 +4,8 @@ import './App.css';
 import SwiftSlider from 'react-swift-slider'
 
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+
 import ProductContainer from '../Products_Container/Product_Container.js';
 import Cart from '../cart/Cart';
 
@@ -24,11 +26,14 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header/>
-        <div className="mainSlider">
-        <SwiftSlider data={data}/>
+        <div className="Wrapper">
+          <div className="mainSlider">
+            <SwiftSlider data={data} enableNextAndPrev={false}/>
+          </div>
+          <ProductContainer/>
+          <Cart/>
         </div>
-        <ProductContainer/>
-        <Cart/>
+        <Footer/>
       </div>
       );
     }

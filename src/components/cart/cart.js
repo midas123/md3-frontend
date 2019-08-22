@@ -12,7 +12,7 @@ import './Cart.scss';
 class Cart extends React.Component {
     state ={
         isOpen: false,
-        sumPrice : ''
+        initial: true
     }
 
 
@@ -55,9 +55,13 @@ class Cart extends React.Component {
         updateCart(cartProducts);
       }
     };
-
+    
     openFloatCart = () => {
-        this.setState({ isOpen: true });
+      
+      this.setState({ isOpen: true });
+      this.setState({ initial: false });
+      const { cartProducts, updateCart } = this.props;
+      updateCart(cartProducts);
       
       };
     
@@ -106,7 +110,7 @@ class Cart extends React.Component {
                 onClick={() => this.closeFloatCart()}
                 className="float-cart__close-btn"
             >
-                X
+                close X
             </div>
             )}
 
@@ -115,7 +119,9 @@ class Cart extends React.Component {
             onClick={() => this.openFloatCart()}
             className="bag bag--float-cart-closed"
           >
-            <span className="bag__quantity">{cartTotal.productQuantity}</span>
+            {!this.state.initial && ( 
+              <span className="bag__quantity">{cartTotal.productQuantity}</span>
+            )}
           </span>
         )}
 

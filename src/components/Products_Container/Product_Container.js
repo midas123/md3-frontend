@@ -92,10 +92,10 @@ class Product_Container extends React.Component {
           <React.Fragment>
                 {this.state.loading && <FadeLoader color={'#000000'} 
                 css={override}/>}
-              <div className="Product_Container">
-                  <ContainerHeader productCount={goodsList.length}/>
-                  {products}
-              </div>
+                <div className="Product_Container">
+                    <ContainerHeader productCount={goodsList.length}/>
+                    {products}
+                </div>
               <Pagination pager={pager} UpdatingCurrentPage={this.handleCurrentPage}/>
           </React.Fragment>
         );

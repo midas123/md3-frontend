@@ -5,6 +5,7 @@ ul.pagination {
     float:left;
     width:100%;
     margin-left: -45px;
+    margin-bottom: 2%;
 
     li {
         //display: inline;
@@ -12,7 +13,7 @@ ul.pagination {
     }
     
     li.active {
-        background-color: #6FB3CE;
+        background-color: #d9d9d9;
         color: white;
     }
     

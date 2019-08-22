@@ -1,5 +1,14 @@
-.Header {
-    background-color: #6FB3CE;
-    height: 90px;
-    width: 100%;
+.Header{
+    
+    .logo_wrapper{
+        max-height:72px;
+        overflow:hidden;
+        .logo_image{
+            position: relative;
+            top: 20px;
+            left: 20px;
+            width: 150px;
+            height: auto;
+        }
+    }
 }
