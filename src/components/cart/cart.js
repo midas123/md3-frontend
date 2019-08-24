@@ -73,8 +73,8 @@ class Cart extends React.Component {
       const {
         totalPrice,
         productQuantity,
-        currencyFormat,
-        currencyId
+        //currencyFormat,
+        //currencyId
       } = this.props.cartTotal;
   
       if (!productQuantity) {

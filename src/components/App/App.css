@@ -9,7 +9,8 @@
 }
 
 .Wrapper {
-    height: 1850px;
+    min-height:100%;
+    position:relative;
 }
 
 .Footer{
@@ -17,8 +18,7 @@
     height: 100px;
     width: 100%;
 
-    position:relative ;
-    right: 0;
+    position: absolute ;
     bottom: 0;
-    left: 0;
+    z-index: -1;
 }
