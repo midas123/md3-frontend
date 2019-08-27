@@ -32,7 +32,7 @@ const compare = {
 }
 
 function getPager(totalItemsCount, currentPage) {
-    var currentPage = currentPage || 1;
+    currentPage = currentPage || 1;
     var itemsPerPage = 9;
 
     // calculate total pages
@@ -66,15 +66,52 @@ function getPager(totalItemsCount, currentPage) {
 }
 
 export const fetchProducts = (sortBy, pager, currentPage, callback) => {
-    return (dispatch) => {fetch('/api/goods/all')
-    .then( response =>  response.json())
+    var exp = localStorage.getItem("goodsListExpiration");
+    var now =  Date.now();
+
+    if((exp !== null || undefined) && exp > now){
+        return (dispatch) => {
+            let goodsList = JSON.parse(localStorage.getItem("goodsList"));
+
+            if(!!sortBy){
+                goodsList = goodsList.sort(compare[sortBy]);
+            }
+            
+            if(!!pager){
+                pager = getPager(goodsList.length, currentPage);
+                goodsList = goodsList.slice(pager.startIndex, pager.endIndex + 1);
+            }
+            
+            if (!!callback) {
+                callback();
+            }
+
+            dispatch({
+                type: FETCH_PRODUCTS,
+                payload : goodsList
+            });
+    
+            dispatch({
+                type: CURRENTPAGE_UPDATE,
+                payload : pager
+            });
+        }    
+    }
+    return (dispatch) => {fetch('/api-product/goods/all')
+    .then(response =>  
+        response.json()
+        )
     .then(json => {
         let goodsList = json;
-        console.log(goodsList);
+        var expires = (60*10);
+        var now = Date.now();  
+        var Expiration = now + expires*1000; 
+        localStorage.setItem("goodsList", JSON.stringify(goodsList));
+        localStorage.setItem("goodsListExpiration", Expiration);
+
         if(!!sortBy){
             goodsList = goodsList.sort(compare[sortBy]);
         }
-        
         
         if(!!pager){
             pager = getPager(goodsList.length, currentPage);
@@ -96,8 +133,12 @@ export const fetchProducts = (sortBy, pager, currentPage, callback) => {
         });
         
     })
+    // .catch(error => console.log("error: "+error) );
     }
 };
+
+
+
 
 export const UpdatingCurrentPage = (currentPage, pager) => dispatch => {
      pager.currentPage = currentPage;

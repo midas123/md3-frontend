@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Router, Link, NavLink  } from "react-router-dom";
 
 import LoginForm from '../Auth/LoginForm';
 import LoginButton from '../Button/LoginButton';
@@ -20,6 +20,10 @@ class Header extends React.Component {
        this.handleLogInForm = this.handleLogInForm.bind(this);
        this.handleLogInButton = this.handleLogInButton.bind(this);
     }
+    // componentDidMount(){
+    //     //localStorage.getItem("accessToken")
+    // }
+
 
     handleLogInForm(){
         if(this.state.isLoggedIn){
@@ -37,6 +41,7 @@ class Header extends React.Component {
         }
     }
     handleLogInButton(){
+        console.log("isLoggedIn")
         this.setState({
             isLoggedIn:!this.state.isLoggedIn
         })
@@ -44,10 +49,10 @@ class Header extends React.Component {
 
     render(){
         return(
-            <Router>
+           
                 <div className="Header">
                     <div className="logo_box">
-                        <Link to="/">
+                        <Link to="/store">
                             <img className="logo_image" src={LogoimagePath+'logo@2x_2.png'} alt=""/>
                         </Link>
                     </div>
@@ -58,16 +63,19 @@ class Header extends React.Component {
                                 <LoginButton isLogged={this.state.isLoggedIn}/>
                             </a>
                         </li>
-                            <li className="social_page_link">
-                                <Link to="/login">소셜</Link>
-                            </li>
-                        {this.isLoggedIn && (
+                            {/* <li className="social_page_link">
+                                <NavLink to="/login">소셜</NavLink>
+                            </li> */}
+                        {this.state.isLoggedIn && (
                             <li className="personal_page_link">
-                                <Link to="/login">내 정보</Link>
+                                <NavLink to="/userinfo">내 정보</NavLink>
                             </li>
                         )}
                         <li className="customer_page_link">
-                            <Link to="/login">고객센터</Link>
+                            <NavLink to="/login">고객센터</NavLink>
+                        </li>
+                        <li className="store_link">
+                            <NavLink to="/store">스토어</NavLink>
                         </li>
                         </ul>
                         <div className="dropdown_login">
@@ -75,7 +83,7 @@ class Header extends React.Component {
                         </div>
                     </div>
                 </div>
-            </Router>
+          
             ) 
     }
         

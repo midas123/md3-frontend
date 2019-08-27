@@ -25,7 +25,6 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <Header/>
         <div className="Wrapper">
           <div className="mainSlider">
             <SwiftSlider data={data} enableNextAndPrev={false}/>
@@ -33,7 +32,6 @@ class App extends React.Component {
           <ProductContainer/>
           <Cart/>
         </div>
-        <Footer/>
       </div>
       );
     }

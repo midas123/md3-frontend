@@ -29,4 +29,7 @@ ul.pagination {
     li a:hover:not(.active) {
         background-color: #ddd;
     }
+    .disable {
+        pointer-events: none;
+      }
 }

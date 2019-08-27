@@ -1,6 +1,5 @@
 import React from 'react';
 //import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 
 import './Pagination.scss';
@@ -19,31 +18,31 @@ class Pagination extends React.Component {
         this.state = {  };
     }
 
-    onChangePage(currentPage){
+    onChangePage(currentPage, pager){
+        if(currentPage>pager.totalPages || currentPage<1)
+            return false;
         this.props.UpdatingCurrentPage(currentPage);
     }
 
     render() {
         var { pager }= this.props;
-
+        
         if (!pager.pages || pager.pages.length <= 1) {
-            
-            // don't display pager if there is only 1 page
             return null;
         }
 
         return (
             <ul className="pagination">
                 <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-                    <a onClick={() => this.onChangePage(pager.currentPage - 1)}>이전</a>
+                    <a onClick={() => this.onChangePage(pager.currentPage - 1, pager)}>이전</a>
                 </li>
                 {pager.pages.map((page, index) =>
                     <li key={index} className={pager.currentPage === page ? 'active' : ''}>
-                        <a onClick={() => this.onChangePage(page)}>{page}</a>
+                        <a onClick={() => this.onChangePage(page, pager)}>{page}</a>
                     </li>
                 )}
                 <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-                    <a onClick={() => this.onChangePage(pager.currentPage + 1)}>다음</a>
+                    <a onClick={() => this.onChangePage(pager.currentPage + 1, pager)}>다음</a>
                 </li>
             </ul>
         );

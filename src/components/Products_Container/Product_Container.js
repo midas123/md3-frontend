@@ -31,6 +31,8 @@ class Product_Container extends React.Component {
 
       componentDidMount(){
         console.log("componentDidMount");
+        localStorage.removeItem("goodsList");
+        localStorage.removeItem("goodsListExpiration");
         let pager = this.props.pager;
         this.handleFetchProducts("newest", pager);
      
@@ -77,14 +79,22 @@ class Product_Container extends React.Component {
 
             });
         };
-    
+        buyProduct = () =>{
+          fetch("/api-product/goods/order")
+          .then(response => response.json())
+          .then(json =>{
+                console.log(json.message);
+            }
+          )
+          .catch(error => console.log(error) );
+        }
 
       render(){
         var { goodsList } = this.props;
         var { pager }= this.props;
         const products = goodsList.map(p => {
           return (
-            <Product product={p} addProduct={this.props.addProduct} key={p.goods_id} />
+            <Product product={p} addProduct={this.props.addProduct} buyProduct={this.buyProduct} key={p.goods_id} />
           );
         });
 

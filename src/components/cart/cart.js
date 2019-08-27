@@ -71,8 +71,8 @@ class Cart extends React.Component {
 
     proceedToCheckout = () => {
       const {
-        totalPrice,
-        productQuantity,
+        productQuantity
+        //totalPrice,
         //currencyFormat,
         //currencyId
       } = this.props.cartTotal;

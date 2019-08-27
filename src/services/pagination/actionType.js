@@ -1,2 +1,0 @@
-// export const GOODS_PAGINATION = 'GOODS_PAGINATION';
-// export const CURRENT_PAGE = 'CURRENT_PAGE';

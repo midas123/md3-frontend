@@ -15,10 +15,15 @@ function Product(props){
             {goods.goodsDetail[0].goods_price} / {goods.goodsDetail[0].goods_disprice}
             </div>
             <div className="add_to_cart" onClick={() => {
-                console.log("goodsNum: "+ goods.goods_id);
-                props.addProduct(goods)}}>
+                console.log("add_to_cart: "+ goods.goods_id);
+                props.addProduct(goods)}}>상품 담기</div>
+            <div className="buy_product" onClick={() => {
+                console.log("buy_product: "+ goods.goods_id);
+                
+            }}>
 
-                상품 담기</div>
+                
+            </div>    
         </div>
     );
 }
