@@ -3,9 +3,6 @@ import './App.css';
 
 import SwiftSlider from 'react-swift-slider'
 
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-
 import ProductContainer from '../Products_Container/Product_Container.js';
 import Cart from '../cart/Cart';
 
@@ -29,8 +26,8 @@ class App extends React.Component {
           <div className="mainSlider">
             <SwiftSlider data={data} enableNextAndPrev={false}/>
           </div>
-          <ProductContainer/>
-          <Cart/>
+          {/* { <ProductContainer/> } */}
+          {/* <Cart/> */}
         </div>
       </div>
       );

@@ -1,17 +1,21 @@
 import React from 'react'
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import Header from '../Header/Header';
+import ModalSwitch from '../Modal/ModalSwitch';
+
 
 class UsersInfo extends React.Component {
   render() {
     return (
         
         
-        // <Header/>
+        
 
-        <div>
+    <div>
     <h1>Users</h1>
-
+  
+      {/* <ModalSwitch/> */}
+   
     </div>
 
     )

@@ -4,29 +4,27 @@ import './index.css';
 import App from './components/App/App';
 import Root from './Root';
 import Header from './components/Header/Header';
-import UserInfo from './components/UserInfo/UserInfo';
 import Footer from './components/Footer/Footer';
 
-import home from './home';
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
 import * as serviceWorker from './serviceWorker';
+import Product_Container from './components/Products_Container/Product_Container';
+import ProductDetail from './components/Product/ProductDetail';
 
 
 
 const routing = (
+    <Root>
     <Router>
-        <Root>
             <Header/>
-            <Route exact path="/" component={home} />
-            <Route path="/userinfo" component={UserInfo} /> 
-            <Route path="/store" component={App} />
+            <Route exact path="/" component={App} />
+            <Route path="/store" component={Product_Container} />
+            <Route path="/goods/:id" component={ProductDetail} /> 
             <Footer/> 
-        </Root>
     </Router>
+    </Root>
   )
-
-
 
 
 ReactDOM.render(routing, document.getElementById('root')

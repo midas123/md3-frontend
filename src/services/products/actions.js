@@ -71,8 +71,8 @@ export const fetchProducts = (sortBy, pager, currentPage, callback) => {
 
     if((exp !== null || undefined) && exp > now){
         return (dispatch) => {
+            console.log("old");
             let goodsList = JSON.parse(localStorage.getItem("goodsList"));
-
             if(!!sortBy){
                 goodsList = goodsList.sort(compare[sortBy]);
             }
@@ -106,6 +106,7 @@ export const fetchProducts = (sortBy, pager, currentPage, callback) => {
         var expires = (60*10);
         var now = Date.now();  
         var Expiration = now + expires*1000; 
+        console.log("new");
         localStorage.setItem("goodsList", JSON.stringify(goodsList));
         localStorage.setItem("goodsListExpiration", Expiration);
 

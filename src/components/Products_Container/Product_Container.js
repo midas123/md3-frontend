@@ -1,7 +1,4 @@
 import React from 'react';
-import Product from '../Product/Product';
-import ContainerHeader from '../Product_header/Product_header';
-
 import { FadeLoader } from 'react-spinners';
 import Pagination from '../Pagination/Pagination'
 
@@ -9,9 +6,9 @@ import { connect } from 'react-redux';
 import { fetchProducts, UpdatingCurrentPage } from '../../services/products/actions';
 import { addProduct } from '../../services/cart/actions';
 
-
 import './Product_Container.scss';
 import { css } from '@emotion/core';
+import ProductList from '../Product/ProductList';
 
 //spinner
 const override = css`
@@ -31,14 +28,14 @@ class Product_Container extends React.Component {
 
       componentDidMount(){
         console.log("componentDidMount");
-        localStorage.removeItem("goodsList");
-        localStorage.removeItem("goodsListExpiration");
+        // localStorage.removeItem("goodsList");
+        // localStorage.removeItem("goodsListExpiration");
         let pager = this.props.pager;
         this.handleFetchProducts("newest", pager);
      
       }
 
-      componentWillReceiveProps(nextProps) { //state가 변경되면서 컴포넌트가 새로운 prop을 받았을때 실행
+      componentWillReceiveProps(nextProps) { 
         console.log("componentWillReceiveProps");
         const { sort: nextSort, pager: pager } = nextProps;
         let preCurrentPage = this.props.pager.currentPage;
@@ -90,22 +87,13 @@ class Product_Container extends React.Component {
         }
 
       render(){
-        var { goodsList } = this.props;
         var { pager }= this.props;
-        const products = goodsList.map(p => {
-          return (
-            <Product product={p} addProduct={this.props.addProduct} buyProduct={this.buyProduct} key={p.goods_id} />
-          );
-        });
-
+        var { goodsList } = this.props;
         return(
           <React.Fragment>
                 {this.state.loading && <FadeLoader color={'#000000'} 
                 css={override}/>}
-                <div className="Product_Container">
-                    <ContainerHeader productCount={goodsList.length}/>
-                    {products}
-                </div>
+                <ProductList goodsList={goodsList}/>
               <Pagination pager={pager} UpdatingCurrentPage={this.handleCurrentPage}/>
           </React.Fragment>
         );

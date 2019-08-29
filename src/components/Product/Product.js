@@ -1,13 +1,18 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const imagePath = process.env.PUBLIC_URL + '/images/goods/';
 
 function Product(props){
     
     const goods = props.product;
-    goods.quantity = 1; //장바구니 수량
+    goods.quantity = 1; //장바구니에 추가될 상품 수량
 
     return(
+        <Link key={goods.goods_id} to={{
+            pathname: `/goods/${goods.goods_id}`,
+            state: { modal : true }
+            }}>
         <div className="Product_item" key={goods.goods_id} >
             <img src={imagePath+goods.goods_thumbnail} alt={goods.goods_name}/>     
             <p className="product_title">{goods.goods_name}</p>
@@ -21,10 +26,10 @@ function Product(props){
                 console.log("buy_product: "+ goods.goods_id);
                 
             }}>
-
-                
             </div>    
         </div>
+        </Link>
+       
     );
 }
 export default Product;

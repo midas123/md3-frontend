@@ -1,12 +1,13 @@
 import React from 'react';
-import { Router, Link, NavLink  } from "react-router-dom";
+import { Link, NavLink  } from "react-router-dom";
 
 import LoginForm from '../Auth/LoginForm';
 import LoginButton from '../Button/LoginButton';
 import './Header.scss'
+import Cart from '../cart/Cart';
 
 
-const LogoimagePath = process.env.PUBLIC_URL + '/images/';
+const LogoImagePath = process.env.PUBLIC_URL + '/images/';
 
 
 class Header extends React.Component {
@@ -52,8 +53,8 @@ class Header extends React.Component {
            
                 <div className="Header">
                     <div className="logo_box">
-                        <Link to="/store">
-                            <img className="logo_image" src={LogoimagePath+'logo@2x_2.png'} alt=""/>
+                        <Link to="/">
+                            <img className="logo_image" src={LogoImagePath+'logo@2x_2.png'} alt=""/>
                         </Link>
                     </div>
                     <div className="menu_wrapper">
@@ -77,6 +78,10 @@ class Header extends React.Component {
                         <li className="store_link">
                             <NavLink to="/store">스토어</NavLink>
                         </li>
+                        <li className="store_cart">
+                           <Cart/>
+                        </li>
+
                         </ul>
                         <div className="dropdown_login">
                             <LoginForm isLoginFormDisplayed={this.state.isLoginFormDisplayed} handleLogInForm={this.handleLogInForm} handleLogInButton={this.handleLogInButton}/>
