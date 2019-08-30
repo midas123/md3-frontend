@@ -27,7 +27,7 @@ class Product_Sort extends React.Component{
     render(){
         return(
             <div className="Product_Sort">
-                정렬 순서:<SelectBox options={sortBy} handleOnChange={this.handleSort}/>
+                <span>정렬 순서</span><SelectBox options={sortBy} handleOnChange={this.handleSort}/>
             </div>
         )
     }

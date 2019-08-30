@@ -6,7 +6,7 @@ import Root from './Root';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import * as serviceWorker from './serviceWorker';
 import Product_Container from './components/Products_Container/Product_Container';

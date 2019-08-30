@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+import './Product.scss';
+
 const imagePath = process.env.PUBLIC_URL + '/images/goods/';
 
 function Product(props){
@@ -17,16 +19,30 @@ function Product(props){
             <img src={imagePath+goods.goods_thumbnail} alt={goods.goods_name}/>     
             <p className="product_title">{goods.goods_name}</p>
             <div className="product_price">
-            {goods.goodsDetail[0].goods_price} / {goods.goodsDetail[0].goods_disprice}
+                <div className="original">
+                    <del>
+                    {goods.goodsDetail[0].goods_price} 
+                    </del>
+                원
+                </div>
+                <div className="dis">
+                    <span>
+                {goods.goodsDetail[0].goods_disprice}
+                    </span>
+                원
+                </div>
             </div>
-            <div className="add_to_cart" onClick={() => {
+            <div className="emphasis">
+
+            </div>
+            {/* <div className="add_to_cart" onClick={() => {
                 console.log("add_to_cart: "+ goods.goods_id);
                 props.addProduct(goods)}}>상품 담기</div>
             <div className="buy_product" onClick={() => {
                 console.log("buy_product: "+ goods.goods_id);
                 
             }}>
-            </div>    
+            </div>     */}
         </div>
         </Link>
        

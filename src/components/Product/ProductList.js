@@ -16,24 +16,13 @@ class ProductList extends React.Component {
     const { goodsList } = this.props;
     const products = goodsList.map(p => {
       return (
-        // <Link key={p.goods_id} to={{
-        //   pathname: `/goods/${p.goods_id}`,
-        //   state: { modal : true }
-        // }}>
           <Product product={p} addProduct={this.props.addProduct} buyProduct={this.buyProduct} key={p.goods_id} />
-          //  </Link>
         );
       });    
       return (
         <div className="Product_Container">
             <Container_Header productCount={goodsList.length}/>
             {products}
-            {/* <Route
-              exact
-              path={match.path}
-              render={() => <h3>Please select a topic.</h3>}
-            /> */}
-
       </div>
     )
   }

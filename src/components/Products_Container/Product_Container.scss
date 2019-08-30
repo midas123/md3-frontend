@@ -15,9 +15,13 @@
         .Product_Sort{
             float: right;
             margin-top: 8px;
+            span{
+                font-size: 14px;
+                padding: 4px;
+                color: #737373;
 
+            }
         }
-
     }
 
     &_Header::after{
@@ -26,39 +30,4 @@
         clear: both;
     }
 
-    .Product_item {
-        float: left;
-        width: 33.3%;
-        position: relative;
-        text-align: center;
-        box-sizing: border-box;
-        padding: 10px;
-        margin-bottom: 30px;
-        border: 1px solid transparent;
-        cursor: pointer;
-
-        img {
-            max-width: 100%;
-            height: auto;
-          }
-          
-        .product_title {
-            white-space: nowrap; 
-            width: 90%; 
-            overflow: hidden;
-            text-overflow: ellipsis; 
-        }
-        .add_to_cart {
-            background-color:#6FB3CE;
-            color: white;
-            width: 90px;
-            height: 25px;
-            float:right;
-            margin-top: 10px;
-        }
-        .add_to_cart:hover{
-            background: #8dc3d8;
-        }  
-    }
-    
 }

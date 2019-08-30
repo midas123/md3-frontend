@@ -28,8 +28,8 @@ class Product_Container extends React.Component {
 
       componentDidMount(){
         console.log("componentDidMount");
-        // localStorage.removeItem("goodsList");
-        // localStorage.removeItem("goodsListExpiration");
+        //  localStorage.removeItem("goodsList");
+        //  localStorage.removeItem("goodsListExpiration");
         let pager = this.props.pager;
         this.handleFetchProducts("newest", pager);
      
