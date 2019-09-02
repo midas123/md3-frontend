@@ -5,7 +5,6 @@ import { addOrder, quantityUp, quantityDown, loadOrders }  from '../../services/
 import { addProduct } from '../../services/cart/actions';
 
 import Quantity from './Quantity';
-import OrderOption from './OrderOptions';
 
 
 class OrderDetails extends Component {
@@ -20,6 +19,7 @@ class OrderDetails extends Component {
       this.handleSelectChange = this.handleSelectChange.bind(this);
       this.updateQuantity = this.updateQuantity.bind(this);
       this.deleteItem = this.deleteItem.bind(this);
+      this.checkDuplication = this.checkDuplication.bind(this);
     //   this.CalculateTotal = this.CalculateTotal.bind(this);
     }
     handleSelectChange(event){
@@ -38,6 +38,16 @@ class OrderDetails extends Component {
             return;
         }
 
+        const prev_array_opt = this.state.options;
+        var booleanValue = this.checkDuplication(prev_array_opt, goodsOption);
+        
+        console.log("33: "+booleanValue);
+        if(prev_array_opt.length>0 && booleanValue)
+        {
+            console.log("44: "+booleanValue);
+            alert("이미 추가한 상품입니다.")
+            return;
+        }
         var option ={
             gd_id: id,
             item_quantity: quantity,
@@ -53,10 +63,21 @@ class OrderDetails extends Component {
         }))
     };
 
+    checkDuplication(array_opt, goodsOption){
+        var bool = 0
+        array_opt.map(opt => {
+            if(opt.item_option1 == goodsOption){
+                console.log("44")
+                bool = 1;
+            }
+        })
+        return bool;
+    }
+
+
     updateQuantity(q, id){
         this.setState(prevState => ({
             options: prevState.options.map(opt => {
-                var total_q = opt.item_quantity + Number(q);
                 if(opt.gd_id !== id){
 
                     return opt;
@@ -128,11 +149,10 @@ class OrderDetails extends Component {
 
         added_options = array.map(opt => {
             return(
-                <div className="item" key={opt.gd_id}>
+                <div className="item" key={index++}>
                    <span>
                        {opt.item_option1}
                        </span> 
-                    <OrderOption optionAdded={opt.goods_option1} key={index++}/>
                     <Quantity id={opt.gd_id} option={opt} updateQuantity={this.updateQuantity} deleteItem={this.deleteItem}/>
                 </div>
         )

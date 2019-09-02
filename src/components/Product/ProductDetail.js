@@ -24,25 +24,12 @@ function ProductDetail({match}) {
                 </div>    
                 )
             }
-        
-            
         const images = goods.goodsImages.map(img => {
             return(
                 <img src={imagePath+img.image_name} className="product_detail_img" key={img.goods_image_id}/>
 
                 )
         });   
-
-        // const options = goods.goodsDetail.map(opt => {
-        //     return (
-        //         <option value={opt.goods_option1} 
-        //         stock={opt.goods_stock} 
-        //         price={opt.goods_disprice ? opt.goods_disprice:opt.goods_price} 
-        //         kinds={opt.gd_id} key={opt.gd_id}>
-        //         {opt.goods_option1}
-        //         </option>
-        //     )
-        // });
         
         console.log("goods: "+JSON.stringify(goods.goodsDetail));
         const price = Number(goods.goodsDetail[0].goods_price);
@@ -82,8 +69,6 @@ function ProductDetail({match}) {
                                 </div>
                             </div>
                             <OrderDetails goods={goods}/>
-                            {/* <OrderProduct goods={goods}/> */}
-
                         </div>
                     </div>
                 </div>
