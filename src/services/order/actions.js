@@ -2,16 +2,6 @@ import { ADD_PRODUCT_ORDER, LOAD_ORDERS } from './actionType';
 import { QUANTITY_UP, QUANTITY_DOWN } from './actionType';
 
 
-// export const loadOrders = (orders) => {
-//     return(dispatch) => {
-//         console.log("Orders: "+JSON.stringify(orders));
-//         dispatch({
-//             type: LOAD_ORDERS,
-//             payload: orders
-//         })    
-//     }
-// }
-
 export const loadOrders = orders => ({
     type: LOAD_ORDERS,
     payload: orders

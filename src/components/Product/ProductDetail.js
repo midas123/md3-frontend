@@ -1,16 +1,14 @@
 import React ,{ Component } from 'react';
 import { withRouter } from 'react-router';
 
-
+import  util from '../../services/util';
 import './ProductDetail.scss';
-import OrderDetails from '../Order/OrderDetails';
-import OrderProduct from '../Order/OrderProduct';
+import ProductOption from '../Order/ProductOption';
 
 const imagePath = process.env.PUBLIC_URL + '/images/goods/';
 
 
 function ProductDetail({match}) {
-    console.log("ProductDetail");
         const goodNum = match.params.id;
         var goodsList = JSON.parse(localStorage.getItem("goodsList"));
         const goods = goodsList.find(function(element){
@@ -31,10 +29,9 @@ function ProductDetail({match}) {
                 )
         });   
         
-        console.log("goods: "+JSON.stringify(goods.goodsDetail));
         const price = Number(goods.goodsDetail[0].goods_price);
         const disprice = Number(goods.goodsDetail[0].goods_disprice);
-        const dis_rate = Math.floor((disprice/price)*100);
+        const dis_rate = Math.floor((1-disprice/price)*100);
 
         return(
             <div className="Product_detail">
@@ -54,10 +51,10 @@ function ProductDetail({match}) {
                                             <strong>{goods.goods_name}</strong>
                                         </dt>
                                         <dt className="original_price">
-                                            <span>{price}</span>원
+                                            <span>{util.formatPrice(price)}</span>원
                                         </dt>
                                         <dt className="discount_price">
-                                            <span>{disprice}</span>원 
+                                            <span>{util.formatPrice(disprice)}</span>원 
                                             <span className="discount_rate">({dis_rate}%할인)</span>
                                         </dt>
                                     </dl>
@@ -68,7 +65,7 @@ function ProductDetail({match}) {
                                     <span>(선결제)</span>
                                 </div>
                             </div>
-                            <OrderDetails goods={goods}/>
+                            <ProductOption goods={goods}/>
                         </div>
                     </div>
                 </div>

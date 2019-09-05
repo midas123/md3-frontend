@@ -37,19 +37,19 @@ class CartProduct extends React.Component{
             />
             <Thumb
               classes="shelf-item__thumb"
-              src={imagePath+product.goods_thumbnail}
-              alt={product.goods_name}
+              src={imagePath+product.item_thumbnail}
+              alt={product.item_name}
             />
             <div className="shelf-item__details">
-              <p className="title">{product.goods_name}</p>
+              <p className="title">{product.item_name}</p>
               { <p className="desc">
-                {product.goodsDetail[0].goods_option1} / {product.goodsDetail[0].goods_option2 !== null && product.goodsDetail[0].goods_option2} <br />
-                수량: {product.quantity}
+                {product.item_option1} / {product.item_option2 !== null && product.item_option2} <br />
+                수량: {product.item_quantity}
               </p> }
             </div>
             <div className="shelf-item__price">
-              <p>{util.formatPrice(product.goodsDetail[0].goods_price)}</p>
-              {util.formatPrice(product.goodsDetail[0].goods_disprice)}원
+              {/* <p>{util.formatPrice(product.goodsDetail[0].goods_price)}</p> */}
+              {/* {util.formatPrice(product.item_price)}원 */}
             </div>
     
             <div className="clearfix" />

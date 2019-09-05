@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import { Link, NavLink  } from "react-router-dom";
 
 import LoginForm from '../Auth/LoginForm';
-import LoginButton from '../Button/LoginButton';
+import LoginButton from '../Auth/LoginButton';
 import './Header.scss'
 import Cart from '../cart/Cart';
 
@@ -21,15 +23,11 @@ class Header extends React.Component {
        this.handleLogInForm = this.handleLogInForm.bind(this);
        this.handleLogInButton = this.handleLogInButton.bind(this);
     }
-    // componentDidMount(){
-    //     //localStorage.getItem("accessToken")
-    // }
-
 
     handleLogInForm(){
         if(this.state.isLoggedIn){
             localStorage.removeItem("accessToken");
-            console.log("removeToken:"+!localStorage.getItem("accessToken"));
+            this.props.logout();
             this.setState({
                 isLoggedIn:!this.state.isLoggedIn
             })
@@ -42,7 +40,6 @@ class Header extends React.Component {
         }
     }
     handleLogInButton(){
-        console.log("isLoggedIn")
         this.setState({
             isLoggedIn:!this.state.isLoggedIn
         })
@@ -72,9 +69,9 @@ class Header extends React.Component {
                                 <NavLink to="/userinfo">내 정보</NavLink>
                             </li>
                         )}
-                        <li className="customer_page_link">
+                        {/* <li className="customer_page_link">
                             <NavLink to="/login">고객센터</NavLink>
-                        </li>
+                        </li> */}
                         <li className="store_link">
                             <NavLink to="/store">스토어</NavLink>
                         </li>
@@ -96,4 +93,17 @@ class Header extends React.Component {
 
 }
 
-export default Header;
+
+// export default connect()(Header);
+
+const mapDispatchToProps = dispatch => {
+    return {
+      // dispatching plain actions
+      logout: () => dispatch({ type: "USER_LOGOUT" }),
+    };
+  };
+  
+  export default connect(
+    null,
+    mapDispatchToProps
+  )(Header)

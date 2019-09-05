@@ -16,7 +16,7 @@ class ProductList extends React.Component {
     const { goodsList } = this.props;
     const products = goodsList.map(p => {
       return (
-          <Product product={p} addProduct={this.props.addProduct} buyProduct={this.buyProduct} key={p.goods_id} />
+          <Product product={p} buyProduct={this.buyProduct} key={p.goods_id} />
         );
       });    
       return (

@@ -50,14 +50,8 @@ class LoginForm extends React.Component {
             })
             .then(response => response.json())
             .then(json =>{
-                console.log("response-token:"+json.accessToken);
-                console.log("response-error:"+json.error);
-                console.log("response-ok:"+json.error);
-                console.log("response-status:"+json.status);
-                console.log("response-message:"+json.message);
                 
                 if(json.status === "401"){
-                    console.log("this");
                     this.setState({
                         loginMessage: "아이디 또는 비밀번호를 확인해주세요."
                     })

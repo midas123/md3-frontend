@@ -4,7 +4,6 @@ import Pagination from '../Pagination/Pagination'
 
 import { connect } from 'react-redux';
 import { fetchProducts, UpdatingCurrentPage } from '../../services/products/actions';
-import { addProduct } from '../../services/cart/actions';
 
 import './Product_Container.scss';
 import { css } from '@emotion/core';
@@ -108,7 +107,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchProducts, UpdatingCurrentPage, addProduct
+  fetchProducts, UpdatingCurrentPage
 };
 
 

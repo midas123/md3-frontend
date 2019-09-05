@@ -2,12 +2,12 @@ import { UPDATE_CART } from './actionTypes';
 
 export const updateCart = cartProducts => dispatch => {
   let productQuantity = cartProducts.reduce((sum, p) => {
-    sum += p.quantity;
+    sum += p.item_quantity;
     return sum;
   }, 0);
 
   let totalPrice = cartProducts.reduce((sum, p) => {
-    sum += p.goodsDetail[0].goods_disprice * p.quantity;
+    sum += p.item_price * p.item_quantity;
     return sum;
   }, 0);
 

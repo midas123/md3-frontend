@@ -10,14 +10,14 @@ export default initialState => {
     const store = createStore(rootReducer, initialState, enhancer);
     
 
-    store.subscribe(() => {
-        const state = store.getState();
-        const persist = {
-            cart: state.cart
-        };
+    // store.subscribe(() => {
+    //     const state = store.getState();
+    //     const persist = {
+    //         cart: state.cart
+    //     };
 
-        window.localStorage.setItem('state', JSON.stringify(persist));
-    })
+    //     window.localStorage.setItem('state', JSON.stringify(persist));
+    // })
 
     return store;
 }
