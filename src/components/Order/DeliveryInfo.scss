@@ -1,0 +1,23 @@
+.delivery-contents{
+    margin:40px 0 40px 0;
+    width: 80%;
+    div{
+        display: flex;
+        margin:0 0 15px 0;
+        height: 25px;
+    }
+
+    input, textarea {
+        margin-left: 15px;
+    }
+    .info {
+        width: 120px;
+        font-size: 15px;
+        font-weight: 400;
+        color: #333333;
+    }
+    .memo textarea {
+        height: 75px;
+    }
+  
+}

@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import * as serviceWorker from './serviceWorker';
+
 import './index.css';
 import App from './components/App/App';
 import Root from './Root';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-
-import * as serviceWorker from './serviceWorker';
 import Product_Container from './components/Products_Container/Product_Container';
 import ProductDetail from './components/Product/ProductDetail';
-
+import OrderContainer from './components/Order/OrderContainer';
 
 
 const routing = (
@@ -21,6 +21,7 @@ const routing = (
             <Route exact path="/" component={App} />
             <Route path="/store" component={Product_Container} />
             <Route path="/goods/:id" component={ProductDetail} /> 
+            <Route path="/order" component={OrderContainer} /> 
             <Footer/> 
     </Router>
     </Root>

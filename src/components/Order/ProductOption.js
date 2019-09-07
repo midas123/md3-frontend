@@ -185,7 +185,6 @@ class OrderDetails extends Component {
         total = null;
     }
     const items = this.state.options;
-    console.log("items: "+items);
     return(
         <div className="box_mid">
             <div className="product_option">

@@ -1,13 +1,21 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { addToCart } from '../../services/cart/actions';
+import { readyOrder } from '../../services/order/actions';
+
+import { Redirect } from 'react-router';
+import {withRouter} from 'react-router-dom'
 
 
 class ProductOrder extends Component {
     constructor(props){
-        super(props);
-
+        super(props);   
+        this.state = {
+            redirect: false
+        }
         this.addProductToCart = this.addProductToCart.bind(this);
+        this.orderProduct = this.orderProduct.bind(this);
+
     }
     
     addProductToCart(e){
@@ -16,11 +24,25 @@ class ProductOrder extends Component {
         this.props.addToCart(items);
         alert("장바구니에 상품을 추가했습니다.")
     }
+
+    orderProduct(){
+        console.log("구매 시도")
+        const { items } = this.props;
+        this.props.readyOrder(items);
+        this.setState({redirect: true});
+        // window.open('/order/');
+        // window.location.href = '/order';
+    }
+
     render(){
+        if (this.state.redirect) {
+            return <Redirect push to="/order" state={this.props.items}/>;
+          }
     return(
+
         <div className="product_order">
         <div className="buy_btn">
-            <a href="#">
+            <a href="#" onClick={(e) => this.orderProduct(e)}>
                 <span>구매하기</span>
             </a>
         </div>
@@ -29,13 +51,6 @@ class ProductOrder extends Component {
                 <span>장바구니 담기</span>
             </a>
         </div>
-
-                    {/* 
-        <div className="buy_product" onClick={() => {
-        console.log("buy_product: "+ goods.goods_id);
-        }}>
-        </div>     */}
-
     </div>
     )
     }
@@ -43,19 +58,19 @@ class ProductOrder extends Component {
 
 // export default ProductOrder;
 
-const mapStateToProps = state => ({
-    cartProducts : state.cart.products
-  });
+// const mapStateToProps = state => ({
+//     cartProducts : state.cart.products,
+//     order : state.order.pre_order
+//   });
 
 
 const mapDispatchToProps = {
-     addToCart
+     addToCart, readyOrder
 };
   
   
 export default connect(
-    mapStateToProps, mapDispatchToProps
+    null, mapDispatchToProps
 )(ProductOrder);
-
 
 

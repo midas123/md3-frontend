@@ -80,4 +80,5 @@ function ProductDetail({match}) {
         )
 }
 
-export default withRouter(ProductDetail);
+// export default withRouter(ProductDetail);
+export default ProductDetail;

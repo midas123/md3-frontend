@@ -1,0 +1,85 @@
+
+.order-page{
+    margin: auto;
+    width: 80%;
+    min-height: 1000px;
+    height: 100%;
+    .order-title{
+        font-size: 24px;
+        color: #333333;
+        font-weight: 700;
+        text-align: center;
+        margin: 40px 0 80px 0;
+    }
+    .order-info, .delivery-info{
+        float: none;
+        font-size: 17px;
+        color: #333333;
+    }
+
+    .line hr{
+        border: 0;
+        height: 1px;
+        background: #ccc;
+    }
+    .order-contents{
+        min-height: 200px;
+        max-height: 500px;
+        overflow: auto;
+        .no-order{
+            color: #cccccc;
+            text-align: center; 
+            font-size: 18px;
+        }
+        
+        .order-item{
+            display:flex;
+            align-items: center;
+            &__thumb img{
+                width: 100px;
+                height: 100px;
+            }
+            div {
+                margin: 0 10px 0 10px;
+            }
+            
+        }
+    }
+    .order-page-btn{
+        display: flex;
+        // margin: auto;
+        justify-content: center;
+        align-items: center;
+        top: 15%;
+        // bottom: 15%;
+        // left: 20%;
+        position:relative;
+        margin-top: 50px;
+        .buy_btn {
+            padding: 7px;
+            background-color: #6FB3CE;
+            text-align: center;
+            // height: 40px;
+            width: 170px;
+            margin-right: 40px;
+            span{
+                color: white;
+                font-size: 20px;
+                font-weight: 500;
+            }
+        }
+        .cancel_btn{
+            padding: 7px;
+            // margin-left: auto;
+            text-align: center;
+            width: 170px;
+            
+            background-color: #b2b2b2;
+            span{
+            color: white;
+            font-size: 20px;
+            font-weight: 500;
+            }
+        }  
+    }
+}

@@ -1,9 +1,8 @@
-import { LOAD_CART, ADD_PRODUCT, REMOVE_PRODUCT, ADD_TO_CART, CLEAR_CART } from './actionTypes';
+import { LOAD_CART, REMOVE_PRODUCT, ADD_TO_CART, CLEAR_CART } from './actionTypes';
 
 const initialState = {
   products: [],
-  productIds: [],
-  productQuantity: []
+  productIds: []
 };
 
 export default function(state = initialState, action) {
@@ -14,12 +13,6 @@ export default function(state = initialState, action) {
         products: action.payload
       };
     }
-    case ADD_PRODUCT:{
-      return {
-        ...state,
-        productToAdd: action.payload
-        };
-      }
     case REMOVE_PRODUCT:{
       return {
         ...state,

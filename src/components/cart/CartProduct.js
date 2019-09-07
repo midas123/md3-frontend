@@ -48,8 +48,7 @@ class CartProduct extends React.Component{
               </p> }
             </div>
             <div className="shelf-item__price">
-              {/* <p>{util.formatPrice(product.goodsDetail[0].goods_price)}</p> */}
-              {/* {util.formatPrice(product.item_price)}원 */}
+              {util.formatPrice(product.item_price)}원
             </div>
     
             <div className="clearfix" />

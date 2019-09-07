@@ -1,4 +1,2 @@
-export const ADD_PRODUCT_ORDER = "READY_PRODUCT_ORDER";
-export const LOAD_ORDERS = "LOAD_ORDERS";
-export const QUANTITY_UP = "QUANTITY_UP";
-export const QUANTITY_DOWN = "QUANTITY_DOWN";
+export const FETCH_ORDERS = "FETCH_ORDERS";
+export const READY_ORDER = "READY_ORDER";

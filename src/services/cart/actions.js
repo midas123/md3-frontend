@@ -6,13 +6,6 @@ export const loadCart = products => {
   payload: products
 }};
 
-// export const addProduct = product => {
-//     return{
-//       type: ADD_PRODUCT,
-//       payload: product
-//     }
-// };
-
 export const removeProduct = product => ({
   type: REMOVE_PRODUCT,
   payload: product
@@ -28,9 +21,3 @@ export const clearCart = () => ({
   type: CLEAR_CART
 });
 
-
-// export const addToCart = productId => (dispatch, getState) => {
-//   if (getState().products.byId[productId].inventory > 0) {
-//     dispatch(addToCartUnsafe(productId))
-//   }
-// }
