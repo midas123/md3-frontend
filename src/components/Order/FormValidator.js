@@ -44,12 +44,36 @@ const formValidator = (target) =>{
             }
             break;
         }
-        // case'zip_code':{
-      
-        // }
-        // case'address2':{
+        case'address1':{
+            let address1Valid = 
+            target.value.match(/^[가-힣0-9\s]+$/);
 
-        // }
+           
+            if(address1Valid !== null && 
+                target.value.length !== address1Valid.length){
+                    valid = true;
+            }
+            result = {
+                name: 'isAddress1Valid',
+                isValid :valid
+            }
+            break;
+        }
+        case'address2':{
+            let address2Valid = 
+            target.value.match(/^[가-힣0-9\s\-\(\)\,]+$/);
+
+           
+            if(address2Valid !== null && 
+                target.value.length !== address2Valid.length){
+                    valid = true;
+            }
+            result = {
+                name: 'isAddress2Valid',
+                isValid :valid
+            }
+            break;
+        }
      
     
     default:

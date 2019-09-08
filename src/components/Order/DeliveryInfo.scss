@@ -4,11 +4,15 @@
     div{
         display: flex;
         margin:0 0 15px 0;
-        height: 25px;
+        height: 28px;
     }
 
     input, textarea {
+        height: 100%;
         margin-left: 15px;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        box-sizing: border-box;
     }
     .info {
         width: 120px;
@@ -18,6 +22,53 @@
     }
     .memo textarea {
         height: 75px;
+    }
+    .zip-code-btn{
+        height: 25px;
+        line-height: 25px;
+        margin-left: 5px;
+        font-size: 13px;
+        padding:1px 8px 1px 8px;
+        background-color:#cccccc;
+        text-align: center;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        
+    }
+    .zip-code-btn:hover{
+        background-color:#d9d9d9;
+    }
+
+
+    .zip-code-box{
+        width: 450px;
+        .zip-close-btn {
+            margin-right: 5px;
+            float: right;
+            font-size: 20px;
+            font-style: bold;
+        }
+    }
+
+    .valid-check-sign{
+    
+        margin-left: 20px;
+        --borderWidth: 3px;
+        --height: 16px;
+        --width: 6px;
+        --borderColor: #78b13f;
+        .check{
+            transform: rotate(45deg);
+            height: var(--height);
+            width: var(--width);
+            border-bottom: var(--borderWidth) solid var(--borderColor);
+            border-right: var(--borderWidth) solid var(--borderColor);
+        }
+      
+        .uncheck{
+      
+        }
     }
   
 }
