@@ -1,0 +1,73 @@
+.order-payment-contents{
+  margin: 20px 0 20px 0;
+  min-height: 100px;
+}
+.pay-option-box{
+  display: flex;
+}
+.pay-option {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin: 0 40px 12px 0;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.pay-option input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.pay-option:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.pay-option input:checked ~ .checkmark {
+  background-color: #6FB3CE;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.pay-option input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.pay-option .checkmark:after {
+ 	top: 6px;
+	left: 6px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+.total-order-price{
+  font-size: 21px;
+  font-weight: 500;
+  margin-left: auto;
+  order: 2;
+}
+.total-order-price span{
+  margin-left: 10px;
+  color:#ff6666;
+}

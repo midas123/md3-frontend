@@ -11,7 +11,7 @@ export default function orderReducer(state = initialState, action) {
             console.log("FETCH_ORDERS: "+action.payload);
             return {
                 ...state,
-                orders: action.payload
+                orders: [...state.orders, ...action.payload]
             }
         case READY_ORDER:
             console.log("READY_ORDER: "+JSON.stringify(action.payload));

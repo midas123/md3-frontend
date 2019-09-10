@@ -3,8 +3,19 @@ import React from 'react';
 const formValidator = (target) =>{
     let valid = false;
     let result= '';
-    console.log("formValidator: "+target.name)
     switch(target.name){
+        case 'orderer_name':{
+            let nameValid = target.value.match(/^[가-힣]+$/);
+            if(nameValid !== null && target.value.length !== nameValid.length){
+                valid = true;
+            }
+            result = {
+                name: 'isOrdererValid',
+                isValid :valid
+            }
+            break;
+        }
+
         case 'recipient_name':{
             let nameValid = target.value.match(/^[가-힣]+$/);
             if(nameValid !== null && target.value.length !== nameValid.length){
@@ -74,12 +85,26 @@ const formValidator = (target) =>{
             }
             break;
         }
+        case'zipcode':{
+            let isZipCodeValid = 
+            target.value.match(/^[0-9\s\-\,]+$/);
+
+           
+            if(isZipCodeValid !== null && 
+                target.value.length !== isZipCodeValid.length){
+                    valid = true;
+            }
+            result = {
+                name: 'isZipCodeValid',
+                isValid :valid
+            }
+            break;
+        }
      
     
     default:
 
     }
-
     return result;
   
 } 

@@ -4,7 +4,6 @@ import { addToCart } from '../../services/cart/actions';
 import { readyOrder } from '../../services/order/actions';
 
 import { Redirect } from 'react-router';
-import {withRouter} from 'react-router-dom'
 
 
 class ProductOrder extends Component {
@@ -42,12 +41,12 @@ class ProductOrder extends Component {
 
         <div className="product_order">
         <div className="buy_btn">
-            <a href="#" onClick={(e) => this.orderProduct(e)}>
+            <a href="#" onClick={() => this.orderProduct()}>
                 <span>구매하기</span>
             </a>
         </div>
         <div className="cart_btn">
-            <a href="#" onClick={(e) => this.addProductToCart(e)}>
+            <a href="#" onClick={() => this.addProductToCart()}>
                 <span>장바구니 담기</span>
             </a>
         </div>

@@ -32,19 +32,21 @@ class Pagination extends React.Component {
         }
 
         return (
-            <ul className="pagination">
-                <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-                    <a onClick={() => this.onChangePage(pager.currentPage - 1, pager)}>이전</a>
-                </li>
-                {pager.pages.map((page, index) =>
-                    <li key={index} className={pager.currentPage === page ? 'active' : ''}>
-                        <a onClick={() => this.onChangePage(page, pager)}>{page}</a>
+            <div>
+                <ul className="pagination">
+                    <li className={pager.currentPage === 1 ? 'disabled' : ''}>
+                        <a onClick={() => this.onChangePage(pager.currentPage - 1, pager)}>이전</a>
                     </li>
-                )}
-                <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-                    <a onClick={() => this.onChangePage(pager.currentPage + 1, pager)}>다음</a>
-                </li>
-            </ul>
+                    {pager.pages.map((page, index) =>
+                        <li key={index} className={pager.currentPage === page ? 'active' : ''}>
+                            <a onClick={() => this.onChangePage(page, pager)}>{page}</a>
+                        </li>
+                    )}
+                    <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
+                        <a onClick={() => this.onChangePage(pager.currentPage + 1, pager)}>다음</a>
+                    </li>
+                </ul>
+            </div>
         );
     }
 }

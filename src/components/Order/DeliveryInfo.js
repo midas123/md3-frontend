@@ -9,6 +9,7 @@ class DeliveryInfo extends Component {
     constructor(props){
         super(props);
         this.state = {
+            orderer_name:'',
             recipient_name:'',
             mobilephone_number:'',
             email_address:'',
@@ -17,17 +18,17 @@ class DeliveryInfo extends Component {
             address2:'',
             delivery_memo:'',
 
-            // isAllValid: false,
+            zipcode_style : {
+                display: 'none'
+            },
+
+            isOrdererValid: false,
             isNameValid: false,
             isPhoneNumberValid: false,
             isEmailValid: false,
             isAddress1Valid: false,
             isAddress2Valid: false,
-
-            zipcode_style : {
-                display: 'none'
-
-            }
+            isZipCodeValid: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.zipCodeModal = this.zipCodeModal.bind(this);
@@ -38,21 +39,15 @@ class DeliveryInfo extends Component {
         const name = target.name;
         const value = target.value;
         var valid = formValidator(target);
-
-        if(valid.isValid){
-            this.setState({
-                [valid.name]:valid.isValid
-            })
-        } else {
-            this.setState({
-                [valid.name]:false
-            })
-        }
+        this.props.handleDeliveryValid(valid);
+        this.props.handleDeliveryInfo(target);
 
         this.setState({
-            [name] : value
+            [name] : value,
+            [valid.name]:valid.isValid
         })
     }
+
     zipCodeModal(value){
         console.log("zipCodeModal")
         let displayValue = '';
@@ -96,6 +91,25 @@ class DeliveryInfo extends Component {
             zip_code: zipcode
         })
 
+        let valids = [
+            {
+                name: 'isAddress1Valid',
+                isValid :true
+            },
+            {
+                name: 'isAddress2Valid',
+                isValid :true
+            },
+            {
+                name: 'isZipCodeValid',
+                isValid :true
+            }
+        ]
+        let x;
+        for(x of valids){
+            this.props.handleDeliveryValid(x);
+        }
+
       }
     
     render(){
@@ -105,6 +119,13 @@ class DeliveryInfo extends Component {
         }
         return(
         <div className="delivery-contents">
+            <div className="orderer">
+                <div className="info">주문자</div><input type="text" name="orderer_name" 
+                size="5" maxLength="15" value={this.state.orderer_name} onChange={this.handleInputChange}/>
+                <div className="valid-check-sign">{this.state.isOrdererValid ? 
+                <div className="check"></div>:<div className="uncheck"></div>}</div>
+            </div>
+
             <div className="recipient">
                 <div className="info">수령인</div><input type="text" name="recipient_name" 
                 size="5" maxLength="15" value={this.state.recipient_name} onChange={this.handleInputChange}/>
@@ -112,7 +133,7 @@ class DeliveryInfo extends Component {
                 <div className="check"></div>:<div className="uncheck"></div>}</div>
             </div>
             <div className="mobile-phone">
-                <div className="info">휴대폰 번호</div><input type="text" name="mobilephone_number" 
+                <div className="info">휴대폰 번호</div><input type="text" name="mobilephone_number" placeholder="010-0000-0000"
                 size="13" maxLength="13" value={this.state.mobilephone_number} onChange={this.handleInputChange}/>
                 <div className="valid-check-sign">{this.state.isPhoneNumberValid ? 
                 <div className="check"></div>:<div className="uncheck"></div>}</div>
@@ -132,6 +153,8 @@ class DeliveryInfo extends Component {
                     <div className="zip-close-btn" onClick={() => this.zipCodeModal(this.state.zipcode_style)}>X</div>
                     <DaumPostcode onComplete={this.handleAddress} width={450} style={zip_box_style}/>
                 </div>
+                <div className="valid-check-sign">{this.state.isZipCodeValid ? 
+                <div className="check"></div>:<div className="uncheck"></div>}</div>
             </div>
             <div className="address1">
                 <div className="info">배송지 주소</div><input type="text" name="address1" 

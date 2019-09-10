@@ -3,63 +3,170 @@ import { connect } from 'react-redux';
 import { fetchOrder } from '../../services/order/actions';
 import OrderInfo from './OrderInfo';
 import DeliveryInfo from './DeliveryInfo';
+import PaymentMethod from './PaymentMethod';
 
 
 
 class OrderContainer extends Component {
     constructor(props){
         super(props);
-        this.state ={}
+        this.state ={
+            isOrdererValid: false,
+            isNameValid: false,
+            isPhoneNumberValid: false,
+            isEmailValid: false,
+            isAddress1Valid: false,
+            isAddress2Valid: false,
+            isZipCodeValid: false,
+
+            delivery_info:{
+                recipient_name:'',
+                mobilephone_number:'',
+                email_address:'',
+                zip_code:'',
+                address1:'',
+                address2:'',
+                delivery_memo:''
+            },
+
+            isPaymentChecked: false,
+
+            payment_info:{
+                order_name:'',
+                payment:''
+            }
+        }
     }
-    
-    orderProduct = (order) => {
-        console.log("주문")
-        if(order.length === 0){
+ 
+
+    componentDidMount () {
+        //결제모듈 js추가
+        const src =[
+            "https://code.jquery.com/jquery-1.12.4.min.js",
+            "https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
+        ]
+        var i ;
+        for(i of src){
+            const script = document.createElement("script");
+            script.type = 'text/javascript';
+            script.src = i;
+            script.async = true;
+            document.body.appendChild(script);
+        }
+    }
+
+    orderProduct = (orders, total_price) => {
+        console.log("주문: "+JSON.stringify(orders))
+        if(orders.length === 0){
             alert("주문할 상품이 없습니다.")
             return;
         }
-        this.props.fetchOrder(order);
-    }
+        if(!(this.state.isNameValid && this.state.isPhoneNumberValid &&
+            this.state.isEmailValid && this.state.isAddress1Valid && this.state.isAddress2Valid)){
+                alert("배송 정보를 정확히 입력해주세요.")
+                return;
+        }
+
+        if(!this.state.isPaymentChecked){
+            alert("결제 방법을 선택해주세요.")
+            return;
+        }
+        
+        const delivery_info = this.state.delivery_info;
+        const payment_info = this.state.payment_info;
+
+  
+        let readyOrder = orders.map(o=>{
+            console.log("o: "+o)
+            return {
+                ...o,
+                "delivery_info":delivery_info,
+                "payment_info":payment_info
+            }
+        })
+          
     
-    cancelOrdering =(e) =>{
-        e.preventDefault();
+     
+        console.log("before order: "+JSON.stringify(readyOrder) )
+        this.props.fetchOrder(readyOrder, total_price);
+
+    }
+ 
+    
+    cancelOrdering =() =>{
         console.log("주문 취소")
         this.props.history.goBack();
         //clear action
     }
-
+    
+    handleDeliveryValid = (valid) => {
+        this.setState({
+            [valid.name]:valid.isValid
+        })
+    }
+    
+    handleDeliveryInfo = (target) =>{
+        const name = target.name;
+        const value = target.value;
+        this.setState({
+            delivery_info:{...this.state.delivery_info,
+                [name] : value
+            }
+        })
+    }
+    handlePaymentInfo = (target) =>{
+        const name = target.name;
+        const value = target.value;
+        this.setState({
+            [name] : value,
+            isPaymentChecked:true
+        })
+    }
+ 
     render(){
-        const { order } = this.props;
-        console.log("orderpage: "+JSON.stringify(order));
+        const orders = this.props.order;
+        var total_amount = 0;
+        var total_price = 0;
+        orders.map(order=> {
+            total_amount += order.item_quantity;
+            total_price += order.item_price*order.item_quantity;
+        })
+
+        console.log("orders: "+JSON.stringify(orders))
         return(
             
-            <div className="order-page">
-                <form>
-                    <div className="order-title">주문/결제</div>
-                    <div className="order-info">상품 정보</div>
-                    <div className="line"><hr></hr> </div>
-                        <OrderInfo orders={order}/>
-                    <div className="delivery-info">배송지 정보</div>
+        <div className="order-page">
+            <form onSubmit={this.handleSubmit}>
+                <div className="order-title">주문/결제</div>
+                <div className="order-info">상품 정보</div>
+                <div className="line"><hr></hr> </div>
+                    <OrderInfo orders={orders} totalprice={total_price} 
+                    total_amount={total_amount}/>
+                <div className="delivery-info">배송지 정보</div>
+                <div className="line"><hr></hr></div>
+                    <DeliveryInfo handleDeliveryValid={this.handleDeliveryValid}
+                    handleDeliveryInfo={this.handleDeliveryInfo}/>
+                <div className="order-payment">결제 방법</div>
                     <div className="line"><hr></hr></div>
-                        <DeliveryInfo/>
-                    <div className="order-payment">결제 방법</div>
-                    <div className="line"><hr></hr></div>
-                    <div className="order-page-btn">
-                    <div className="buy_btn" onClick={(e) => this.orderProduct(order)}>
+                    <PaymentMethod handlePaymentInfo={this.handlePaymentInfo}
+                    totalprice={total_price}/>
+                <div className="order-page-btn">
+                    <div className="buy_btn" onClick={() => this.orderProduct(orders, total_price)}>
                             <span>결제 하기</span>
                     </div>
-                    <div className="cancel_btn" onClick={(e) => this.cancelOrdering(e)}>
+                    <div className="cancel_btn" onClick={() => this.cancelOrdering()}>
                             <span>취소</span>
                     </div>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
+        </div>
     )
     }
 }
 
 const mapStateToProps = state => ({
-    order:state.order.preOrder
+    order:state.order.preOrder,
+    orders:state.order.orders
 });
 
 const mapDispatchToProps = {

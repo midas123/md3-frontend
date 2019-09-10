@@ -14,11 +14,12 @@
 }
 
 .Footer{
+    clear: both;
     background-color: #6FB3CE;
     height: 100px;
     width: 100%;
 
-    position: absolute ;
-    bottom: 0;
+    position: relative ;
+    /* bottom: 0; */
     z-index: -1;
 }

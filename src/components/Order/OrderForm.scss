@@ -2,7 +2,7 @@
 .order-page{
     margin: auto;
     width: 80%;
-    min-height: 1000px;
+    min-height: 1200px;
     height: 100%;
     .order-title{
         font-size: 24px;
@@ -35,18 +35,26 @@
         .order-item{
             display:flex;
             align-items: center;
+            text-align: center;
             &__thumb img{
                 width: 100px;
                 height: 100px;
             }
             div {
-                margin: 0 10px 0 10px;
+                margin: 0 30px ;
+            }
+            &__price{
+                margin-left:auto;
             }
             
         }
     }
+    .order-payment{
+        margin-top: 100px;
+    }
+
     .order-page-btn{
-        z-index: -1;
+        z-index: 0;
         display: flex;
         // margin: auto;
         justify-content: center;
@@ -56,6 +64,7 @@
         // left: 20%;
         position:relative;
         margin-top: 50px;
+        cursor: pointer;
         .buy_btn {
             padding: 7px;
             background-color: #6FB3CE;
@@ -63,6 +72,7 @@
             // height: 40px;
             width: 170px;
             margin-right: 40px;
+            
             span{
                 color: white;
                 font-size: 20px;
