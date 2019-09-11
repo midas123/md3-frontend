@@ -26,10 +26,14 @@
         min-height: 200px;
         max-height: 500px;
         overflow: auto;
+        margin-bottom: 50px;
         .no-order{
             color: #cccccc;
             text-align: center; 
             font-size: 18px;
+        }
+        &__total{
+          float:right;  
         }
         
         .order-item{
@@ -45,6 +49,11 @@
             }
             &__price{
                 margin-left:auto;
+                order: 2;
+            }
+            &__option span, &__name span, &__quantity span {
+                color:#cccccc;
+                margin-right: 10px;
             }
             
         }

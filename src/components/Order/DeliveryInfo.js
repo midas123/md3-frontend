@@ -90,6 +90,30 @@ class DeliveryInfo extends Component {
             address2: extraAddress,
             zip_code: zipcode
         })
+        this.setState({
+            isAddress1Valid: true,
+            isAddress2Valid: true,
+            isZipCodeValid: true
+        })
+
+
+        const target = [
+            {   "name": "address1",
+                "value": fullAddress},
+            {
+                "name": "address2",
+                "value": extraAddress
+            },
+            {
+                "name": "zip_code",
+                "value": zipcode
+            }
+        ];
+
+        let y;
+        for(y of target){
+            this.props.handleDeliveryInfo(y);
+        }
 
         let valids = [
             {

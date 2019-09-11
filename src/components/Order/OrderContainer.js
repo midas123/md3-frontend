@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchOrder } from '../../services/order/actions';
+import { fetchOrder, clearOrder } from '../../services/order/actions';
 import OrderInfo from './OrderInfo';
 import DeliveryInfo from './DeliveryInfo';
 import PaymentMethod from './PaymentMethod';
@@ -32,7 +32,6 @@ class OrderContainer extends Component {
             isPaymentChecked: false,
 
             payment_info:{
-                order_name:'',
                 payment:''
             }
         }
@@ -54,6 +53,7 @@ class OrderContainer extends Component {
             document.body.appendChild(script);
         }
     }
+  
 
     orderProduct = (orders, total_price) => {
         console.log("주문: "+JSON.stringify(orders))
@@ -75,28 +75,23 @@ class OrderContainer extends Component {
         const delivery_info = this.state.delivery_info;
         const payment_info = this.state.payment_info;
 
-  
         let readyOrder = orders.map(o=>{
-            console.log("o: "+o)
             return {
                 ...o,
                 "delivery_info":delivery_info,
                 "payment_info":payment_info
             }
         })
-          
-    
      
-        console.log("before order: "+JSON.stringify(readyOrder) )
         this.props.fetchOrder(readyOrder, total_price);
 
     }
  
     
     cancelOrdering =() =>{
-        console.log("주문 취소")
-        this.props.history.goBack();
-        //clear action
+        console.log("주문 취소: "+JSON.stringify(this.props.history))
+        this.props.history.go(-2);
+        this.props.clearOrder();
     }
     
     handleDeliveryValid = (valid) => {
@@ -118,7 +113,9 @@ class OrderContainer extends Component {
         const name = target.name;
         const value = target.value;
         this.setState({
-            [name] : value,
+            "payment_info": {
+                [name] : value,
+            },
             isPaymentChecked:true
         })
     }
@@ -170,7 +167,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    fetchOrder
+    fetchOrder, clearOrder
     };
 
 //export default OrderPage;

@@ -25,13 +25,13 @@ export default function(state = initialState, action) {
       };
     }
     case ADD_TO_CART:{
-      var array1 = action.payload;
-      var array2 = state.products;
+      var array1 = action.payload;//새로 추가된 상품
+      var array2 = state.products;//기존 장바구니 상품
       
       const productList = array1.map(p => {
         if(state.productIds.includes(String(p.gd_id))){
           let idx;
-          let dup = array2.find((e,index)=>{
+          array2.find((e,index)=>{ //중복 상품 인덱스 구해서 수량 더하기
             idx = index;
             return e.gd_id == p.gd_id;
           })
@@ -44,7 +44,7 @@ export default function(state = initialState, action) {
 
         return p;
       })
-      const ids = action.payload.map(i =>{
+      const ids = action.payload.map(i =>{ //새로 추가된 상품을 상품id 리스트에 추가
           if(!state.productIds.includes(i.gd_id)){
             return String(i.gd_id);
           }
@@ -52,7 +52,7 @@ export default function(state = initialState, action) {
         
       return {
         ...state,
-        products: [...productList],
+        products: [...state.products,...productList],
         productIds: [...state.productIds,...ids]
         };
       }

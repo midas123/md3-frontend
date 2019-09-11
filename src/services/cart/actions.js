@@ -12,9 +12,9 @@ export const removeProduct = product => ({
 });
 
 
-export const addToCart = products => ({
+export const addToCart = product => ({
   type: ADD_TO_CART,
-  payload: products
+  payload: product
 });
 
 export const clearCart = () => ({

@@ -1,18 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { Redirect } from 'react-router';
 
 import { loadCart, removeProduct, clearCart } from '../../services/cart/actions';
 import { updateCart } from '../../services/total/actions';
+import { readyOrder } from '../../services/order/actions';
 import CartProduct from './CartProduct';
 import util from '../../services/util';
+
 
 import './Cart.scss';
 
 class Cart extends React.Component {
     state ={
         isOpen: false,
-        initial: true
+        initial: true,
+        redirect: false
     }
 
 
@@ -78,6 +81,8 @@ class Cart extends React.Component {
     };
 
     proceedToCheckout = () => {
+      const { cartProducts } = this.props;
+      console.log("proceedToCheckout: "+JSON.stringify(cartProducts))
       const {
         productQuantity
         //totalPrice,
@@ -86,19 +91,20 @@ class Cart extends React.Component {
       } = this.props.cartTotal;
   
       if (!productQuantity) {
-        alert('Add some product in the bag!');
+        alert('장바구니에 상품을 추가해주세요.');
       } else {
-        alert(
-          // `Checkout - Subtotal: ${currencyFormat} ${util.formatPrice(
-          //   totalPrice,
-          //   currencyId
-          // )}`
-        );
+        this.props.readyOrder(cartProducts);
+        this.setState({redirect: true});
+     
       }
     };
 
     render(){
+      if (this.state.redirect) {
+        return <Redirect push to="/order" state={this.props.items}/>;
+      }
         const { cartTotal, cartProducts, removeProduct, } = this.props;
+        console.log("cart: "+JSON.stringify(cartProducts))
         const products = cartProducts.map(p => {
               return (
                 <CartProduct product={p} removeProduct={removeProduct} key={p.gd_id} />
@@ -179,5 +185,5 @@ const mapStateToProps = state => ({
   
   export default connect(
     mapStateToProps,
-    { loadCart, updateCart, removeProduct, clearCart }
+    { loadCart, updateCart, removeProduct, clearCart, readyOrder }
   )(Cart);

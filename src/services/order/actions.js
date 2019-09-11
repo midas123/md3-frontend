@@ -1,18 +1,22 @@
-import { FETCH_ORDERS, READY_ORDER } from './actionType';
+import { FETCH_ORDERS, READY_ORDER, CLEAR_ORDER } from './actionType';
 
 
 export const readyOrder = order =>{
-    console.log("readyOrder: "+JSON.stringify(order))
     return{
         type: READY_ORDER,
         payload: order
     }
 }
 
+export const clearOrder = () =>{
+    return{
+        type: CLEAR_ORDER
+    }
+}
+
 
 export const fetchOrder = (orders, total_price) => {
     return  (dispatch) => { 
-        console.log("##order: "+JSON.stringify(orders))
         fetch("/api-product/goods/order", {
         headers: {'Content-Type': 'application/json'},
         method: 'post',
@@ -20,10 +24,8 @@ export const fetchOrder = (orders, total_price) => {
       })
       .then(response => response.json())
       .then(json => {
-            console.log("orderResult: "+json.message)
             if(json.success){
                 let readyOrder = orders.map(o=>{
-                    console.log("o: "+o)
                     return {
                         ...o,
                         "ordercode":json.ordercode
@@ -31,19 +33,24 @@ export const fetchOrder = (orders, total_price) => {
                 })
                 payOrder(readyOrder[0], dispatch, total_price);
             }
-            // order.order_result = json.success;
-            // dispatch({
-            //     type: FETCH_ORDERS,
-            //     payload: order
-            // })
     })
     }
 }
 
 const payOrder = (order, dispatch, total_price) => {
-    console.log("payOrder: "+payOrder)
-    if(!order.success){
+    console.log("payOrder: "+JSON.stringify(order))
+
+    if(order.payment_info.payment == "계좌이체"){
+        console.log("계좌이체")
+        dispatch({
+            type: FETCH_ORDERS,
+            payload: order
+        })
+    }
+
+    if(order.ordercode == null){
         alert("주문실패: 잠시후 다시 시도해주세요.")
+        return;
     }
     console.log("pay: "+order.ordercode);
 
@@ -75,49 +82,3 @@ const payOrder = (order, dispatch, total_price) => {
     });
 }
 
-
-
-// export const fetchUserInfo = user => {
-//     return (dispatch) => {
-//         fetch('/api-product/goods/order')
-//         .then(response => {
-
-//             console.log("order_result: "+response.status);
-            
-//             if(response.status === 200){
-//                 order.isOrdered = true;
-//             } else {
-//                 order.isOrdered = false;
-//             }
-            
-//             dispatch({
-//                 type: FETCH_ORDERS,
-//                 payload: order
-//             })
-
-//         })
-//     }
-// }
-
-
-
-
-
-
-// export const loadOrders = orders => ({
-//     type: LOAD_ORDERS,
-//     payload: orders
-// });
-
-
-// export const addOrder = (order) => {
-
-//     return(dispatch) => {
-//         console.log("addOrder: "+JSON.stringify(order));
-//         dispatch({
-//             type: ADD_PRODUCT_ORDER,
-//             payload : order
-//         }) 
-
-//     }
-// }

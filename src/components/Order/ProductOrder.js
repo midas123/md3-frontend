@@ -17,16 +17,23 @@ class ProductOrder extends Component {
 
     }
     
-    addProductToCart(e){
-        e.preventDefault();
+    addProductToCart(){
         const { items } = this.props;
+        if(items.length ==0){
+            alert("장바구니에 추가할 상품을 선택해주세요.")
+            return;
+        }
+        console.log("addProductToCart: "+JSON.stringify(items))
         this.props.addToCart(items);
         alert("장바구니에 상품을 추가했습니다.")
     }
 
     orderProduct(){
-        console.log("구매 시도")
         const { items } = this.props;
+        if(items.length ==0){
+            alert("구매할 상품을 추가해주세요.")
+            return;
+        }
         this.props.readyOrder(items);
         this.setState({redirect: true});
         // window.open('/order/');
@@ -35,7 +42,7 @@ class ProductOrder extends Component {
 
     render(){
         if (this.state.redirect) {
-            return <Redirect push to="/order" state={this.props.items}/>;
+            return <Redirect push to="/order"/>;
           }
     return(
 

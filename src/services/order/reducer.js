@@ -1,4 +1,4 @@
-import { FETCH_ORDERS, READY_ORDER }  from './actionType';
+import { FETCH_ORDERS, READY_ORDER, CLEAR_ORDER }  from './actionType';
 
 const initialState = {
     orders : [],
@@ -14,12 +14,16 @@ export default function orderReducer(state = initialState, action) {
                 orders: [...state.orders, ...action.payload]
             }
         case READY_ORDER:
-            console.log("READY_ORDER: "+JSON.stringify(action.payload));
             return {
                 ...state,
                 preOrder: [...state.preOrder, ...action.payload]
             }    
-     
+        case CLEAR_ORDER:
+            console.log("CLEAR_ORDER")
+            return{
+                order: [],
+                preOrder: []
+            }
         default:
             return state;
     }
