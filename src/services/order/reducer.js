@@ -8,10 +8,11 @@ const initialState = {
 export default function orderReducer(state = initialState, action) {
     switch(action.type){
         case FETCH_ORDERS:
-            console.log("FETCH_ORDERS: "+action.payload);
+            console.log("FETCH_ORDERS: "+JSON.stringify(action.payload));
             return {
                 ...state,
-                orders: [...state.orders, ...action.payload]
+                // orders: [...state.orders, ...action.payload]
+                orders: action.payload
             }
         case READY_ORDER:
             return {

@@ -12,6 +12,7 @@ import Footer from './components/Footer/Footer';
 import Product_Container from './components/Products_Container/Product_Container';
 import ProductDetail from './components/Product/ProductDetail';
 import OrderContainer from './components/Order/OrderContainer';
+import OrderResult from './components/Order/OrderResult';
 
 
 const routing = (
@@ -22,6 +23,7 @@ const routing = (
             <Route path="/store" component={Product_Container} />
             <Route path="/goods/:id" component={ProductDetail} /> 
             <Route path="/order" component={OrderContainer} /> 
+            <Route path="/orderResult" component={OrderResult} /> 
             <Footer/> 
     </Router>
     </Root>

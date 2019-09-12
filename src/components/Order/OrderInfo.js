@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Thumb from '../ThumbNail/ThumbNail';
 import util from '../../services/util';
 
-import './OrderForm.scss';
+import './OrderInfo.scss';
 const imagePath = process.env.PUBLIC_URL + '/images/goods/';
 
 

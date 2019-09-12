@@ -3,8 +3,6 @@ import React from 'react';
 import Thumb from '../ThumbNail/ThumbNail';
 import util from '../../services/util';
 
-const imagePath = process.env.PUBLIC_URL + '/images/goods/';
-
 
 class CartProduct extends React.Component{
     state = {
@@ -37,7 +35,7 @@ class CartProduct extends React.Component{
             />
             <Thumb
               classes="shelf-item__thumb"
-              src={imagePath+product.item_thumbnail}
+              src={util.imagePath+product.item_thumbnail}
               alt={product.item_name}
             />
             <div className="shelf-item__details">
@@ -50,8 +48,6 @@ class CartProduct extends React.Component{
             <div className="shelf-item__price">
               {util.formatPrice(product.item_price)}원
             </div>
-    
-            <div className="clearfix" />
           </div>
         );
     }

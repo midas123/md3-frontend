@@ -5,9 +5,10 @@ const formatPrice = (x) => {
   };
 }
   
+const imagePath = process.env.PUBLIC_URL + '/images/goods/';
 
 
 export default {
-    formatPrice
+    formatPrice, imagePath
   };
   

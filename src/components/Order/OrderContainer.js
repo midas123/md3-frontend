@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchOrder, clearOrder } from '../../services/order/actions';
+import { Redirect } from 'react-router';
+
+
 import OrderInfo from './OrderInfo';
 import DeliveryInfo from './DeliveryInfo';
 import PaymentMethod from './PaymentMethod';
@@ -11,7 +14,7 @@ class OrderContainer extends Component {
     constructor(props){
         super(props);
         this.state ={
-            isOrdererValid: false,
+            // isOrdererValid: false,
             isNameValid: false,
             isPhoneNumberValid: false,
             isEmailValid: false,
@@ -121,6 +124,12 @@ class OrderContainer extends Component {
     }
  
     render(){
+        const { orderResult } = this.props;
+        if (orderResult.length !== 0) { //주문 완료시
+            console.log("orderResult: "+JSON.stringify(orderResult))
+            return <Redirect push to="/orderResult"/>;
+        }
+
         const orders = this.props.order;
         var total_amount = 0;
         var total_price = 0;
@@ -129,7 +138,6 @@ class OrderContainer extends Component {
             total_price += order.item_price*order.item_quantity;
         })
 
-        console.log("orders: "+JSON.stringify(orders))
         return(
             
         <div className="order-page">
@@ -162,8 +170,8 @@ class OrderContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    order:state.order.preOrder,
-    orders:state.order.orders
+    order: state.order.preOrder,
+    orderResult: state.order.orders
 });
 
 const mapDispatchToProps = {
