@@ -5,8 +5,10 @@ import { Link, NavLink  } from "react-router-dom";
 
 import LoginForm from '../Auth/LoginForm';
 import LoginButton from '../Auth/LoginButton';
-import './Header.scss'
-import Cart from '../cart/Cart';
+import Cart from '../Cart/Cart';
+
+import './Header.scss';
+import './dropdown_menu.css';
 
 
 const LogoImagePath = process.env.PUBLIC_URL + '/images/';
@@ -18,6 +20,7 @@ class Header extends React.Component {
         this.state = { 
             isLoggedIn : false,
             isLoginFormDisplayed : false,
+            isMobileMenuDisplayed : false
             
         };
        this.handleLogInForm = this.handleLogInForm.bind(this);
@@ -84,7 +87,29 @@ class Header extends React.Component {
                         <div className="dropdown_login">
                             <LoginForm isLoginFormDisplayed={this.state.isLoginFormDisplayed} handleLogInForm={this.handleLogInForm} handleLogInButton={this.handleLogInButton}/>
                         </div>
+                        <div className="menu_drop_down">
+                            
+                        
+                            <div className="dropdown">
+                                <button className="dropbtn" onClick={()=>{
+                            this.setState({
+                                isMobileMenuDisplayed:!this.state.isMobileMenuDisplayed
+                            })
+                        }}>=메뉴</button>
+                        {this.state.isMobileMenuDisplayed?
+                                <div className="dropdown-content">
+                                <a onClick={this.handleLogInForm}>
+                                <LoginButton isLogged={this.state.isLoggedIn}/>
+                                </a>
+                                <NavLink to="/store">스토어</NavLink>
+                                <NavLink to="/cart">장바구니</NavLink>
+                                </div>
+                        :null}
+                            </div>
+                        </div>    
                     </div>
+
+
                 </div>
           
             ) 

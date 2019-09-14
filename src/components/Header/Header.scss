@@ -1,6 +1,6 @@
-$mobile_device : "screen and (min-width: 320px) and (max-width:415px)";
-$tab : "screen and (min-width: 416px) and (max-width:767px)";
-$ipad : "screen and (min-width: 768px) and (max-width:1024px)";
+$mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
+$all_device_width : "screen and (min-width: 568px) and (max-width:823px)";
+$ipad : "screen and (min-width:1024px)";
 
 
 
@@ -11,13 +11,12 @@ $ipad : "screen and (min-width: 768px) and (max-width:1024px)";
     @media #{$mobile_device}{
         height: 60px;
     }
-    @media #{$tab}{
-        height: 70px;
+    @media #{$all_device_width}{
+        height: 80px;
     }    
     @media #{$ipad}{
         height: 80px;
     }    
-    //display:inline-block;
     .logo_box {
         float: left;
         width: 20%;
@@ -28,9 +27,9 @@ $ipad : "screen and (min-width: 768px) and (max-width:1024px)";
             width: 35%;
             max-height:45px;
         }
-        @media #{$tab}{
+        @media #{$all_device_width}{
             width: 25%;
-            max-height:54px;
+            max-height:58px;
         } 
         @media #{$ipad}{
             width: 25%;
@@ -47,7 +46,7 @@ $ipad : "screen and (min-width: 768px) and (max-width:1024px)";
                 width: 90px;
                 height: auto;
             }
-            @media #{$tab}{
+            @media #{$all_device_width}{
                 top:20px;
                 width: 110px;
                 height: auto;
@@ -60,19 +59,21 @@ $ipad : "screen and (min-width: 768px) and (max-width:1024px)";
         }
     }
     .menu_wrapper {
+        display: block;
         height: 100%;
         ul {
+            @media #{$mobile_device}{
+                    display: none;
+            }
             position: relative;
             float: right;
             right: 70px;
-            //top:-10px;
             list-style-type: none;
             margin: 0;
             padding: 0;
             overflow: hidden;
             width: 60%;
             height: 100%;
-            //background-color: #333;
             li {
                 float: right;
                 height: 100%;
