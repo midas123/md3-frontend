@@ -29,6 +29,14 @@ class ProductOrder extends Component {
     }
 
     orderProduct(){
+        var token = localStorage.getItem("accessToken");
+        console.log("토큰: "+token)
+        if(!token){
+            alert("로그인 후 이용가능합니다.")
+            return;
+        }
+
+
         const { items } = this.props;
         if(items.length ==0){
             alert("구매할 상품을 추가해주세요.")

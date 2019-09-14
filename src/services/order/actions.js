@@ -17,8 +17,12 @@ export const clearOrder = () =>{
 
 export const fetchOrder = (orders, total_price) => {
     return  (dispatch) => { 
-        fetch("/api-product/goods/order", {
-        headers: {'Content-Type': 'application/json'},
+        let token = localStorage.getItem("accessToken")
+        fetch("/api-order/goods/order", {
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }),
         method: 'post',
         body: JSON.stringify(orders)
       })
@@ -42,23 +46,17 @@ export const fetchOrder = (orders, total_price) => {
 }
 
 const payOrder = (order, dispatch, total_price) => {
-    console.log("payOrder: "+JSON.stringify(order))
-
     if(order[0].ordercode == null){
         alert("주문실패: 잠시후 다시 시도해주세요.")
         return;
     }
 
     if(order[0].payment_info.payment == "계좌이체"){
-        console.log("계좌이체")
         dispatch({
             type: FETCH_ORDERS,
             payload: order
         })
     } else if(order[0].payment_info.payment == "cart"){ 
-
-        console.log("pay: "+order.ordercode);
-
         const IMP = window.IMP; // 생략해도 괜찮습니다.
         IMP.init("imp08080720"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
 

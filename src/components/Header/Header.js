@@ -31,6 +31,7 @@ class Header extends React.Component {
             this.setState({
                 isLoggedIn:!this.state.isLoggedIn
             })
+            window.location.href = "/";
 
         }
         if(!this.state.isLoggedIn){

@@ -59,7 +59,6 @@ class OrderContainer extends Component {
   
 
     orderProduct = (orders, total_price) => {
-        console.log("주문: "+JSON.stringify(orders))
         if(orders.length === 0){
             alert("주문할 상품이 없습니다.")
             return;
@@ -92,7 +91,6 @@ class OrderContainer extends Component {
  
     
     cancelOrdering =() =>{
-        console.log("주문 취소: "+JSON.stringify(this.props.history))
         this.props.history.go(-2);
         this.props.clearOrder();
     }
@@ -126,7 +124,6 @@ class OrderContainer extends Component {
     render(){
         const { orderResult } = this.props;
         if (orderResult.length !== 0) { //주문 완료시
-            console.log("orderResult: "+JSON.stringify(orderResult))
             return <Redirect push to="/orderResult"/>;
         }
 

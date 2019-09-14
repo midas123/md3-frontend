@@ -16,7 +16,6 @@ class LoginForm extends React.Component {
         var token = localStorage.getItem("accessToken");
         if(token)
             this.props.handleLogInButton();
-        console.log("ini-token: "+token);
     }
   
     handleSubmit(event){
@@ -57,8 +56,7 @@ class LoginForm extends React.Component {
                     })
                     return ;
                 }
-                
-                localStorage.setItem("accessToken", json.accessToken);
+                localStorage.setItem("accessToken", json.tokenType+" "+json.accessToken);
                 this.clearLoginForm();
                 this.closeLoginForm();
                 this.props.handleLogInButton();

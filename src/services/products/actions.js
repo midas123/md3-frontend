@@ -66,12 +66,12 @@ function getPager(totalItemsCount, currentPage) {
 }
 
 export const fetchProducts = (sortBy, pager, currentPage, callback) => {
+    let goodsList = JSON.parse(localStorage.getItem("goodsList"));
     var exp = localStorage.getItem("goodsListExpiration");
     var now =  Date.now();
 
-    if((exp !== null || undefined) && exp > now){
+    if((exp !== null || undefined) && exp > now && goodsList.length>0){
         return (dispatch) => {
-            let goodsList = JSON.parse(localStorage.getItem("goodsList"));
             if(!!sortBy){
                 goodsList = goodsList.sort(compare[sortBy]);
             }
@@ -96,7 +96,8 @@ export const fetchProducts = (sortBy, pager, currentPage, callback) => {
             });
         }    
     }
-    return (dispatch) => {fetch('/api-product/goods/all')
+    return (dispatch) => {
+    fetch('/api-product/goods/all')
     .then(response =>  
         response.json()
         )
