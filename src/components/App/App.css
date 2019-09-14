@@ -1,8 +1,70 @@
-.Header {
-    background-color: #6FB3CE;
-    height: 90px;
-    width: 100%;
+@media screen and (min-width: 360px) and (max-width:414px){
+    .mainSlider img {
+        height: auto;
+        width: 360px;
+        }
+    .Footer{
+        clear: both;
+        background-color: #6FB3CE;
+        height: 60px;
+        width: 100%;
+        position: relative ;
+        /* bottom: 0; */
+        z-index: -1;
+        margin-top: 60px;
+    }
 }
+@media screen and (min-width: 415px) and (max-width:767px){
+    .mainSlider img {
+        height: 100%;
+        width: 415px;
+        }
+    .Footer{
+        clear: both;
+        background-color: #6FB3CE;
+        height: 70px;
+        width: 100%;
+        position: relative ;
+        /* bottom: 0; */
+        z-index: -1;
+        margin-top: 60px;
+    }
+}
+
+
+@media screen and (min-width: 768px) and (max-width:1024px){
+    .mainSlider img {
+        height: 100%;
+        width: 768px;
+        }
+    .Footer{
+        clear: both;
+        background-color: #6FB3CE;
+        height: 80px;
+        width: 100%;
+        position: relative ;
+        /* bottom: 0; */
+        z-index: -1;
+        margin-top: 60px;
+    }
+}
+@media screen and (min-width: 1025px){
+    .mainSlider img {
+        height: 100%;
+        width: 360px;
+        }
+    .Footer{
+        clear: both;
+        background-color: #6FB3CE;
+        height: 100px;
+        width: 100%;
+        position: relative ;
+        /* bottom: 0; */
+        z-index: -1;
+        margin-top: 80px;
+    }
+}
+
 
 .mainSlider div ul li {
     z-index: -1;
@@ -13,13 +75,12 @@
     position:relative;
 }
 
-.Footer{
+/* .Footer{
     clear: both;
     background-color: #6FB3CE;
     height: 100px;
     width: 100%;
     margin-top: 100px;
     position: relative ;
-    /* bottom: 0; */
     z-index: -1;
-}
+} */

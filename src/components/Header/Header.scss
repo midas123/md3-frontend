@@ -1,16 +1,62 @@
+$mobile_device : "screen and (min-width: 320px) and (max-width:415px)";
+$tab : "screen and (min-width: 416px) and (max-width:767px)";
+$ipad : "screen and (min-width: 768px) and (max-width:1024px)";
+
+
+
 .Header{ 
+    background-color: #6FB3CE;
+    height: 90px;
+    width: 100%;
+    @media #{$mobile_device}{
+        height: 60px;
+    }
+    @media #{$tab}{
+        height: 70px;
+    }    
+    @media #{$ipad}{
+        height: 80px;
+    }    
     //display:inline-block;
     .logo_box {
         float: left;
         width: 20%;
-        max-height:72px;
         overflow:hidden;
+        max-height:72px;
+        @media #{$mobile_device}{
+            top:20px;
+            width: 35%;
+            max-height:45px;
+        }
+        @media #{$tab}{
+            width: 25%;
+            max-height:54px;
+        } 
+        @media #{$ipad}{
+            width: 25%;
+            max-height:64px;
+        }    
         .logo_image{
             position: relative;
             top: 20px;
             left: 20px;
             width: 150px;
             height: auto;
+            @media #{$mobile_device}{
+                top:15px;
+                width: 90px;
+                height: auto;
+            }
+            @media #{$tab}{
+                top:20px;
+                width: 110px;
+                height: auto;
+            }
+            @media #{$ipad}{
+                top:20px;
+                width: 130px;
+                height: auto;
+            }
         }
     }
     .menu_wrapper {
@@ -36,15 +82,6 @@
                     text-align: center;
                     padding: 35px 16px;
                     text-decoration: none;
-                    // .login_form_link{
-                    //     width: 20%;
-                    //     display: inline-block;
-                    // }
-                    // .social_page_link{
-                    //     width: 20%;
-                    //     display: inline-block;
-
-                    // }
                     }
                 a:hover {
                     background-color: rgb(130, 200, 228);
