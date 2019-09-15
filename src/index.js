@@ -13,6 +13,7 @@ import Product_Container from './components/Products_Container/Product_Container
 import ProductDetail from './components/Product/ProductDetail';
 import OrderContainer from './components/Order/OrderContainer';
 import OrderResult from './components/Order/OrderResult';
+import LoginForm from './components/Auth/LoginForm';
 
 
 const routing = (
@@ -24,6 +25,7 @@ const routing = (
             <Route path="/goods/:id" component={ProductDetail} /> 
             <Route path="/order" component={OrderContainer} /> 
             <Route path="/orderResult" component={OrderResult} /> 
+            <Route path="/login" component={LoginForm} /> 
             <Footer/> 
     </Router>
     </Root>

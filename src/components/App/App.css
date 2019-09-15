@@ -29,7 +29,7 @@
     }
 }
 
-@media screen and (min-width: 1024px){
+@media screen and (min-width: 824px){
     .mainSlider img {
         height: 100%;
         width: 360px;

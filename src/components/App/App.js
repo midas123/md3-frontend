@@ -26,8 +26,6 @@ class App extends React.Component {
           <div className="mainSlider">
             <SwiftSlider data={data} enableNextAndPrev={false}/>
           </div>
-          {/* { <ProductContainer/> } */}
-          {/* <Cart/> */}
         </div>
       </div>
       );

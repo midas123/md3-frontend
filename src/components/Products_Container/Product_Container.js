@@ -11,10 +11,13 @@ import ProductList from '../Product/ProductList';
 
 //spinner
 const override = css`
-    display: block;
-    margin: 0 auto;
-`;
-
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    `;
+    
+    // display: block;
+    // margin: 0 auto;
 
 class Product_Container extends React.Component {
     constructor(props){

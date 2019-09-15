@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { Link, NavLink  } from "react-router-dom";
 
-import LoginForm from '../Auth/LoginForm';
-import LoginButton from '../Auth/LoginButton';
+import { logoutUser } from '../../services/auth/actions';
 import Cart from '../Cart/Cart';
 
 import './Header.scss';
@@ -18,41 +16,25 @@ class Header extends React.Component {
     constructor(props){
         super(props);
         this.state = { 
-            isLoggedIn : false,
-            isLoginFormDisplayed : false,
             isMobileMenuDisplayed : false
-            
         };
-       this.handleLogInForm = this.handleLogInForm.bind(this);
-       this.handleLogInButton = this.handleLogInButton.bind(this);
+ 
+       this.userLogout = this.userLogout.bind(this);
     }
 
-    handleLogInForm(){
-        if(this.state.isLoggedIn){
-            localStorage.removeItem("accessToken");
-            this.props.logout();
-            this.setState({
-                isLoggedIn:!this.state.isLoggedIn
-            })
-            window.location.href = "/";
-
+    userLogout(e){
+        e.preventDefault();
+        console.log("userLogout");
+        const { isLoggedIn } = this.props;
+        if(isLoggedIn){
+            this.props.logoutUser();
         }
-        if(!this.state.isLoggedIn){
-            this.setState({
-                isLoginFormDisplayed : !this.state.isLoginFormDisplayed
-            })
-        }
-    }
-    handleLogInButton(){
-        this.setState({
-            isLoggedIn:!this.state.isLoggedIn
-        })
     }
 
     render(){
+        const { isLoggedIn } = this.props;
         return(
-           
-                <div className="Header">
+            <div className="Header">
                     <div className="logo_box">
                         <Link to="/">
                             <img className="logo_image" src={LogoImagePath+'logo@2x_2.png'} alt=""/>
@@ -61,46 +43,53 @@ class Header extends React.Component {
                     <div className="menu_wrapper">
                         <ul>
                         <li>
-                            <a onClick={this.handleLogInForm}>
-                                <LoginButton isLogged={this.state.isLoggedIn}/>
-                            </a>
+                     
+                            {isLoggedIn ? <a href="#" onClick={(e) => this.userLogout(e)}>로그아웃</a>:
+                                <NavLink to="/login">
+                                    로그인
+                                </NavLink>
+                            }
                         </li>
-                            {/* <li className="social_page_link">
-                                <NavLink to="/login">소셜</NavLink>
-                            </li> */}
-                        {this.state.isLoggedIn && (
+                        {isLoggedIn && (
                             <li className="personal_page_link">
                                 <NavLink to="/userinfo">내 정보</NavLink>
                             </li>
                         )}
-                        {/* <li className="customer_page_link">
-                            <NavLink to="/login">고객센터</NavLink>
-                        </li> */}
                         <li className="store_link">
                             <NavLink to="/store">스토어</NavLink>
                         </li>
                         <li className="store_cart">
                            <Cart/>
                         </li>
-
                         </ul>
-                        <div className="dropdown_login">
-                            <LoginForm isLoginFormDisplayed={this.state.isLoginFormDisplayed} handleLogInForm={this.handleLogInForm} handleLogInButton={this.handleLogInButton}/>
-                        </div>
                         <div className="menu_drop_down">
-                            
-                        
                             <div className="dropdown">
-                                <button className="dropbtn" onClick={()=>{
-                            this.setState({
-                                isMobileMenuDisplayed:!this.state.isMobileMenuDisplayed
-                            })
-                        }}>=메뉴</button>
+                            <div className="menu-btn" onClick={()=>{
+                                        this.setState({
+                                            isMobileMenuDisplayed:!this.state.isMobileMenuDisplayed
+                                        })
+                                    }}>
+                                <div className="menu-icon">
+                                    <div className="hamburger-menu"></div>
+                                    <div className="hamburger-menu"></div>
+                                    <div className="hamburger-menu"></div>
+                                </div>
+                                <div>
+                                    <button className="dropbtn">
+                                    메뉴</button>
+                                </div>
+                            </div>    
                         {this.state.isMobileMenuDisplayed?
                                 <div className="dropdown-content">
-                                <a onClick={this.handleLogInForm}>
-                                <LoginButton isLogged={this.state.isLoggedIn}/>
-                                </a>
+                                {isLoggedIn ? <a href="#" onClick={(e) => this.userLogout(e)}>로그아웃</a>:
+                                <NavLink to="/login" onClick={()=>{
+                                    this.setState({
+                                        isMobileMenuDisplayed: !this.state.isMobileMenuDisplayed
+                                    })
+                                }}>
+                                    로그인
+                                </NavLink>
+                                }
                                 <NavLink to="/store">스토어</NavLink>
                                 <NavLink to="/cart">장바구니</NavLink>
                                 </div>
@@ -120,16 +109,16 @@ class Header extends React.Component {
 }
 
 
-// export default connect()(Header);
+const mapStateToProps = state => ({
+    isLoggedIn: state.auth.isLoggedIn
+})
 
-const mapDispatchToProps = dispatch => {
-    return {
-      // dispatching plain actions
-      logout: () => dispatch({ type: "USER_LOGOUT" }),
-    };
-  };
+
+const mapDispatchToProps = {
+    logoutUser
+};
   
   export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(Header)

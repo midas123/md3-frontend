@@ -1,4 +1,10 @@
 import React from 'react';
+import { Redirect } from 'react-router';
+import { connect } from 'react-redux';
+import { loginUser } from '../../services/auth/actions';
+
+
+import './LoginForm.scss';
 
 class LoginForm extends React.Component {
     constructor(props){
@@ -9,15 +15,9 @@ class LoginForm extends React.Component {
             password: "123456"
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.closeLoginForm = this.closeLoginForm.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-    componentDidMount(){
-        var token = localStorage.getItem("accessToken");
-        if(token)
-            this.props.handleLogInButton();
-    }
-  
+    
     handleSubmit(event){
         event.preventDefault();
         
@@ -40,7 +40,8 @@ class LoginForm extends React.Component {
         const json = {};
         Array.from(data.entries()).forEach(([key, value]) => {
             json[key] = value;
-          })
+        })
+        console.log("handleSubmit: "+JSON.stringify(json))
           fetch("/api/auth/login", {
               //credentials: 'include',
               headers: {'Content-Type': 'application/json'},
@@ -49,27 +50,25 @@ class LoginForm extends React.Component {
             })
             .then(response => response.json())
             .then(json =>{
-                
-                if(json.status === "401"){
+                console.log("####: "+JSON.stringify(json))
+                if(json.status == "401"){
                     this.setState({
                         loginMessage: "아이디 또는 비밀번호를 확인해주세요."
                     })
+                    console.log("loginMessage:"+this.state.loginMessage)
                     return ;
                 }
-                localStorage.setItem("accessToken", json.tokenType+" "+json.accessToken);
-                this.clearLoginForm();
-                this.closeLoginForm();
-                this.props.handleLogInButton();
+
+                if(json.accessToken !== null){
+                    this.props.loginUser();
+                    localStorage.setItem("accessToken", json.tokenType+" "+json.accessToken);
+                }
+               
           })
         .catch(e => {
             console.warn(e)
         })
     }
-
-    closeLoginForm() {
-        this.props.handleLogInForm();
-    }
-
     handleChange(event) {
         let name = event.target.name;
         let value = event.target.value;
@@ -77,35 +76,47 @@ class LoginForm extends React.Component {
             [name]: value
         });
     }
-    clearLoginForm(){
-        this.setState({
-            username:"",
-            password:""
-        })
-    }
+  
     render(){
+        const { isLoggedIn } = this.props;
+        console.log("LoginForm: "+isLoggedIn)
+        if(isLoggedIn){
+            return <Redirect push to="/"/>;
+        }
         return(
-            <div className="Login_box" style={{
-                display:this.props.isLoginFormDisplayed ? 'block' : 'none'}} >
-                <form onSubmit={this.handleSubmit}>
-                    <div className="login_id">
-                        아이디<input type="text" name="username" id="아이디" value={this.state.username} onChange={this.handleChange}/>
-                    </div>
-                    <div className="login_password">
-                        비밀번호<input type="password" name="password" id="비밀번호" value={this.state.password} onChange={this.handleChange}/>
-                    </div>
-                    <div className="login_message">
-                     {this.state.loginMessage && <span>{this.state.loginMessage}</span>}   
-                    </div>
-                    <div className="login_button">
-                        <input type="submit" value="로그인"/>    
-                        <input type="button" value="닫기" onClick={this.closeLoginForm}/>
-                    </div>
-                </form>
-                
+            <div className="login_page">
+                <div className="Login_box">
+                <div className="login_box_title"><span>로그인</span></div>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="login_id">
+                            <label>아이디</label><input type="text" name="username" id="아이디" value={this.state.username} onChange={this.handleChange}/>
+                        </div>
+                        <div className="login_password">
+                            <label>비밀번호</label><input type="password" name="password" id="비밀번호" value={this.state.password} onChange={this.handleChange}/>
+                        </div>
+                        <div className="login_message">
+                        {this.state.loginMessage && <span>{this.state.loginMessage}</span>}   
+                        </div>
+                        <div className="login_button">
+                            <input type="submit" value="로그인"/>    
+                        </div>
+                    </form>
+                    
+                </div>
             </div>
         )    
     };
 }
 
-export default LoginForm;
+const mapStateToProps = state => ({
+    isLoggedIn: state.auth.isLoggedIn
+})
+
+const mapDispatchToProps = {
+    loginUser
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(LoginForm)
