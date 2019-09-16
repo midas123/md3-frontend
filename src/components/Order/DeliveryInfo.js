@@ -144,55 +144,77 @@ class DeliveryInfo extends Component {
         return(
         <div className="delivery-contents">
             <div className="orderer">
-                <div className="info">주문자</div><input type="text" name="orderer_name" 
-                size="5" maxLength="15" value={this.state.orderer_name} onChange={this.handleInputChange}/>
-                <div className="valid-check-sign">{this.state.isOrdererValid ? 
-                <div className="check"></div>:<div className="uncheck"></div>}</div>
+                <label className="info">주문자</label>
+                <div className="orderer inner">
+                    <input type="text" name="orderer_name" 
+                    size="5" maxLength="15" value={this.state.orderer_name} onChange={this.handleInputChange}/>
+                    <div className="valid-check-sign">{this.state.isOrdererValid ? 
+                    <div className="check"></div>:<div className="uncheck"></div>}</div>
+                </div>
             </div>
 
             <div className="recipient">
-                <div className="info">수령인</div><input type="text" name="recipient_name" 
-                size="5" maxLength="15" value={this.state.recipient_name} onChange={this.handleInputChange}/>
-                <div className="valid-check-sign">{this.state.isNameValid ? 
-                <div className="check"></div>:<div className="uncheck"></div>}</div>
+                <div className="info">수령인</div>
+                <div className="recipient inner">
+                    <input type="text" name="recipient_name" 
+                    size="5" maxLength="15" value={this.state.recipient_name} onChange={this.handleInputChange}/>
+                    <div className="valid-check-sign">{this.state.isNameValid ? 
+                    <div className="check"></div>:<div className="uncheck"></div>}</div>
+                </div>
             </div>
             <div className="mobile-phone">
-                <div className="info">휴대폰 번호</div><input type="text" name="mobilephone_number" placeholder="010-0000-0000"
-                size="13" maxLength="13" value={this.state.mobilephone_number} onChange={this.handleInputChange}/>
-                <div className="valid-check-sign">{this.state.isPhoneNumberValid ? 
-                <div className="check"></div>:<div className="uncheck"></div>}</div>
+                <div className="info">휴대폰 번호</div>
+                <div className="mobile-phone inner">
+                    <input type="text" name="mobilephone_number" placeholder="010-0000-0000"
+                    size="13" maxLength="13" value={this.state.mobilephone_number} onChange={this.handleInputChange}/>
+                    <div className="valid-check-sign">{this.state.isPhoneNumberValid ? 
+                    <div className="check"></div>:<div className="uncheck"></div>}</div>
+                </div>    
             </div>
             <div className="email-address">
-                <div className="info">이메일 주소</div><input type="text" name="email_address" 
-                size="30" maxLength="30" value={this.state.email_address} onChange={this.handleInputChange}/>
-                <div className="valid-check-sign">{this.state.isEmailValid ? 
-                <div className="check"></div>:<div className="uncheck"></div>}</div>
+                <div className="info">이메일 주소</div>
+                <div className="email-address inner">
+                    <input type="text" name="email_address" 
+                    size="30" maxLength="30" value={this.state.email_address} onChange={this.handleInputChange}/>
+                    <div className="valid-check-sign">{this.state.isEmailValid ? 
+                    <div className="check"></div>:<div className="uncheck"></div>}</div>
+                </div>    
             </div>
             <div className="zipcode">
-                <div className="info">우편번호</div><input type="text" name="zip_code" 
-                size="7" maxLength="7" value={this.state.zip_code} onChange={this.handleInputChange}
-                id="sample4_postcode" />
-                <div className="zip-code-btn" onClick={() => this.zipCodeModal(this.state.zipcode_style)}>주소 검색</div>
-                <div className="zip-code-box" style={this.state.zipcode_style}>
-                    <div className="zip-close-btn" onClick={() => this.zipCodeModal(this.state.zipcode_style)}>X</div>
-                    <DaumPostcode onComplete={this.handleAddress} width={450} style={zip_box_style}/>
+                <div className="info">우편번호</div>
+                <div className="zipcode-box">
+                    <input type="text" name="zip_code" 
+                    size="7" maxLength="7" value={this.state.zip_code} onChange={this.handleInputChange}
+                    id="sample4_postcode" />
+                    <div className="zip-code-btn" onClick={() => this.zipCodeModal(this.state.zipcode_style)}>주소 검색</div>
+                    <div className="valid-check-sign">{this.state.isZipCodeValid ? 
+                    <div className="check"></div>:<div className="uncheck"></div>}
+                    </div>
                 </div>
-                <div className="valid-check-sign">{this.state.isZipCodeValid ? 
-                <div className="check"></div>:<div className="uncheck"></div>}</div>
+            <div className="zip-code-popup-box" style={this.state.zipcode_style}>
+                <div className="zip-close-btn" onClick={() => this.zipCodeModal(this.state.zipcode_style)}><div className="close_x">X</div></div>
+                <DaumPostcode onComplete={this.handleAddress} style={zip_box_style}/>
+            </div>
             </div>
             <div className="address1">
-                <div className="info">배송지 주소</div><input type="text" name="address1" 
-                size="30" maxLength="30" value={this.state.address1} onChange={this.handleInputChange}
-                id="sample4_roadAddress"/>
-                  <div className="valid-check-sign">{this.state.isAddress1Valid ? 
-                <div className="check"></div>:<div className="uncheck"></div>}</div>
+                <div className="info">배송지 주소</div>
+                <div className="address1 inner">
+                    <input type="text" name="address1" 
+                    size="30" maxLength="30" value={this.state.address1} onChange={this.handleInputChange}
+                    id="sample4_roadAddress"/>
+                    <div className="valid-check-sign">{this.state.isAddress1Valid ? 
+                    <div className="check"></div>:<div className="uncheck"></div>}</div>
+                </div>    
             </div>
             <div className="address2">
-                <div className="info">상세 주소</div><input type="text" name="address2" 
-                size="38" maxLength="40" value={this.state.address2} onChange={this.handleInputChange}
-                id="sample4_detailAddress"/>
-                <div className="valid-check-sign">{this.state.isAddress2Valid ? 
-                <div className="check"></div>:<div className="uncheck"></div>}</div>
+                <div className="info">상세 주소</div>
+                <div className="address2 inner">
+                    <input type="text" name="address2" 
+                    size="37" maxLength="40" value={this.state.address2} onChange={this.handleInputChange}
+                    id="sample4_detailAddress"/>
+                    <div className="valid-check-sign">{this.state.isAddress2Valid ? 
+                    <div className="check"></div>:<div className="uncheck"></div>}</div>
+                </div>    
             </div>
             <div className="memo">
                 <div className="info">요청 사항</div>

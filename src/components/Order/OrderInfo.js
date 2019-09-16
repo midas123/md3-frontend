@@ -23,17 +23,15 @@ function OrderInfo(props){
         {order.item_name}
       </div>
       <div className="order-item__option">
-      <span>옵션:</span>
-        
-        {order.item_option1}{order.item_option2 && '/ '+ order.item_option2}
-         
+        <span>옵션:</span>
+          {order.item_option1}{order.item_option2 && '/ '+ order.item_option2}
       </div>
       <div className="order-item__quantity">
-      <span>수량:</span>
+        <span>수량:</span>
           {order.item_quantity}
       </div>
       <div className="order-item__price">
-        {util.formatPrice(order.item_price)}원
+        <span>가격:</span>{util.formatPrice(order.item_price)}원
       </div>
     </div>
     );
@@ -46,8 +44,9 @@ function OrderInfo(props){
       {orderList}
       {props.total_amount == 0 ? null :
         <div className="order-contents__total">
-          <p>총 구매수량: {props.total_amount}</p>
-        <p>합계 금액: {util.formatPrice(props.totalprice)}원</p>
+            <p><b>합계</b></p>
+          <p>상품 수량: {props.total_amount}</p>
+        <p>상품 가격: {util.formatPrice(props.totalprice)}원</p>
         </div>
       }
 

@@ -123,7 +123,7 @@ class OrderContainer extends Component {
  
     render(){
         const { orderResult } = this.props;
-        if (orderResult.length !== 0) { //주문 완료시
+        if (orderResult && orderResult.length !== 0) { //주문 완료시
             return <Redirect push to="/orderResult"/>;
         }
 
@@ -140,16 +140,22 @@ class OrderContainer extends Component {
         <div className="order-page">
             <form onSubmit={this.handleSubmit}>
                 <div className="order-title">주문/결제</div>
-                <div className="order-info">상품 정보</div>
-                <div className="line"><hr></hr> </div>
+                <div className="order-info">
+                    상품 정보
+                    <div className="line"><hr></hr> </div>
+                </div>
                     <OrderInfo orders={orders} totalprice={total_price} 
                     total_amount={total_amount}/>
-                <div className="delivery-info">배송지 정보</div>
-                <div className="line"><hr></hr></div>
+                <div className="delivery-info">
+                    배송지 정보
+                    <div className="line"><hr></hr></div>
+                </div>
                     <DeliveryInfo handleDeliveryValid={this.handleDeliveryValid}
                     handleDeliveryInfo={this.handleDeliveryInfo}/>
-                <div className="order-payment">결제 방법</div>
+                <div className="order-payment">
+                    결제 방법
                     <div className="line"><hr></hr></div>
+                </div>
                     <PaymentMethod handlePaymentInfo={this.handlePaymentInfo}
                     totalprice={total_price}/>
                 <div className="order-page-btn">

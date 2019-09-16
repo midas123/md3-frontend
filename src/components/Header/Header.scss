@@ -60,6 +60,7 @@ $all_device_width : "screen and (min-width:824px)";
     }
     .menu_wrapper {
         display: block;
+        width: 100%;
         height: 100%;
         ul {
             @media #{$mobile_device}{

@@ -44,10 +44,10 @@ class PaymentMethod extends Component{
                             <span className="checkmark"></span>
                         </label>
                     </div>
-                    <div className="total-order-price">
-                       결제금액<span>{this.props.totalprice ? util.formatPrice(this.props.totalprice): 0}</span>원
-                   </div>
                 </div>    
+                <div className="total-order-price">
+                    결제금액<span>{this.props.totalprice ? util.formatPrice(this.props.totalprice): 0}</span>원
+                </div>
             </div>
         )
     }

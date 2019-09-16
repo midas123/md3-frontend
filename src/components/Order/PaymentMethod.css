@@ -1,6 +1,6 @@
 .order-payment-contents{
-  margin: 20px 0 20px 0;
-  min-height: 100px;
+  margin: 20px;
+  min-height: 90px;
 }
 .pay-option-box{
   display: flex;
@@ -9,7 +9,7 @@
   display: block;
   position: relative;
   padding-left: 30px;
-  margin: 0 40px 12px 0;
+  margin: 0 30px 12px 0;
   cursor: pointer;
   font-size: 16px;
   -webkit-user-select: none;
@@ -62,9 +62,12 @@
 }
 
 .total-order-price{
-  font-size: 21px;
+  position: relative;
+  top: 30px;
+  margin: 20px 0 30px 0;
+  font-size: 19px;
   font-weight: 500;
-  margin-left: auto;
+  float: right;
   order: 2;
 }
 .total-order-price span{
