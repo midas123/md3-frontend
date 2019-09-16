@@ -55,27 +55,20 @@ class ProductOrder extends Component {
     return(
 
         <div className="product_order">
-        <div className="buy_btn">
-            <a href="#" onClick={() => this.orderProduct()}>
-                <span>구매하기</span>
-            </a>
+            <div className="buy_btn">
+                <a href="#" onClick={() => this.orderProduct()}>
+                    <span>구매하기</span>
+                </a>
+            </div>
+            <div className="cart_btn">
+                <a href="#" onClick={() => this.addProductToCart()}>
+                    <span>장바구니 담기</span>
+                </a>
+            </div>
         </div>
-        <div className="cart_btn">
-            <a href="#" onClick={() => this.addProductToCart()}>
-                <span>장바구니 담기</span>
-            </a>
-        </div>
-    </div>
     )
     }
 }
-
-// export default ProductOrder;
-
-// const mapStateToProps = state => ({
-//     cartProducts : state.cart.products,
-//     order : state.order.pre_order
-//   });
 
 
 const mapDispatchToProps = {

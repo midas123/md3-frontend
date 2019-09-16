@@ -1,31 +1,54 @@
+$mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
+$mobile_device2 : "screen and (min-width: 568px) and (max-width:823px)";
+$all_device_width : "screen and (min-width:824px)";
+
 
 .Product_detail{
-    width: 60%;
+    @media #{$all_device_width}{
+        width: 80%;
+    }
     height: 100%;
     margin: auto;
     .product_top{
         display: flex;
-        height: 450px;
-        margin-top: 50px;
+        @media #{$mobile_device}{
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        @media #{$mobile_device2}{
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }    
+        margin-top: 40px;
         margin-bottom: 50px;
         .top_left {
-            height: 450px;
-            width: 450px;
+            height: 100%;
+            width: 100%;
+
             .product_img{
-                min-height: 450px;
-                min-width: 450px;
-                height: 100%;
-                width: 100%;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                @media #{$mobile_device}{
+                    height: 320px;
+                    width: 320px;
+                }
+                @media #{$mobile_device2}{
+                    height: 450px;
+                    width: 450px;
+                }    
+                @media #{$all_device_width}{
+                    height: 450px;
+                    width: 450px;
+                }
             }    
         }
         
         .top_right {
-            // height: 500px;
-            min-height: 450px;
-            min-width: 450px;
-            max-height: 450px;
-            max-width: 450px;
-            width: 450px;
+            height: 100%;
+            width: 100%;
             .product_box{
                 height: 95%;
                 margin: 0 20px 0px 20px;
@@ -128,14 +151,14 @@
                             }
                         }
                         .product_order{
-                            //margin: 20px;
                             clear: both;
                             display: block;
                             text-align: center;
                             div{
-                                width: 170px;
                                 margin: 20px 0 20px 0;
                                 padding: 10px;
+                                width: 40%;
+                             
                             }
                             a {
                                 text-align: center;
@@ -169,17 +192,28 @@
         }
     }
     .product_bottom {
-        width: 900px;
+        max-width: 900px;
         height: 100%;
         margin-bottom: 17%;
         text-align: center;
         .product_contents{
             
             .product_detail_img{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
                 text-align: center;
-                min-width: 900px;
                 max-width: 900px;
-                width: 100%;
+                @media #{$mobile_device}{
+                    width: 320px;
+                }
+                @media #{$mobile_device2}{
+                    width: 568px;
+                }    
+                @media #{$all_device_width}{
+                    width: 824px;
+                }    
+
             }
         }
     }
