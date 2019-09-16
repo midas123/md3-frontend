@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-import  util from '../../services/util';
+import  util from '../../services/util/util';
 import './Product.scss';
 
 const imagePath = process.env.PUBLIC_URL + '/images/goods/';

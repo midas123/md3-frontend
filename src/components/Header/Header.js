@@ -91,7 +91,7 @@ class Header extends React.Component {
                                 </NavLink>
                                 }
                                 <NavLink to="/store">스토어</NavLink>
-                                <NavLink to="/cart">장바구니</NavLink>
+                                <NavLink to="/mcart">장바구니</NavLink>
                                 </div>
                         :null}
                             </div>

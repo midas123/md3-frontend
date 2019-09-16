@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import util from '../../services/util';
+import util from '../../services/util/util';
 import ThumbNail from '../ThumbNail/ThumbNail';
 import { Link  } from "react-router-dom";
 

@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 
-import { connect } from 'react-redux';
-import { addOrder, quantityUp, quantityDown, loadOrders }  from '../../services/order/actions';
-
-import  util from '../../services/util';
+import  util from '../../services/util/util';
 import Quantity from './Quantity';
 import ProductOrder from './ProductOrder';
 

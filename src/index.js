@@ -14,11 +14,14 @@ import ProductDetail from './components/Product/ProductDetail';
 import OrderContainer from './components/Order/OrderContainer';
 import OrderResult from './components/Order/OrderResult';
 import LoginForm from './components/Auth/LoginForm';
+import ScrollToTop from './services/util/ScrollTop';
+import MCart from './components/Cart/MCart';
 
 
 const routing = (
     <Root>
     <Router>
+    <ScrollToTop>
             <Header/>
             <Route exact path="/" component={App} />
             <Route path="/store" component={Product_Container} />
@@ -26,7 +29,9 @@ const routing = (
             <Route path="/order" component={OrderContainer} /> 
             <Route path="/orderResult" component={OrderResult} /> 
             <Route path="/login" component={LoginForm} /> 
+            <Route path="/mcart" component={MCart} /> 
             <Footer/> 
+    </ScrollToTop>
     </Router>
     </Root>
   )

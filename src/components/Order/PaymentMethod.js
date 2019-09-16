@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import util from '../../services/util';
+import util from '../../services/util/util';
 
 import './PaymentMethod.css';
 

@@ -9,12 +9,12 @@ import CartProduct from './CartProduct';
 import util from '../../services/util/util';
 
 
-import './Cart.scss';
+import './MCart.scss';
 
-class Cart extends React.Component {
+class MCart extends React.Component {
     state ={
-        isOpen: false,
-        initial: true,
+        // isOpen: false,
+        // initial: true,
         redirect: false
     }
 
@@ -28,7 +28,6 @@ class Cart extends React.Component {
       if (nextProps.productToRemove !== this.props.productToRemove) {
         this.removeProduct(nextProps.productToRemove);
       }
-
     }
     addProduct = product => {
       const { cartProducts, updateCart } = this.props;
@@ -104,53 +103,32 @@ class Cart extends React.Component {
         return <Redirect push to="/order" state={this.props.items}/>;
       }
         const { cartTotal, cartProducts, removeProduct, } = this.props;
-        console.log("cart1: "+JSON.stringify(cartProducts))
+        console.log("cart2: "+JSON.stringify(cartProducts))
         const products = cartProducts.map(p => {
               return (
                 <CartProduct product={p} removeProduct={removeProduct} key={p.gd_id} />
             );
         });
 
-        let classes = ['float-cart'];
-
-        if (!!this.state.isOpen) {
-            classes.push('float-cart--open');
-        }
+     
 
         return (
-            <div className={classes.join(' ')}>
-        {!this.state.isOpen && (
-          <span
-            onClick={() => this.openFloatCart()}
-            className="bag bag--float-cart-closed"
-          >
-            {!this.state.initial && ( 
-              <span className="bag__quantity">{cartTotal.productQuantity}</span>
-            )}
-          </span>
-        )}
-
-        <div className="float-cart__content">
-          <div className="float-cart__header">
-            <span className="bag">
-              <span className="bag__quantity">{cartTotal.productQuantity}</span>
-            </span>
+        <div className="float-mcart__content">
+          <div className="float-mcart__header">
             <span className="header-title">장바구니</span>
-
             {/* <span onClick={() => this.clearCart()}>장바구니 비우기</span> */}
           </div>
 
-          <div className="float-cart__shelf-container">
-            {products}
-            {!products.length && (
-              <p className="shelf-empty">
-                장바구니가 비어있습니다. <br />
-               
+          <div className="float-mcart__shelf-container">
+            {!products.length ? 
+                <p className="shelf-empty">
+                장바구니에 상품이 없습니다.<br />
               </p>
-            )}
+            : products}
           </div>
-
-          <div className="float-cart__footer">
+          {products.length > 0 && 
+          <div className="float-mcart__footer">
+             <div className="quantity">총&nbsp;{cartTotal.productQuantity}개의 상품</div> 
             <div className="sub">합계</div>
             <div className="sub-price">
               <p className="sub-price__val">
@@ -159,7 +137,7 @@ class Cart extends React.Component {
               </p>
       
             </div>
-            <div className="cart-btn">
+            <div className="mcart-btn">
               <div onClick={() => this.proceedToCheckout()} className="buy-btn">
                 구매하기
               </div>
@@ -168,13 +146,12 @@ class Cart extends React.Component {
               </div>
             </div>
           </div>
+           }
         </div>
-      </div>
     );
     }
 }
 
-//export default Cart;
 
 const mapStateToProps = state => ({
     cartProducts: state.cart.products,
@@ -186,4 +163,4 @@ const mapStateToProps = state => ({
   export default connect(
     mapStateToProps,
     { loadCart, updateCart, removeProduct, clearCart, readyOrder }
-  )(Cart);
+  )(MCart);

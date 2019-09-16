@@ -1,7 +1,7 @@
 import React ,{ Component } from 'react';
 import { withRouter } from 'react-router';
 
-import  util from '../../services/util';
+import  util from '../../services/util/util';
 import './ProductDetail.scss';
 import ProductOption from '../Order/ProductOption';
 

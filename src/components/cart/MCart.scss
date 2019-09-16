@@ -1,102 +1,13 @@
-$mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
 
-.float-cart {
-    position: fixed;
-    top: 0;
-    right: -450px;
-    width: 450px;
+.float-mcart {
+    width: 300px;
     height: 100%;
     background-color: white;
-    box-sizing: border-box;
-  
-    transition: right 0.2s;
-  
-    -webkit-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.2);
-    box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.2);
-
-    &--open {
-      z-index: 2;
-      right: 0;
-    }
-  
-    &__close-btn {
-      width: 70px;
-      height: 70px;
-      color: white;
-      //background-color: white;
-      text-align: center;
-      line-height: 50px;
-      position: absolute;
-      top: 0;
-      right: 10px;
-      cursor: pointer;
-      font-size: 1.0em;
-  
-      // &:hover {
-      //   background-color: #212027;
-      // }
-    }
-  
-    .bag {
-      width: 40px;
-      height: 40px;
-      position: relative;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 15px;
-      background-image: url('https://rawcdn.githack.com/jeffersonRibeiro/react-shopping-cart/ccf64841ddfdfedfce9821b2b7ff2c8075afb17c/src/static/bag-icon.png');
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-  
-      &--float-cart-closed {
-        @media #{$mobile_device}{
-          display: none;
-        }
-          position: absolute;
-          background-color: #6FB3CE;
-          background-size: 50%;
-          top: 10px;
-          left: -65px;
-          width: 65px;
-          height: 65px;
-          cursor: pointer;
-          
-          .bag__quantity {
-            bottom: 5px;
-            right: 10px;
-          }
-      }
-      &--float-cart-closed:hover {
-        @media #{$mobile_device}{
-          display: none;
-        }
-        background-color: rgb(130, 200, 228);
-    }
-  
-      &__quantity {
-        display: inline-block;
-        width: 18px;
-        height: 18px;
-        color: #0c0b10;
-        font-weight: bold;
-        font-size: 0.7em;
-        text-align: center;
-        line-height: 18px;
-        border-radius: 50%;
-        background-color: #eabf00;
-        position: absolute;
-        bottom: -5px;
-        right: 0px;
-      }
-    }
-  
     &__header {
       color: white;
       box-sizing: border-box;
       text-align: center;
-      padding: 45px 0;
+      padding: 25px 0;
       background-color: #6FB3CE;
   
       .header-title {
@@ -109,12 +20,12 @@ $mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
     &__shelf-container {
       position: relative;
       min-height: 280px;
-      padding-bottom: 200px;
   
       .shelf-empty {
-        color: white;
+        color: #5b5a5e;
         text-align: center;
-        line-height: 40px;
+        line-height: 170px;
+        height: 100%;
       }
   
       .shelf-item {
@@ -122,7 +33,6 @@ $mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
         box-sizing: border-box;
         padding: 5%;
         
-        //transition: background-color 0.2s, opacity 0.2s;
         -webkit-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);
         -moz-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);
         box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.14);
@@ -132,7 +42,6 @@ $mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
           content: '';
           width: 90%;
           height: 2px;
-          //background-color: rgba(0, 0, 0, 0.2);
           background-color: white;
           position: absolute;
           top: 0;
@@ -144,21 +53,9 @@ $mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
           .shelf-item__price {
             p {
               text-decoration: line-through;
-              //opacity: 0.6;
             }
           }
         }
-        // &--mouseover {
-        //   background: #0c0b10;
-  
-        //   .shelf-item__details {
-        //     .title,
-        //     .desc {
-        //       text-decoration: line-through;
-        //       opacity: 0.6;
-        //     }
-        //   }
-  
         //   .shelf-item__price {
         //     p {
         //       text-decoration: line-through;
@@ -166,8 +63,6 @@ $mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
         //     }
         //   }
         // }
-
-  
         &__del {
           width: 16px;
           height: 16px;
@@ -227,11 +122,8 @@ $mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
     &__footer {
       box-sizing: border-box;
       padding: 5%;
-      position: absolute;
-      bottom: 0;
       width: 100%;
       height: 200px;
-      z-index: 2;
       background-color: white;
   
       &::before {
@@ -242,8 +134,13 @@ $mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
         position: absolute;
         top: -20px;
         left: 0;
-        //background: linear-gradient(to top, rgba(235, 235, 235, 0.2), transparent);
         background-color: white;
+      }
+      .quantity{
+        color: #5b5a5e;
+        font-size: 13px;
+        font-weight: 300;
+        text-align: right;
       }
   
       .sub,
@@ -267,11 +164,10 @@ $mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
         }
   
         &__val {
-          color: #eabf00;
           font-size: 20px;
         }
       }
-      .cart-btn{ 
+      .mcart-btn{ 
         margin-top: 40px;
         cursor: pointer;
         display: flex;

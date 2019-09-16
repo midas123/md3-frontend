@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Thumb from '../ThumbNail/ThumbNail';
-import util from '../../services/util';
+import util from '../../services/util/util';
 
 
 class CartProduct extends React.Component{
