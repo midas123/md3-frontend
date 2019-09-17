@@ -15,11 +15,17 @@ $all_device_width : "screen and (min-width:824px)";
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 0 10px 0 10px;
         }
         @media #{$mobile_device2}{
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 0 40px 0 40px;
+        }
+        @media #{$all_device_width}{
+            min-width: 790px;
+            max-width: 890px;
         }    
         margin-top: 40px;
         margin-bottom: 50px;
@@ -32,8 +38,8 @@ $all_device_width : "screen and (min-width:824px)";
                 margin-left: auto;
                 margin-right: auto;
                 @media #{$mobile_device}{
-                    height: 320px;
-                    width: 320px;
+                    height: 300px;
+                    width: 300px;
                 }
                 @media #{$mobile_device2}{
                     height: 450px;
@@ -83,14 +89,21 @@ $all_device_width : "screen and (min-width:824px)";
                 .box_mid{
                     height: 205px;
                     .product_option{
-                        height: 100%;
-                        overflow-y: auto;
+                        @media #{$all_device_width}{
+                            height: 100%;
+                            overflow-y: auto;
+                        }
+                        min-height: 70%;
                         margin: 10px 0 10px 0;
                         .select_options{
-                            margin: 5px 0 5px 0;
+                            background-color: white;
+                            margin: 10px 0 10px 0;
+                            font-size: 14px;
+                            padding: 3px;
                         }
                         
                         .options_added{
+                            margin: 20px 0 40px 0;
                             span{
                                 font-size: 15px;
                                 color: #4d4d4d;
@@ -98,7 +111,7 @@ $all_device_width : "screen and (min-width:824px)";
                             .item{
                                 height: 19px;
                                 display: flex;
-                                margin:0 20px 10px 20px ;
+                                margin:10px 20px 10px 20px ;
                                 .quantity_input{
                                     margin-left: auto;
 

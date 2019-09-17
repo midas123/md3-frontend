@@ -8,7 +8,7 @@ import './OrderResult.scss';
 
 function OrderResult(props){
     const { orderResult } = props;
-
+    console.log("OrderResult: "+JSON.stringify(orderResult));
     const itemList = orderResult.map(order=>{
         return(
         <div className="order-result-item" key={order.gd_id}>
@@ -17,20 +17,20 @@ function OrderResult(props){
                 src={util.imagePath+order.item_thumbnail}
                 alt={order.item_name}
                 />
-            <div className="order-result-item__name">
-                <span>상품명:</span>
-                {order.item_name}
-            </div>
-            <div className="order-result-item__option">
-            <span>옵션:</span>
-                
-                {order.item_option1}{order.item_option2 && '/ '+ order.item_option2}
-                
-            </div>
-            <div className="order-result-item__quantity">
-            <span>수량:</span>
-                {order.item_quantity}
-            </div>
+            <div className="order-result-item__detail">
+                <div className="order-result-item__name">
+                    <span>상품명:</span>
+                    {order.item_name}
+                </div>
+                <div className="order-result-item__option">
+                    <span>옵션:</span>
+                    {order.item_option1}{order.item_option2 && '/ '+ order.item_option2}
+                </div>
+                <div className="order-result-item__quantity">
+                    <span>수량:</span>
+                    {order.item_quantity}
+                </div>
+            </div>    
         </div>
         )
     })
@@ -38,9 +38,9 @@ function OrderResult(props){
     return(
         <div className="order-result">
             <div className="order-result__title">주문 결과</div>
-
-            <div className="order-result__sub-title">주문 상품<span>주문번호: {orderResult[0].ordercode}</span></div>
+            <div className="order-result__sub-title">주문 상품</div>
             <div className="line"><hr></hr></div>
+            <div className="order-result__number">주문번호: {orderResult[0].ordercode}</div>
             <div className="order-result__item-info">
                 <div className="order-result__item-list">
                     {itemList}
@@ -67,7 +67,7 @@ function OrderResult(props){
                     <p><span>주문인</span>{orderResult[0].delivery_info.orderer_name}</p>
                     <p><span>결제수단</span>{orderResult[0].payment_info.payment}</p>
                     {orderResult[0].payment_info.payment == "" ? null : 
-                    <p><span>입금 계좌</span>모두 은행:010101-01-010101 &nbsp; 예금주: 모두홈</p>}
+                    <p><span>입금 계좌</span>모두 은행:010101-01-010101 &nbsp;&nbsp;&nbsp; 예금주: 모두홈</p>}
 
                     <p><span>결제금액</span>{util.formatPrice(orderResult[0].payment_info.total_price)}원</p>
                 </div>
@@ -75,7 +75,7 @@ function OrderResult(props){
             <div className="order-result__btn">
                 <Link to="/">
                     <div className="to-home_btn">
-                            <span>홈으로</span>
+                            <span>쇼핑 계속하기</span>
                     </div>
                 </Link>
             </div>

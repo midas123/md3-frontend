@@ -6,7 +6,7 @@ $all_device_width : "screen and (min-width:824px)";
 
 .Header{ 
     background-color: #6FB3CE;
-    height: 90px;
+    // height: 90px;
     width: 100%;
     @media #{$mobile_device}{
         height: 60px;

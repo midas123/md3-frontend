@@ -51,9 +51,10 @@ $all_device_width : "screen and (min-width:824px)";
         .order-item{
             display:flex;
             @media #{$mobile_device}{
-                flex-direction: column;
-                // flex-direction: row;
-                // justify-content: center;
+                flex-direction: row;
+                &__detail{
+                    margin-left: 15px;
+                }
             }
             @media #{$mobile_device2}{
                 flex-direction: column;
@@ -64,8 +65,8 @@ $all_device_width : "screen and (min-width:824px)";
             }
             &__thumb img{
                 @media #{$mobile_device}{
-                    width: 200px;
-                    height: 200px;
+                    width: 100px;
+                    height: 100px;
                     
                 }
                 @media #{$all_device_width}{
@@ -73,9 +74,7 @@ $all_device_width : "screen and (min-width:824px)";
                     height: 100px;
                 }
             }
-            div {
-                margin: 0 30px ;
-            }
+       
             &__price{
                 margin-left:auto;
                 order: 2;

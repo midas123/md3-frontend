@@ -10,6 +10,7 @@ const imagePath = process.env.PUBLIC_URL + '/images/goods/';
 function OrderInfo(props){
 
   const { orders } = props;
+  console.log("OrderInfo:"+JSON.stringify(orders));
   const orderList = orders.map(order=> {
     return(
     <div className="order-item" key={order.gd_id}>
@@ -18,21 +19,23 @@ function OrderInfo(props){
         src={imagePath+order.item_thumbnail}
         alt={order.item_name}
         />
-      <div className="order-item__name">
-        <span>상품명:</span>
-        {order.item_name}
-      </div>
-      <div className="order-item__option">
-        <span>옵션:</span>
-          {order.item_option1}{order.item_option2 && '/ '+ order.item_option2}
-      </div>
-      <div className="order-item__quantity">
-        <span>수량:</span>
-          {order.item_quantity}
-      </div>
-      <div className="order-item__price">
-        <span>가격:</span>{util.formatPrice(order.item_price)}원
-      </div>
+      <div className="order-item__detail">
+        <div className="order-item__name">
+          <span>상품명:</span>
+          {order.item_name}
+        </div>
+        <div className="order-item__option">
+          <span>옵션:</span>
+            {order.item_option1}{order.item_option2 && '/ '+ order.item_option2}
+        </div>
+        <div className="order-item__quantity">
+          <span>수량:</span>
+            {order.item_quantity}
+        </div>
+        <div className="order-item__price">
+          <span>가격:</span>{util.formatPrice(order.item_price)}원
+        </div>
+      </div>  
     </div>
     );
   });

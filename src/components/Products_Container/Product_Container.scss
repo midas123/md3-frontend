@@ -1,6 +1,5 @@
 .Product_Container {
     width: 70%;
-    //float: left;
     margin: auto;
     min-height: 1000px;
     &_Header{
@@ -14,10 +13,13 @@
 
         .Product_Sort{
             float: right;
-            margin-top: 8px;
+            margin:0 0 10px 0;
+            select{
+                background-color: white;
+            }
             span{
                 font-size: 14px;
-                padding: 4px;
+                margin-right: 6px;
                 color: #737373;
 
             }
