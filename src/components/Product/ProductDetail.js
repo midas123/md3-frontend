@@ -5,7 +5,7 @@ import  util from '../../services/util/util';
 import './ProductDetail.scss';
 import ProductOption from '../Order/ProductOption';
 
-const imagePath = process.env.PUBLIC_URL + '/images/goods/';
+// const imagePath = process.env.PUBLIC_URL + '/images/goods/';
 
 
 function ProductDetail({match}) {
@@ -24,7 +24,7 @@ function ProductDetail({match}) {
             }
         const images = goods.goodsImages.map(img => {
             return(
-                <img src={imagePath+img.image_name} className="product_detail_img" key={img.goods_image_id}/>
+                <img src={util.imagePath+img.image_name} className="product_detail_img" key={img.goods_image_id}/>
 
                 )
         });   
@@ -37,7 +37,7 @@ function ProductDetail({match}) {
             <div className="Product_detail">
                 <div className="product_top">
                     <div className="top_left">
-                        <img src={imagePath+goods.goods_thumbnail} className="product_img"/>
+                        <img src={util.imagePath+goods.goods_thumbnail} className="product_img"/>
                     </div>
                     <div className="top_right">
                         <div className="product_box">

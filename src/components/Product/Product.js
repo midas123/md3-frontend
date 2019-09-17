@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import  util from '../../services/util/util';
 import './Product.scss';
 
-const imagePath = process.env.PUBLIC_URL + '/images/goods/';
+// const imagePath = process.env.PUBLIC_URL + '/images/goods/';
 
 function Product(props){
     
@@ -16,7 +16,7 @@ function Product(props){
             state: { modal : true }
             }}>
         <div className="Product_item" key={goods.goods_id} >
-            <img src={imagePath+goods.goods_thumbnail} alt={goods.goods_name}/>     
+            <img src={util.imagePath+goods.goods_thumbnail} alt={goods.goods_name}/>     
             <p className="product_title">{goods.goods_name}</p>
             <div className="product_price">
                 <div className="original">

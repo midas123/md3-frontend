@@ -10,7 +10,6 @@ const imagePath = process.env.PUBLIC_URL + '/images/goods/';
 function OrderInfo(props){
 
   const { orders } = props;
-  console.log("OrderInfo:"+JSON.stringify(orders));
   const orderList = orders.map(order=> {
     return(
     <div className="order-item" key={order.gd_id}>

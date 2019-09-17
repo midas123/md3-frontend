@@ -1,4 +1,10 @@
-@media screen and (min-width: 568px) and (max-width: 823px){
+@media screen and (min-width: 700px) and (max-width: 929px){
+    .mainSlider div ul {
+        height: 350px;
+        /* width: 360px; */
+        object-fit: scale-down;
+        }
+    
     .Footer{
         clear: both;
         background-color: #6FB3CE;
@@ -10,14 +16,13 @@
     }
   }
 
-
-@media screen and (min-width: 320px) and (max-width:567px){
-    .mainSlider div ul li img {
-        height: auto;
-        width: 360px;
+@media screen and (min-width: 320px) and (max-width:699px){
+    .mainSlider div ul {
+        height: 160px;
+        /* width: 360px; */
         object-fit: scale-down;
-        }
-   
+    }
+    
     .Footer{
         clear: both;
         background-color: #6FB3CE;
@@ -29,7 +34,7 @@
     }
 }
 
-@media screen and (min-width: 824px){
+@media screen and (min-width: 930px){
     .mainSlider img {
         height: 100%;
         width: 360px;

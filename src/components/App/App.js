@@ -3,9 +3,6 @@ import './App.css';
 
 import SwiftSlider from 'react-swift-slider'
 
-import ProductContainer from '../Products_Container/Product_Container.js';
-import Cart from '../Cart/Cart';
-
 
 const SlideImagePath = process.env.PUBLIC_URL + '/images/slide/';
 

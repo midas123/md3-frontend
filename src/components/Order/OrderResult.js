@@ -8,7 +8,6 @@ import './OrderResult.scss';
 
 function OrderResult(props){
     const { orderResult } = props;
-    console.log("OrderResult: "+JSON.stringify(orderResult));
     const itemList = orderResult.map(order=>{
         return(
         <div className="order-result-item" key={order.gd_id}>

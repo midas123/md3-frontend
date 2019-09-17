@@ -104,7 +104,6 @@ class Cart extends React.Component {
         return <Redirect push to="/order" state={this.props.items}/>;
       }
         const { cartTotal, cartProducts, removeProduct, } = this.props;
-        console.log("cart1: "+JSON.stringify(cartProducts))
         const products = cartProducts.map(p => {
               return (
                 <CartProduct product={p} removeProduct={removeProduct} key={p.gd_id} />
