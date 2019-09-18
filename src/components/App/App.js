@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 
-import SwiftSlider from 'react-swift-slider'
+import Product_Container from '../Products_Container/Product_Container';
+import ImageSlider from './ImageSlider';
 
 
 const SlideImagePath = process.env.PUBLIC_URL + '/images/slide/';
@@ -15,15 +16,18 @@ const data =  [
 
 
 class App extends React.Component {
- 
+  
   render(){
+    const sort = "popularity";
+    const sort1 = "newest";
     return (
       <div className="App">
         <div className="Wrapper">
           <div className="mainSlider">
-            <SwiftSlider data={data} enableNextAndPrev={false}/>
+            <ImageSlider/>
           </div>
         </div>
+        <Product_Container app_sort={sort}/>
       </div>
       );
     }

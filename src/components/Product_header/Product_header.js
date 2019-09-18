@@ -1,16 +1,15 @@
 import React from 'react';
-import Sort from '../Product_Sort/Product_Sort'
+import Sort from '../Product_Sort/Product_Sort';
+import './Product_Header.scss';
 
 class Container_Header extends React.Component {
     render(){
+        const { app_sort } = this.props;
 
         return(
             <div className="Product_Container_Header">
-                {/* <small className="Product_Count">총({this.props.productCount})개의 상품</small> */}
-                <Sort/>
+                {app_sort? null:<Sort/>}
             </div>
-            
-
         )
     }
 }

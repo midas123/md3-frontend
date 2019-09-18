@@ -5,9 +5,9 @@ import Pagination from '../Pagination/Pagination'
 import { connect } from 'react-redux';
 import { fetchProducts, UpdatingCurrentPage } from '../../services/products/actions';
 
-import './Product_Container.scss';
 import { css } from '@emotion/core';
 import ProductList from '../Product/ProductList';
+import RankList from '../App/RankList';
 
 //spinner
 const override = css`
@@ -15,9 +15,6 @@ const override = css`
     top: 50%;
     left: 50%;
     `;
-    
-    // display: block;
-    // margin: 0 auto;
 
 class Product_Container extends React.Component {
     constructor(props){
@@ -25,16 +22,19 @@ class Product_Container extends React.Component {
         this.state = {
           loading: false
         };
-
       }
 
       componentDidMount(){
         console.log("componentDidMount");
-        //  localStorage.removeItem("goodsList");
-        //  localStorage.removeItem("goodsListExpiration");
         let pager = this.props.pager;
+        const { app_sort } = this.props;
+        if(app_sort){
+          console.log("app_sort: "+app_sort)
+          this.handleFetchProducts(app_sort, pager);
+          return;
+        }
+
         this.handleFetchProducts("newest", pager);
-     
       }
 
       componentWillReceiveProps(nextProps) { 
@@ -78,25 +78,18 @@ class Product_Container extends React.Component {
 
             });
         };
-        buyProduct = () =>{
-          fetch("/api-product/goods/order")
-          .then(response => response.json())
-          .then(json =>{
-                console.log(json.message);
-            }
-          )
-          .catch(error => console.log(error) );
-        }
 
       render(){
         var { pager }= this.props;
         var { goodsList } = this.props;
+        const { app_sort } = this.props;
         return(
           <React.Fragment>
                 {this.state.loading && <FadeLoader color={'#000000'} 
                 css={override}/>}
-                <ProductList goodsList={goodsList}/>
-              <Pagination pager={pager} UpdatingCurrentPage={this.handleCurrentPage}/>
+              {app_sort ? <RankList goodsList={goodsList}/>:  
+                <ProductList goodsList={goodsList} app_sort={app_sort} pager={pager} handleCurrentPage={this.handleCurrentPage}/>
+              }
           </React.Fragment>
         );
     }

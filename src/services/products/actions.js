@@ -69,7 +69,6 @@ export const fetchProducts = (sortBy, pager, currentPage, callback) => {
     let goodsList = JSON.parse(localStorage.getItem("goodsList"));
     var exp = localStorage.getItem("goodsListExpiration");
     var now =  Date.now();
-
     if((exp !== null || undefined) && exp > now && goodsList.length>0){
         return (dispatch) => {
             if(!!sortBy){

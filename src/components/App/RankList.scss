@@ -1,0 +1,67 @@
+$mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
+$mobile_device2 : "screen and (min-width: 568px) and (max-width:823px)";
+$all_device_width : "screen and (min-width:824px)";
+
+
+.rank-collection{
+    width: 100%;
+    margin-top: 6%;
+    &__title{
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .rank-collection-container{
+        width: 90%;
+        margin:auto;
+    }
+    &__list{
+        @media #{$mobile_device}{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        @media #{$mobile_device2}{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        @media #{$all_device_width}{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        a{ 
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+        .rank-collection-item{
+            @media #{$mobile_device}{
+                width: 100px;
+            }
+            width: 140px;
+            margin: 10px;
+            .rank-collection-title {
+                white-space: nowrap; 
+                width: 90%; 
+                overflow: hidden;
+                text-overflow: ellipsis; 
+                text-align: left;
+            }
+            img{
+                width: 100%;
+                height: auto;
+            }
+            div {
+                font-size: 14px;
+            }
+            .rank-collection-price{
+                span{
+                    font-weight: 600;
+                }
+            }
+        }   
+    }
+}
