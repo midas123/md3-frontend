@@ -13,13 +13,13 @@ class RankList extends React.Component {
 
   }
   render() {
-    console.log("RankList")
     const { goodsList } = this.props;
-    const products = goodsList.map((goods, index) => {
-      if(index < 6 ){
-         
+    const { category } = this.props;
+    let index = 0;
+    const products = goodsList.map((goods) => {
+      if(goods.goods_category1 == category && index < 5){
+         ++index;
       return (
-        //   <Product product={p} buyProduct={this.buyProduct} key={p.goods_id} />
         <Link key={goods.goods_id} to={{
             pathname: `/goods/${goods.goods_id}`,
             state: { modal : true }
@@ -37,12 +37,11 @@ class RankList extends React.Component {
         </Link>
         );
       }
-      });    
+      });
       return (
       <div className="rank-collection">
+          <div className="category-name">{category}</div>
           <div className="rank-collection-container">
-
-            <div className="rank-collection__title">베스트 셀러</div>
             <div className="rank-collection__list">
                 {products}
             </div>

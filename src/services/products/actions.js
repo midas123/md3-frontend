@@ -46,7 +46,6 @@ function getPager(totalItemsCount, currentPage) {
         endPage = startPage +4;
     }
 
-
     // calculate start and end item indexes
     var startIndex = (currentPage - 1) * itemsPerPage;
     var endIndex = Math.min(startIndex + itemsPerPage - 1, totalItemsCount - 1);
@@ -65,62 +64,70 @@ function getPager(totalItemsCount, currentPage) {
     };
 }
 
-export const fetchProducts = (sortBy, pager, currentPage, callback) => {
+export const fetchProducts = () => {
+    console.log("fetchProducts")
+    return (dispatch) => {
     let goodsList = JSON.parse(localStorage.getItem("goodsList"));
     var exp = localStorage.getItem("goodsListExpiration");
     var now =  Date.now();
-    if((exp !== null || undefined) && exp > now && goodsList.length>0){
-        return (dispatch) => {
-            if(!!sortBy){
-                goodsList = goodsList.sort(compare[sortBy]);
-            }
-            
-            if(!!pager){
-                pager = getPager(goodsList.length, currentPage);
-                goodsList = goodsList.slice(pager.startIndex, pager.endIndex + 1);
-            }
-            
-            if (!!callback) {
-                callback();
-            }
 
-            dispatch({
-                type: FETCH_PRODUCTS,
-                payload : goodsList
-            });
-    
-            dispatch({
-                type: CURRENTPAGE_UPDATE,
-                payload : pager
-            });
-        }    
-    }
-    return (dispatch) => {
-    fetch('/api-product/goods/all')
-    .then(response =>  
-        response.json()
+    // if((exp !== null || undefined) && exp > now && goodsList.length>0){
+    if((exp == null || undefined) && exp < now){
+        fetch('/api-product/goods/all')
+        .then(response =>  
+            response.json()
         )
-    .then(json => {
-        let goodsList = json;
-        var expires = (60*10);
-        var now = Date.now();  
-        var Expiration = now + expires*1000; 
-        localStorage.setItem("goodsList", JSON.stringify(goodsList));
-        localStorage.setItem("goodsListExpiration", Expiration);
+        .then(json => {
+            goodsList = json;
+            console.log("goodsList: "+goodsList)
+            var expires = (60*10);
+            var now = Date.now();  
+            var Expiration = now + expires*1000; 
+            localStorage.setItem("goodsList", JSON.stringify(goodsList));
+            localStorage.setItem("goodsListExpiration", Expiration);
+        })
+    }    
+    dispatch({
+        type: FETCH_PRODUCTS,
+        payload : goodsList
+    });
+}
+};
 
+export const sortAndPagingProduct = (sortBy, pager, currentPage, category, callback) =>{
+    var goodsList = JSON.parse(localStorage.getItem("goodsList"));
+
+    if(goodsList.length == 0){
+        alert("잠시 후 다시 시도해주세요.")
+        return ;
+    }
+
+    return (dispatch) => {
         if(!!sortBy){
             goodsList = goodsList.sort(compare[sortBy]);
         }
         
+        if(!!category){
+            var list=[];
+            console.log(typeof list)
+            for(var i=0; goodsList.length>i; i++){
+                if(goodsList[i].goods_category1 == category){
+                    list.push(goodsList[i])
+                }
+            }
+            goodsList = list;
+        }
+
         if(!!pager){
             pager = getPager(goodsList.length, currentPage);
             goodsList = goodsList.slice(pager.startIndex, pager.endIndex + 1);
         }
+
         
         if (!!callback) {
             callback();
         }
-        
+
         dispatch({
             type: FETCH_PRODUCTS,
             payload : goodsList
@@ -130,13 +137,8 @@ export const fetchProducts = (sortBy, pager, currentPage, callback) => {
             type: CURRENTPAGE_UPDATE,
             payload : pager
         });
-        
-    })
-    // .catch(error => console.log("error: "+error) );
-    }
-};
-
-
+    }    
+}
 
 
 export const UpdatingCurrentPage = (currentPage, pager) => dispatch => {
@@ -145,4 +147,8 @@ export const UpdatingCurrentPage = (currentPage, pager) => dispatch => {
         type: CURRENTPAGE_UPDATE,
         payload: pager
     })
+}
+
+const fetchBestSeller = (category) =>{
+  
 }

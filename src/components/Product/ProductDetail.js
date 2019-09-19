@@ -1,11 +1,9 @@
 import React ,{ Component } from 'react';
-import { withRouter } from 'react-router';
 
 import  util from '../../services/util/util';
 import './ProductDetail.scss';
 import ProductOption from '../Order/ProductOption';
 
-// const imagePath = process.env.PUBLIC_URL + '/images/goods/';
 
 
 function ProductDetail({match}) {
@@ -35,6 +33,7 @@ function ProductDetail({match}) {
 
         return(
             <div className="Product_detail">
+                    <div className="category-name">{goods.goods_category1+" > "+goods.goods_category2}</div>
                 <div className="product_top">
                     <div className="top_left">
                         <img src={util.imagePath+goods.goods_thumbnail} className="product_img"/>

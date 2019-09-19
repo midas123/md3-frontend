@@ -18,8 +18,11 @@ const data =  [
 class App extends React.Component {
   
   render(){
-    const sort = "popularity";
-    const sort1 = "newest";
+    const sort = 
+    [
+      {category:"가구", sort:"popularity"}, 
+      {category:"가전", sort:"popularity"}
+    ];
     return (
       <div className="App">
         <div className="Wrapper">
@@ -27,6 +30,7 @@ class App extends React.Component {
             <ImageSlider/>
           </div>
         </div>
+        <div className="rank-collection__title">인기 상품</div>
         <Product_Container app_sort={sort}/>
       </div>
       );

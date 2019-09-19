@@ -5,6 +5,7 @@ import cartReducer from './cart/reducer';
 import totalReducer from './total/reducer';
 import orderReducer from './order/reducer';
 import authReducer from './auth/reducer';
+import categoryReducer from './category/reducer';
 
 const appReducer = combineReducers({
     sort: sortReducer,
@@ -12,7 +13,8 @@ const appReducer = combineReducers({
     cart : cartReducer,
     total : totalReducer,
     order : orderReducer,
-    auth : authReducer
+    auth : authReducer,
+    category : categoryReducer
   });
 
   const rootReducer = (state, action) => {

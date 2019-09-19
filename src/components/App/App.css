@@ -35,3 +35,9 @@
     z-index: -1;
     margin-top: 80px;
 }
+
+.rank-collection__title{
+    margin: 50px 0 30px 7%;
+    font-size: 20px;
+    font-weight: 600;
+}

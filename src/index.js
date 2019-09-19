@@ -16,6 +16,7 @@ import OrderResult from './components/Order/OrderResult';
 import LoginForm from './components/Auth/LoginForm';
 import ScrollToTop from './services/util/ScrollTop';
 import MCart from './components/Cart/MCart';
+import Product_header from './components/Product_header/Product_header';
 
 
 const routing = (
@@ -24,6 +25,8 @@ const routing = (
     <ScrollToTop>
             <Header/>
             <Route exact path="/" component={App} />
+            <Route path="/store/:id" component={Product_header} />
+            {/* <Route path="/store/:id" component={Product_Container} /> */}
             <Route path="/store" component={Product_Container} />
             <Route path="/goods/:id" component={ProductDetail} /> 
             <Route path="/order" component={OrderContainer} /> 

@@ -3,7 +3,7 @@ import { FadeLoader } from 'react-spinners';
 import Pagination from '../Pagination/Pagination'
 
 import { connect } from 'react-redux';
-import { fetchProducts, UpdatingCurrentPage } from '../../services/products/actions';
+import { fetchProducts, sortAndPagingProduct, UpdatingCurrentPage } from '../../services/products/actions';
 
 import { css } from '@emotion/core';
 import ProductList from '../Product/ProductList';
@@ -27,39 +27,49 @@ class Product_Container extends React.Component {
       componentDidMount(){
         console.log("componentDidMount");
         let pager = this.props.pager;
-        const { app_sort } = this.props;
-        if(app_sort){
-          console.log("app_sort: "+app_sort)
-          this.handleFetchProducts(app_sort, pager);
-          return;
-        }
-
+        this.initialFetchProduct();
         this.handleFetchProducts("newest", pager);
       }
 
       componentWillReceiveProps(nextProps) { 
         console.log("componentWillReceiveProps");
-        const { sort: nextSort, pager: pager } = nextProps;
+        const { sort: nextSort, category:nextCategory } = nextProps;
         let preCurrentPage = this.props.pager.currentPage;
         let sort = this.props.sort;
+        let pager = this.props.pager;
+        let category = this.props.category;
 
+        console.log("ex-category: "+category)
+
+        if(nextCategory !== category){
+          console.log("nextcategory: "+nextCategory)
+          this.handleFetchProducts(sort, pager, 1, nextCategory);
+        }
+        
         if(nextSort !== sort){
-          this.handleFetchProducts(nextSort, pager, 1);
+          console.log("test2: "+nextSort)
+          this.handleFetchProducts(nextSort, pager, 1, category);
         }
         
         if(pager.currentPage !== preCurrentPage){
           this.handleFetchProducts(sort, pager, pager.currentPage);
         }
 
+
+
+      }
+      initialFetchProduct = () => {
+        this.props.fetchProducts();
       }
 
       handleFetchProducts = (
         sort,
         pager,
-        currentPage
+        currentPage,
+        category
       ) => {
         this.setState({ loading: true });
-        this.props.fetchProducts(sort, pager, currentPage, () => {
+        this.props.sortAndPagingProduct(sort, pager, currentPage, category, () => {
           this.setState({ loading: false});
 
         });
@@ -73,7 +83,7 @@ class Product_Container extends React.Component {
         ) =>{
         console.log("UpdatingCurrentPage: "+currentPage);
         this.setState({ loading: true });
-        this.props.fetchProducts(sort, pager, currentPage, () => {
+        this.props.sortAndPagingProduct(sort, pager, currentPage, () => {
           this.setState({ loading: false});
 
             });
@@ -81,14 +91,26 @@ class Product_Container extends React.Component {
 
       render(){
         var { pager }= this.props;
-        var { goodsList } = this.props;
+        const { goodsListSorted } = this.props;
+   
+        let goodsList = JSON.parse(localStorage.getItem("goodsList"));
+
         const { app_sort } = this.props;
+        var ranklist;
+        if(app_sort){
+          ranklist = app_sort.map((m,index) => {
+            return (<RankList goodsList={goodsList}  category={m.category} app_sort={m.sort} key={index}/>)
+          })
+        }
         return(
           <React.Fragment>
                 {this.state.loading && <FadeLoader color={'#000000'} 
                 css={override}/>}
-              {app_sort ? <RankList goodsList={goodsList}/>:  
-                <ProductList goodsList={goodsList} app_sort={app_sort} pager={pager} handleCurrentPage={this.handleCurrentPage}/>
+              {app_sort ? 
+              // <RankList goodsList={goodsList}/>
+              ranklist
+              :  
+                <ProductList goodsList={goodsListSorted} pager={pager} handleCurrentPage={this.handleCurrentPage}/>
               }
           </React.Fragment>
         );
@@ -97,13 +119,14 @@ class Product_Container extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  goodsList: state.goods.goodsList,
+  goodsListSorted: state.goods.goodsList,
   sort: state.sort.type,
-  pager: state.goods.pager
+  pager: state.goods.pager,
+  category : state.category.category
 });
 
 const mapDispatchToProps = {
-  fetchProducts, UpdatingCurrentPage
+  fetchProducts, sortAndPagingProduct, UpdatingCurrentPage
 };
 
 

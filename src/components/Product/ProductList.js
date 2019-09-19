@@ -13,15 +13,23 @@ class ProductList extends React.Component {
     };
 
   }
+
+  handleCategory = (category, e) => {
+    e.preventDefault();
+    console.log("handlecategory: "+category)
+    this.props.updateCategory(category);
+}
+
   render() {
-    console.log("ProductList")
     const { goodsList } = this.props;
+    console.log("goodsList: "+goodsList.length)
     const { pager } = this.props;
     const products = goodsList.map(p => {
       return (
           <Product product={p} buyProduct={this.buyProduct} key={p.goods_id} />
         );
       });    
+ 
       return (
       <div className="Product_Container">
             <Container_Header app_sort={this.props.app_sort}/>
@@ -34,3 +42,5 @@ class ProductList extends React.Component {
   }
 }
 export default ProductList;
+
+

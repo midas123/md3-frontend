@@ -20,7 +20,6 @@ class SelectBox extends React.Component {
     ));
 
     OnChange = e => {
-        console.log("changing");
         this.props.handleOnChange(e.target.value);
     }
     
