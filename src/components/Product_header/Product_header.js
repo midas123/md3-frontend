@@ -27,8 +27,8 @@ class Container_Header extends React.Component {
 
         const category = categories.map((c,index)=>{
             return(
-                <Link to={'/store/'+c.category}>
-                <div className="main-category-item" key={index} onClick={(e) => this.handleCategory(c.category, e)}> 
+                <Link to={'/store/'+c.category} key={index}>
+                <div className="main-category-item" onClick={(e) => this.handleCategory(c.category, e)}> 
                     {c.category}
                 </div>
                 </Link>

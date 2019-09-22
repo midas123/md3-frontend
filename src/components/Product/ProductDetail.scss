@@ -60,6 +60,9 @@ $all_device_width : "screen and (min-width:824px)";
         }
         
         .top_right {
+            @media #{$all_device_width}{
+                min-width: 366px;
+            }    
             height: 100%;
             width: 100%;
             .product_box{
@@ -178,12 +181,10 @@ $all_device_width : "screen and (min-width:824px)";
                                 margin: 20px 0 20px 0;
                                 padding: 10px;
                                 width: 40%;
-                             
-                            }
-                            a {
                                 text-align: center;
-                                text-decoration: none;
                                 color: white;
+                                cursor: pointer;
+
                             }
     
                             .buy_btn{
@@ -196,7 +197,6 @@ $all_device_width : "screen and (min-width:824px)";
                             .cart_btn{
                                 float: left;
                                 background-color: #b2b2b2;
-                                color: white;
                             }
                             .cart_btn:hover{
                                 background-color: #cacaca;

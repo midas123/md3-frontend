@@ -94,7 +94,6 @@ class OrderDetails extends Component {
     }
 
     deleteItem(id){
-        console.log("deleteItem");
         var array = [...this.state.options];
         var itemIndex;
         array.map((item, index) =>{
@@ -109,7 +108,6 @@ class OrderDetails extends Component {
     }
 
     CalculateTotal(){
-        console.log("CalculateTotal: "+JSON.stringify(this.state.options));
             var total_price=0;
             var total_quantity = 0;
 
@@ -128,7 +126,6 @@ class OrderDetails extends Component {
 
     addProductToCart(items){
         if(items.length>0){
-            console.log("add_to_cart: "+ items.length);
             this.props.addProduct(items);
         }
     }

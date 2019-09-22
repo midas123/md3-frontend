@@ -2,4 +2,25 @@
     width: 70%;
     margin: auto;
     min-height: 1000px;
+    .data-loading {
+        display: block;
+        text-align: center;
+        background-color: #eeeeee;
+        border: 0;
+        font-size: 5rem;
+      }
+    .to-the-top-btn{
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      z-index: 99;
+      font-size: 15px;
+      border: none;
+      outline: none;
+      background-color: #6FB3CE;
+      color: white;
+      cursor: pointer;
+      padding: 10px 20px 10px 20px;
+      // border-radius: 4px;
+    }  
 }

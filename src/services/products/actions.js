@@ -73,13 +73,14 @@ export const fetchProducts = () => {
 
     // if((exp !== null || undefined) && exp > now && goodsList.length>0){
     if((exp == null || undefined) && exp < now){
+        localStorage.removeItem("goodsList");
+
         fetch('/api-product/goods/all')
         .then(response =>  
             response.json()
         )
         .then(json => {
             goodsList = json;
-            console.log("goodsList: "+goodsList)
             var expires = (60*10);
             var now = Date.now();  
             var Expiration = now + expires*1000; 
@@ -96,7 +97,6 @@ export const fetchProducts = () => {
 
 export const sortAndPagingProduct = (sortBy, pager, currentPage, category, callback) =>{
     var goodsList = JSON.parse(localStorage.getItem("goodsList"));
-
     if(goodsList.length == 0){
         alert("잠시 후 다시 시도해주세요.")
         return ;
@@ -109,7 +109,6 @@ export const sortAndPagingProduct = (sortBy, pager, currentPage, category, callb
         
         if(!!category){
             var list=[];
-            console.log(typeof list)
             for(var i=0; goodsList.length>i; i++){
                 if(goodsList[i].goods_category1 == category){
                     list.push(goodsList[i])
@@ -117,12 +116,13 @@ export const sortAndPagingProduct = (sortBy, pager, currentPage, category, callb
             }
             goodsList = list;
         }
-
         if(!!pager){
             pager = getPager(goodsList.length, currentPage);
             goodsList = goodsList.slice(pager.startIndex, pager.endIndex + 1);
+            goodsList.forEach(g => {
+            })
         }
-
+        
         
         if (!!callback) {
             callback();
@@ -147,8 +147,4 @@ export const UpdatingCurrentPage = (currentPage, pager) => dispatch => {
         type: CURRENTPAGE_UPDATE,
         payload: pager
     })
-}
-
-const fetchBestSeller = (category) =>{
-  
 }

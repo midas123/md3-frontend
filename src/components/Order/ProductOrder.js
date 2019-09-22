@@ -17,7 +17,8 @@ class ProductOrder extends Component {
 
     }
     
-    addProductToCart(){
+    addProductToCart(e){
+        e.preventDefault();
         const { items } = this.props;
         if(items.length ==0){
             alert("장바구니에 추가할 상품을 선택해주세요.")
@@ -28,7 +29,8 @@ class ProductOrder extends Component {
         alert("장바구니에 상품을 추가했습니다.")
     }
 
-    orderProduct(){
+    orderProduct(e){
+        e.preventDefault();
         var token = localStorage.getItem("accessToken");
         console.log("토큰: "+token)
         if(!token){
@@ -55,15 +57,15 @@ class ProductOrder extends Component {
     return(
 
         <div className="product_order">
-            <div className="buy_btn">
-                <a href="#" onClick={() => this.orderProduct()}>
+            <div className="buy_btn" onClick={(e) => this.orderProduct(e)}>
+                {/* <a href="#" onClick={(e) => this.orderProduct(e)}> */}
                     <span>구매하기</span>
-                </a>
+                {/* </a> */}
             </div>
-            <div className="cart_btn">
-                <a href="#" onClick={() => this.addProductToCart()}>
+            <div className="cart_btn" onClick={(e) => this.addProductToCart(e)}>
+                {/* <a href="#" onClick={(e) => this.addProductToCart(e)}> */}
                     <span>장바구니 담기</span>
-                </a>
+                {/* </a> */}
             </div>
         </div>
     )

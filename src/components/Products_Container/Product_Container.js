@@ -1,6 +1,5 @@
 import React from 'react';
 import { FadeLoader } from 'react-spinners';
-import Pagination from '../Pagination/Pagination'
 
 import { connect } from 'react-redux';
 import { fetchProducts, sortAndPagingProduct, UpdatingCurrentPage } from '../../services/products/actions';
@@ -39,15 +38,12 @@ class Product_Container extends React.Component {
         let pager = this.props.pager;
         let category = this.props.category;
 
-        console.log("ex-category: "+category)
 
         if(nextCategory !== category){
-          console.log("nextcategory: "+nextCategory)
           this.handleFetchProducts(sort, pager, 1, nextCategory);
         }
         
         if(nextSort !== sort){
-          console.log("test2: "+nextSort)
           this.handleFetchProducts(nextSort, pager, 1, category);
         }
         
@@ -79,11 +75,12 @@ class Product_Container extends React.Component {
       handleCurrentPage = (
         currentPage, 
         pager = this.props.pager,
-        sort = this.props.sort
+        sort = this.props.sort,
+        category = this.props.category
         ) =>{
         console.log("UpdatingCurrentPage: "+currentPage);
         this.setState({ loading: true });
-        this.props.sortAndPagingProduct(sort, pager, currentPage, () => {
+        this.props.sortAndPagingProduct(sort, pager, currentPage, category, () => {
           this.setState({ loading: false});
 
             });
@@ -107,7 +104,6 @@ class Product_Container extends React.Component {
                 {this.state.loading && <FadeLoader color={'#000000'} 
                 css={override}/>}
               {app_sort ? 
-              // <RankList goodsList={goodsList}/>
               ranklist
               :  
                 <ProductList goodsList={goodsListSorted} pager={pager} handleCurrentPage={this.handleCurrentPage}/>
