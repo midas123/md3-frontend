@@ -2,7 +2,7 @@ import React from 'react';
 import { FadeLoader } from 'react-spinners';
 
 import { connect } from 'react-redux';
-import { fetchProducts, sortAndPagingProduct, UpdatingCurrentPage } from '../../services/products/actions';
+import { fetchProducts, UpdatingCurrentPage } from '../../services/products/actions';
 
 import { css } from '@emotion/core';
 import ProductList from '../Product/ProductList';
@@ -24,20 +24,16 @@ class Product_Container extends React.Component {
       }
 
       componentDidMount(){
-        console.log("componentDidMount");
         let pager = this.props.pager;
-        this.initialFetchProduct();
-        this.handleFetchProducts("newest", pager);
+        this.initialFetchProduct(pager);
       }
 
       componentWillReceiveProps(nextProps) { 
-        console.log("componentWillReceiveProps");
         const { sort: nextSort, category:nextCategory } = nextProps;
         let preCurrentPage = this.props.pager.currentPage;
         let sort = this.props.sort;
         let pager = this.props.pager;
         let category = this.props.category;
-
 
         if(nextCategory !== category){
           this.handleFetchProducts(sort, pager, 1, nextCategory);
@@ -55,7 +51,8 @@ class Product_Container extends React.Component {
 
       }
       initialFetchProduct = () => {
-        this.props.fetchProducts();
+        var { pager }= this.props;
+        this.props.fetchProducts("newest", pager);
       }
 
       handleFetchProducts = (
@@ -65,7 +62,7 @@ class Product_Container extends React.Component {
         category
       ) => {
         this.setState({ loading: true });
-        this.props.sortAndPagingProduct(sort, pager, currentPage, category, () => {
+        this.props.fetchProducts(sort, pager, currentPage, category, () => {
           this.setState({ loading: false});
 
         });
@@ -78,9 +75,8 @@ class Product_Container extends React.Component {
         sort = this.props.sort,
         category = this.props.category
         ) =>{
-        console.log("UpdatingCurrentPage: "+currentPage);
         this.setState({ loading: true });
-        this.props.sortAndPagingProduct(sort, pager, currentPage, category, () => {
+        this.props.fetchProducts(sort, pager, currentPage, category, () => {
           this.setState({ loading: false});
 
             });
@@ -89,14 +85,13 @@ class Product_Container extends React.Component {
       render(){
         var { pager }= this.props;
         const { goodsListSorted } = this.props;
-   
-        let goodsList = JSON.parse(localStorage.getItem("goodsList"));
+        const { allGoodsList } = this.props;
 
         const { app_sort } = this.props;
         var ranklist;
         if(app_sort){
           ranklist = app_sort.map((m,index) => {
-            return (<RankList goodsList={goodsList}  category={m.category} app_sort={m.sort} key={index}/>)
+            return (<RankList goodsList={allGoodsList}  category={m.category} app_sort={m.sort} key={index}/>)
           })
         }
         return(
@@ -116,13 +111,14 @@ class Product_Container extends React.Component {
 
 const mapStateToProps = state => ({
   goodsListSorted: state.goods.goodsList,
+  allGoodsList: state.goods.initial_goodsList,
   sort: state.sort.type,
   pager: state.goods.pager,
   category : state.category.category
 });
 
 const mapDispatchToProps = {
-  fetchProducts, sortAndPagingProduct, UpdatingCurrentPage
+  fetchProducts, UpdatingCurrentPage
 };
 
 

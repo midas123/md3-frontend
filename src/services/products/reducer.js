@@ -1,8 +1,8 @@
-import { FETCH_PRODUCTS, CURRENTPAGE_UPDATE} from './actionType';
+import { FETCH_PRODUCTS, CURRENTPAGE_UPDATE, INITIAL_FETCH_PRODUCTS} from './actionType';
 
 const initialState = {
     goodsList: [],
-    goodsListSorted: [],
+    initial_goodsList: [],
     pager : {
         currentPage: 1,
         totalPages: 1,
@@ -21,6 +21,11 @@ export default function(state = initialState, action) {
                 ...state,
                 goodsList: action.payload
             };
+        case INITIAL_FETCH_PRODUCTS:
+            return {
+                ...state,
+                initial_goodsList: action.payload
+            };      
         case CURRENTPAGE_UPDATE:
             return {
                 ...state,

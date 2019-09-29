@@ -32,7 +32,6 @@ class ProductOrder extends Component {
     orderProduct(e){
         e.preventDefault();
         var token = localStorage.getItem("accessToken");
-        console.log("토큰: "+token)
         if(!token){
             alert("로그인 후 이용가능합니다.")
             return;

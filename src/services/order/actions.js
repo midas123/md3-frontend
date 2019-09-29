@@ -1,4 +1,5 @@
 import { FETCH_ORDERS, READY_ORDER, CLEAR_ORDER } from './actionType';
+import { API_BASE_URL } from '../../services/util/constant';
 
 
 export const readyOrder = order =>{
@@ -15,10 +16,10 @@ export const clearOrder = () =>{
 }
 
 
-export const fetchOrder = (orders, total_price) => {
+export const fetchOrder = (orders, total_price, callback) => {
     return  (dispatch) => { 
         let token = localStorage.getItem("accessToken")
-        fetch("/api-order/goods/order", {
+        fetch(API_BASE_URL+"/api-order/goods/order", {
         headers: new Headers({
             'Content-Type': 'application/json',
             'Authorization': token
@@ -39,13 +40,15 @@ export const fetchOrder = (orders, total_price) => {
                         }
                     }
                 })
-                payOrder(readyOrder, dispatch, total_price);
+                payOrder(readyOrder, dispatch, total_price, callback);
+
+             
             }
     })
     }
 }
 
-const payOrder = (order, dispatch, total_price) => {
+const payOrder = (order, dispatch, total_price, callback) => {
     if(order[0].ordercode == null){
         alert("주문실패: 잠시후 다시 시도해주세요.")
         return;
@@ -56,7 +59,9 @@ const payOrder = (order, dispatch, total_price) => {
             type: FETCH_ORDERS,
             payload: order
         })
-    } else if(order[0].payment_info.payment == "cart"){ 
+    }
+
+    if(order[0].payment_info.payment == "card"){ 
         const IMP = window.IMP; // 생략해도 괜찮습니다.
         IMP.init("imp08080720"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
 
@@ -74,11 +79,13 @@ const payOrder = (order, dispatch, total_price) => {
         }, rsp => { // callback
             if (rsp.success) {
                 // 결제 성공 시 로직,
-
                 dispatch({
                     type: FETCH_ORDERS,
                     payload: order
                 })
+                if (!!callback) {
+                    callback();
+                }
             } else {
                 // 결제 실패 시 로직,
                 alert("결제실패: 잠시후 다시 시도해주세요.")

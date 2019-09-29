@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { loginUser } from '../../services/auth/actions';
+import { API_BASE_URL } from '../../services/util/constant';
 
 
 import './LoginForm.scss';
@@ -41,8 +42,7 @@ class LoginForm extends React.Component {
         Array.from(data.entries()).forEach(([key, value]) => {
             json[key] = value;
         })
-        console.log("handleSubmit: "+JSON.stringify(json))
-          fetch("/api/auth/login", {
+          fetch(API_BASE_URL+"/api/auth/login", {
               //credentials: 'include',
               headers: {'Content-Type': 'application/json'},
               method: 'post',
@@ -50,12 +50,10 @@ class LoginForm extends React.Component {
             })
             .then(response => response.json())
             .then(json =>{
-                console.log("####: "+JSON.stringify(json))
                 if(json.status == "401"){
                     this.setState({
                         loginMessage: "아이디 또는 비밀번호를 확인해주세요."
                     })
-                    console.log("loginMessage:"+this.state.loginMessage)
                     return ;
                 }
 
@@ -79,7 +77,6 @@ class LoginForm extends React.Component {
   
     render(){
         const { isLoggedIn } = this.props;
-        console.log("LoginForm: "+isLoggedIn)
         if(isLoggedIn){
             return <Redirect push to="/"/>;
         }

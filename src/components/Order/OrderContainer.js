@@ -36,7 +36,9 @@ class OrderContainer extends Component {
 
             payment_info:{
                 payment:''
-            }
+            },
+
+            redirect: false
         }
     }
  
@@ -55,6 +57,10 @@ class OrderContainer extends Component {
             script.async = true;
             document.body.appendChild(script);
         }
+    }
+
+    componentWillUnmount(){
+        this.props.clearOrder();
     }
   
 
@@ -85,14 +91,17 @@ class OrderContainer extends Component {
             }
         })
      
-        this.props.fetchOrder(readyOrder, total_price);
+        this.props.fetchOrder(readyOrder, total_price, ()=>{
+            this.setState({
+                redirect:true
+            })
+        });
 
     }
  
     
     cancelOrdering =() =>{
         this.props.history.go(-2);
-        this.props.clearOrder();
     }
     
     handleDeliveryValid = (valid) => {
@@ -123,7 +132,8 @@ class OrderContainer extends Component {
  
     render(){
         const { orderResult } = this.props;
-        if (orderResult && orderResult.length !== 0) { //주문 완료시
+        // if (orderResult && orderResult.length !== 0) {
+        if(this.state.redirect) {   
             return <Redirect push to="/orderResult"/>;
         }
 

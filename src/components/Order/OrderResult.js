@@ -3,11 +3,24 @@ import { connect } from 'react-redux';
 import util from '../../services/util/util';
 import ThumbNail from '../ThumbNail/ThumbNail';
 import { Link  } from "react-router-dom";
+import { clearOrder } from '../../services/order/actions';
 
 import './OrderResult.scss';
 
-function OrderResult(props){
-    const { orderResult } = props;
+class OrderResult extends React.Component {
+    constructor(props){
+        super(props);
+        this.state ={
+
+        }
+    }
+
+    componentWillUnmount(){
+        this.props.clearOrder();
+    }
+
+    render(){
+    const { orderResult } = this.props;
     const itemList = orderResult.map(order=>{
         return(
         <div className="order-result-item" key={order.gd_id}>
@@ -80,12 +93,16 @@ function OrderResult(props){
             </div>
         </div>
     )
+    }
 }
 
 const mapStateToProps = state => ({
     orderResult : state.order.orders
 });
 
+const mapDispatchToProps = {
+    clearOrder
+};
 
 // export default OrderResult;
-export default connect(mapStateToProps, null)(OrderResult)
+export default connect(mapStateToProps, mapDispatchToProps)(OrderResult)

@@ -61,7 +61,10 @@ $all_device_width : "screen and (min-width:824px)";
             }
             @media #{$all_device_width}{
                 align-items: center;
-                text-align: center;
+                // text-align: center;
+                &__detail{
+                    margin-left: 15px;
+                }
             }
             &__thumb img{
                 @media #{$mobile_device}{

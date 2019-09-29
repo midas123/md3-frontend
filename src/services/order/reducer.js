@@ -10,7 +10,6 @@ export default function orderReducer(state = initialState, action) {
         case FETCH_ORDERS:
             return {
                 ...state,
-                // orders: [...state.orders, ...action.payload]
                 orders: action.payload
             }
         case READY_ORDER:

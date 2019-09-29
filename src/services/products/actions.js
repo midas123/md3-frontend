@@ -1,4 +1,5 @@
-import { FETCH_PRODUCTS, CURRENTPAGE_UPDATE } from './actionType';
+import { FETCH_PRODUCTS, CURRENTPAGE_UPDATE, INITIAL_FETCH_PRODUCTS } from './actionType';
+import { API_BASE_URL } from '../../services/util/constant';
 
 const compare = {
     lowestprice: (a, b) => {
@@ -63,82 +64,75 @@ function getPager(totalItemsCount, currentPage) {
         pages: pages
     };
 }
-
-export const fetchProducts = () => {
-    console.log("fetchProducts")
+export const fetchProducts = (sortBy, pager, currentPage, category, callback) => {
     return (dispatch) => {
-    let goodsList = JSON.parse(localStorage.getItem("goodsList"));
-    var exp = localStorage.getItem("goodsListExpiration");
-    var now =  Date.now();
+        let goodsList = JSON.parse(localStorage.getItem("goodsList"));
+        let exp = localStorage.getItem("goodsListExpiration");
+        let now =  Date.now();
+        if(((exp == null || undefined) && exp < now) || !goodsList){
+            localStorage.removeItem("goodsList");
 
-    // if((exp !== null || undefined) && exp > now && goodsList.length>0){
-    if((exp == null || undefined) && exp < now){
-        localStorage.removeItem("goodsList");
+            fetch(API_BASE_URL+'/api-product/goods/all')
+            .then(response =>  
+                response.json()
+            )
+            .then(json => {
+                goodsList = json;
+                var expires = (60*10);
+                var now = Date.now();  
+                var Expiration = now + expires*1000; 
+                localStorage.setItem("goodsList", JSON.stringify(goodsList));
+                localStorage.setItem("goodsListExpiration", Expiration);
+                dispatch({
+                    type: INITIAL_FETCH_PRODUCTS,
+                    payload : goodsList
+                });
+            }).catch(function(error) {
+                console.log("error: "+error);
+            });
+        } else {
+            dispatch({
+                type: INITIAL_FETCH_PRODUCTS,
+                payload : goodsList
+            });
 
-        fetch('/api-product/goods/all')
-        .then(response =>  
-            response.json()
-        )
-        .then(json => {
-            goodsList = json;
-            var expires = (60*10);
-            var now = Date.now();  
-            var Expiration = now + expires*1000; 
-            localStorage.setItem("goodsList", JSON.stringify(goodsList));
-            localStorage.setItem("goodsListExpiration", Expiration);
-        })
-    }    
-    dispatch({
-        type: FETCH_PRODUCTS,
-        payload : goodsList
-    });
-}
+            if(!!sortBy){
+                goodsList = goodsList.sort(compare[sortBy]);
+            }
+            
+            if(!!category){
+                var list=[];
+                for(var i=0; goodsList.length>i; i++){
+                    if(goodsList[i].goods_category1 == category){
+                        list.push(goodsList[i])
+                    }
+                }
+                goodsList = list;
+            }
+
+            if(!!pager){
+                pager = getPager(goodsList.length, currentPage);
+                goodsList = goodsList.slice(pager.startIndex, pager.endIndex + 1);
+            }
+            
+            
+            if (!!callback) {
+                callback();
+            }
+
+            dispatch({
+                type: FETCH_PRODUCTS,
+                payload : goodsList
+            });
+    
+            dispatch({
+                type: CURRENTPAGE_UPDATE,
+                payload : pager
+            });
+        }
+}    
 };
 
-export const sortAndPagingProduct = (sortBy, pager, currentPage, category, callback) =>{
-    var goodsList = JSON.parse(localStorage.getItem("goodsList"));
-    if(goodsList.length == 0){
-        alert("잠시 후 다시 시도해주세요.")
-        return ;
-    }
-
-    return (dispatch) => {
-        if(!!sortBy){
-            goodsList = goodsList.sort(compare[sortBy]);
-        }
-        
-        if(!!category){
-            var list=[];
-            for(var i=0; goodsList.length>i; i++){
-                if(goodsList[i].goods_category1 == category){
-                    list.push(goodsList[i])
-                }
-            }
-            goodsList = list;
-        }
-        if(!!pager){
-            pager = getPager(goodsList.length, currentPage);
-            goodsList = goodsList.slice(pager.startIndex, pager.endIndex + 1);
-            goodsList.forEach(g => {
-            })
-        }
-        
-        
-        if (!!callback) {
-            callback();
-        }
-
-        dispatch({
-            type: FETCH_PRODUCTS,
-            payload : goodsList
-        });
-
-        dispatch({
-            type: CURRENTPAGE_UPDATE,
-            payload : pager
-        });
-    }    
-}
 
 
 export const UpdatingCurrentPage = (currentPage, pager) => dispatch => {

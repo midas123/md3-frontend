@@ -4,17 +4,30 @@ import { Link } from "react-router-dom";
 import  util from '../../services/util/util';
 import './RankList.scss';
 
+import { css } from '@emotion/core';
+import { FadeLoader } from 'react-spinners';
+
+
+//spinner
+const override = css`
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    `;
+
 class RankList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-     
+      loading: false
     };
-
   }
+
   render() {
     const { goodsList } = this.props;
     const { category } = this.props;
+ 
+
     let index = 0;
     const products = goodsList.map((goods) => {
       if(goods.goods_category1 == category && index < 5){
@@ -40,6 +53,8 @@ class RankList extends React.Component {
       });
       return (
       <div className="rank-collection">
+          {this.state.loading && <FadeLoader color={'#000000'} 
+                css={override}/>}
           <div className="category-name">{category}</div>
           <div className="rank-collection-container">
             <div className="rank-collection__list">
