@@ -1,4 +1,4 @@
-import { LOAD_CART, ADD_PRODUCT, REMOVE_PRODUCT, ADD_TO_CART, CLEAR_CART } from './actionTypes';
+import { LOAD_CART, REMOVE_PRODUCT, ADD_TO_CART, CLEAR_CART } from './actionTypes';
 
 export const loadCart = products => {
   return{

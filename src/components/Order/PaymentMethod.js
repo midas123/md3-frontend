@@ -15,7 +15,6 @@ class PaymentMethod extends Component{
 
     handleInputChange(event) {
         const target = event.target;
-        console.log("handleInputChange: "+target.value);
         this.setState({
             payment: target.value
         });

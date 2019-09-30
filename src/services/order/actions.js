@@ -1,4 +1,4 @@
-import { FETCH_ORDERS, READY_ORDER, CLEAR_ORDER } from './actionType';
+import { FETCH_ORDERS, READY_ORDER, CLEAR_ORDER, CLEAR_PREORDER } from './actionType';
 import { API_BASE_URL } from '../../services/util/constant';
 
 
@@ -12,6 +12,12 @@ export const readyOrder = order =>{
 export const clearOrder = () =>{
     return{
         type: CLEAR_ORDER
+    }
+}
+
+export const clearPreOrder = () =>{
+    return{
+        type: CLEAR_PREORDER
     }
 }
 
@@ -59,6 +65,9 @@ const payOrder = (order, dispatch, total_price, callback) => {
             type: FETCH_ORDERS,
             payload: order
         })
+        if (!!callback) {
+            callback();
+        }
     }
 
     if(order[0].payment_info.payment == "card"){ 

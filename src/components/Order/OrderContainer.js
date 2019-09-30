@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchOrder, clearOrder } from '../../services/order/actions';
+import { fetchOrder, clearOrder, clearPreOrder } from '../../services/order/actions';
 import { Redirect } from 'react-router';
 
 
@@ -59,11 +59,6 @@ class OrderContainer extends Component {
         }
     }
 
-    componentWillUnmount(){
-        this.props.clearOrder();
-    }
-  
-
     orderProduct = (orders, total_price) => {
         if(orders.length === 0){
             alert("주문할 상품이 없습니다.")
@@ -98,9 +93,9 @@ class OrderContainer extends Component {
         });
 
     }
- 
     
     cancelOrdering =() =>{
+        this.props.clearPreOrder();
         this.props.history.go(-2);
     }
     
@@ -188,7 +183,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    fetchOrder, clearOrder
+    fetchOrder, clearOrder, clearPreOrder
     };
 
 //export default OrderPage;

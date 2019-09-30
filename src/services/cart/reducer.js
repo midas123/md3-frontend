@@ -20,26 +20,29 @@ export default function(state = initialState, action) {
       };
     }
     case CLEAR_CART:{
+      console.log("CLEAR_CART")
       return {
-        state : {}
+        products: [],
+        productIds: []
       };
     }
     case ADD_TO_CART:{
-      var array1 = action.payload;//새로 추가된 상품
-      var array2 = state.products;//기존 장바구니 상품
+      console.log("ADD_TO_CART")
+      var newItem = action.payload;//새로 추가된 상품
+      var current = state.products;//기존 장바구니 상품
       
-      const productList = array1.map(p => {
+      const productList = newItem.map(p => {
         if(state.productIds.includes(String(p.gd_id))){
+          console.log("cart-dup")
           let idx;
-          array2.find((e,index)=>{ //중복 상품 인덱스 구해서 수량 더하기
+          current.find((e,index)=>{ //중복 상품 인덱스 구해서 수량 더하기
             idx = index;
             return e.gd_id == p.gd_id;
           })
           return {
             ...p,
-            item_quantity:p.item_quantity + array2[idx].item_quantity
+            item_quantity: p.item_quantity + current[idx].item_quantity
           }
-          
         } 
 
         return p;
@@ -52,7 +55,7 @@ export default function(state = initialState, action) {
         
       return {
         ...state,
-        products: [...state.products,...productList],
+        products: [...productList],
         productIds: [...state.productIds,...ids]
         };
       }

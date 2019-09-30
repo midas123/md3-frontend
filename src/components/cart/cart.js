@@ -20,7 +20,6 @@ class Cart extends React.Component {
 
 
     componentWillReceiveProps(nextProps) {
-      console.log("componentWillReceiveProps");
       if (nextProps.newProduct !== this.props.newProduct) {
         // this.addProduct(nextProps.newProduct);
       }
@@ -33,12 +32,8 @@ class Cart extends React.Component {
     addProduct = product => {
       const { cartProducts, updateCart } = this.props;
       let productAlreadyInCart = false;
-      console.log("cartProducts:"+ JSON.stringify(cartProducts));
-  
       cartProducts.forEach(cp => { //상품 중복시 수량 증가
-        console.log("check:"+ cp.gd_id);
         if (cp.gd_id === product.gd_id) {
-          console.log("quan: "+cp.item_quantity);
           cp.item_quantity += product.item_quantity;
           productAlreadyInCart = true;
         }
@@ -64,8 +59,7 @@ class Cart extends React.Component {
 
     clearCart = () => {
       console.log("장바구니 비우기")
-      // const { clearCart } = this.props;
-      // this.props.clearCart();
+      this.props.clearCart();
     }
     
     openFloatCart = () => {
@@ -82,7 +76,6 @@ class Cart extends React.Component {
 
     proceedToCheckout = () => {
       const { cartProducts } = this.props;
-      console.log("proceedToCheckout: "+JSON.stringify(cartProducts))
       const {
         productQuantity
         //totalPrice,
@@ -136,7 +129,6 @@ class Cart extends React.Component {
             </span>
             <span className="header-title">장바구니</span>
 
-            {/* <span onClick={() => this.clearCart()}>장바구니 비우기</span> */}
           </div>
 
           <div className="float-cart__shelf-container">
@@ -150,6 +142,7 @@ class Cart extends React.Component {
           </div>
 
           <div className="float-cart__footer">
+          <div className="clear-cart-btn" onClick={() => this.clearCart()}>장바구니 비우기</div>
             <div className="sub">합계</div>
             <div className="sub-price">
               <p className="sub-price__val">

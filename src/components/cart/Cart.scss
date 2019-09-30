@@ -222,8 +222,10 @@ $mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
           width: 25%;
         }
       }
+
+      
     }
-  
+    
     &__footer {
       box-sizing: border-box;
       padding: 5%;
@@ -233,6 +235,15 @@ $mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
       height: 200px;
       z-index: 2;
       background-color: white;
+      .clear-cart-btn{
+        width: 100%;
+        text-align: center;
+        color: #999999; 
+        border: 1px solid #e7e7e7;
+        padding:7px 0 7px 0;
+        margin-bottom: 15px;
+        cursor: pointer;
+      }
   
       &::before {
         content: '';
@@ -248,6 +259,7 @@ $mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
   
       .sub,
       .sub-price {
+        margin-bottom: 15px;
         color: #5b5a5e;
         vertical-align: middle;
         display: inline-block;
@@ -272,10 +284,8 @@ $mobile_device : "screen and (min-width: 320px) and (max-width:567px)";
         }
       }
       .cart-btn{ 
-        margin-top: 40px;
         cursor: pointer;
         display: flex;
-
         text-align: center;
         .buy-btn {
           height: 40px;

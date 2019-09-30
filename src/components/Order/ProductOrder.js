@@ -57,14 +57,10 @@ class ProductOrder extends Component {
 
         <div className="product_order">
             <div className="buy_btn" onClick={(e) => this.orderProduct(e)}>
-                {/* <a href="#" onClick={(e) => this.orderProduct(e)}> */}
                     <span>구매하기</span>
-                {/* </a> */}
             </div>
             <div className="cart_btn" onClick={(e) => this.addProductToCart(e)}>
-                {/* <a href="#" onClick={(e) => this.addProductToCart(e)}> */}
                     <span>장바구니 담기</span>
-                {/* </a> */}
             </div>
         </div>
     )

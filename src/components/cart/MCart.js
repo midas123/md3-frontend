@@ -13,14 +13,11 @@ import './MCart.scss';
 
 class MCart extends React.Component {
     state ={
-        // isOpen: false,
-        // initial: true,
         redirect: false
     }
 
 
     componentWillReceiveProps(nextProps) {
-      console.log("componentWillReceiveProps");
       if (nextProps.newProduct !== this.props.newProduct) {
         // this.addProduct(nextProps.newProduct);
       }
@@ -32,12 +29,9 @@ class MCart extends React.Component {
     addProduct = product => {
       const { cartProducts, updateCart } = this.props;
       let productAlreadyInCart = false;
-      console.log("cartProducts:"+ JSON.stringify(cartProducts));
   
       cartProducts.forEach(cp => { //상품 중복시 수량 증가
-        console.log("check:"+ cp.gd_id);
         if (cp.gd_id === product.gd_id) {
-          console.log("quan: "+cp.item_quantity);
           cp.item_quantity += product.item_quantity;
           productAlreadyInCart = true;
         }
@@ -46,8 +40,7 @@ class MCart extends React.Component {
       if (!productAlreadyInCart) { //장바구니 객채에 상품 추가
         cartProducts.push(product);
       } 
-      updateCart(cartProducts); //장바구니 state 업데이트
-      // this.openFloatCart();
+      this.props.updateCart(cartProducts); //장바구니 state 업데이트
     };
 
 
@@ -57,21 +50,19 @@ class MCart extends React.Component {
       const index = cartProducts.findIndex(p => p.gd_id === product.gd_id);
       if (index >= 0) {
         cartProducts.splice(index, 1);
-        updateCart(cartProducts);
+        this.props.updateCart(cartProducts);
       }
     };
 
     clearCart = () => {
-      console.log("장바구니 비우기")
-      // const { clearCart } = this.props;
-      // this.props.clearCart();
+      this.props.clearCart();
     }
     
     openFloatCart = () => {
       this.setState({ isOpen: true });
       this.setState({ initial: false });
       const { cartProducts, updateCart } = this.props;
-      updateCart(cartProducts);
+      this.props.updateCart(cartProducts);
       };
     
     closeFloatCart = () => {
@@ -81,7 +72,6 @@ class MCart extends React.Component {
 
     proceedToCheckout = () => {
       const { cartProducts } = this.props;
-      console.log("proceedToCheckout: "+JSON.stringify(cartProducts))
       const {
         productQuantity
         //totalPrice,
@@ -103,7 +93,6 @@ class MCart extends React.Component {
         return <Redirect push to="/order" state={this.props.items}/>;
       }
         const { cartTotal, cartProducts, removeProduct, } = this.props;
-        console.log("cart2: "+JSON.stringify(cartProducts))
         const products = cartProducts.map(p => {
               return (
                 <CartProduct product={p} removeProduct={removeProduct} key={p.gd_id} />
@@ -116,7 +105,6 @@ class MCart extends React.Component {
         <div className="float-mcart__content">
           <div className="float-mcart__header">
             <span className="header-title">장바구니</span>
-            {/* <span onClick={() => this.clearCart()}>장바구니 비우기</span> */}
           </div>
 
           <div className="float-mcart__shelf-container">
@@ -128,6 +116,8 @@ class MCart extends React.Component {
           </div>
           {products.length > 0 && 
           <div className="float-mcart__footer">
+          <div className="clear-cart-btn" onClick={() => this.clearCart()}>장바구니 비우기</div>
+
              <div className="quantity">총&nbsp;{cartTotal.productQuantity}개의 상품</div> 
             <div className="sub">합계</div>
             <div className="sub-price">

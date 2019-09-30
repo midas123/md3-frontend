@@ -49,7 +49,6 @@ class DeliveryInfo extends Component {
     }
 
     zipCodeModal(value){
-        console.log("zipCodeModal")
         let displayValue = '';
         if(value.display == 'block'){
             displayValue = 'none'
