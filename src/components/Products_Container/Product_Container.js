@@ -52,7 +52,10 @@ class Product_Container extends React.Component {
       }
       initialFetchProduct = () => {
         var { pager }= this.props;
-        this.props.fetchProducts("newest", pager);
+        this.setState({ loading: true});
+        this.props.fetchProducts("newest", pager, 1, null, () => {
+          this.setState({ loading: false});
+        } );
       }
 
       handleFetchProducts = (

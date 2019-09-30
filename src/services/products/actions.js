@@ -83,6 +83,11 @@ export const fetchProducts = (sortBy, pager, currentPage, category, callback) =>
                 var Expiration = now + expires*1000; 
                 localStorage.setItem("goodsList", JSON.stringify(goodsList));
                 localStorage.setItem("goodsListExpiration", Expiration);
+
+                if (!!callback) {
+                    callback();
+                }
+
                 dispatch({
                     type: INITIAL_FETCH_PRODUCTS,
                     payload : goodsList
@@ -103,7 +108,7 @@ export const fetchProducts = (sortBy, pager, currentPage, category, callback) =>
             if(!!category){
                 var list=[];
                 for(var i=0; goodsList.length>i; i++){
-                    if(goodsList[i].goods_category1 == category){
+                    if(goodsList[i].goods_category1 === category){
                         list.push(goodsList[i])
                     }
                 }

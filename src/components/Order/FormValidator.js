@@ -1,5 +1,3 @@
-import React from 'react';
-
 const formValidator = (target) =>{
     let valid = false;
     let result= '';

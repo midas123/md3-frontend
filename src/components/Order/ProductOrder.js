@@ -24,7 +24,6 @@ class ProductOrder extends Component {
             alert("장바구니에 추가할 상품을 선택해주세요.")
             return;
         }
-        console.log("addProductToCart: "+JSON.stringify(items))
         this.props.addToCart(items);
         alert("장바구니에 상품을 추가했습니다.")
     }

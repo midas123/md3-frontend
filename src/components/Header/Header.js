@@ -50,11 +50,11 @@ class Header extends React.Component {
                                 </NavLink>
                             }
                         </li>
-                        {isLoggedIn && (
+                        {/* {isLoggedIn && (
                             <li className="personal_page_link">
                                 <NavLink to="/userinfo">내 정보</NavLink>
                             </li>
-                        )}
+                        )} */}
                         <li className="store_link">
                             <NavLink to="/store">스토어</NavLink>
                         </li>

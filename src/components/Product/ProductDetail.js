@@ -1,4 +1,4 @@
-import React ,{ Component } from 'react';
+import React from 'react';
 
 import  util from '../../services/util/util';
 import './ProductDetail.scss';

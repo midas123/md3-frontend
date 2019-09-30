@@ -58,7 +58,6 @@ class Cart extends React.Component {
     };
 
     clearCart = () => {
-      console.log("장바구니 비우기")
       this.props.clearCart();
     }
     
@@ -75,6 +74,11 @@ class Cart extends React.Component {
     };
 
     proceedToCheckout = () => {
+      var token = localStorage.getItem("accessToken");
+      if(!token){
+        alert("로그인 후 이용가능합니다.")
+        return;
+      }
       const { cartProducts } = this.props;
       const {
         productQuantity

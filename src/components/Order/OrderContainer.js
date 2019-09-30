@@ -126,8 +126,6 @@ class OrderContainer extends Component {
     }
  
     render(){
-        const { orderResult } = this.props;
-        // if (orderResult && orderResult.length !== 0) {
         if(this.state.redirect) {   
             return <Redirect push to="/orderResult"/>;
         }

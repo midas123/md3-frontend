@@ -71,6 +71,11 @@ class MCart extends React.Component {
     };
 
     proceedToCheckout = () => {
+      var token = localStorage.getItem("accessToken");
+      if(!token){
+        alert("로그인 후 이용가능합니다.")
+        return;
+      }
       const { cartProducts } = this.props;
       const {
         productQuantity

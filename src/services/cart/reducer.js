@@ -20,20 +20,17 @@ export default function(state = initialState, action) {
       };
     }
     case CLEAR_CART:{
-      console.log("CLEAR_CART")
       return {
         products: [],
         productIds: []
       };
     }
     case ADD_TO_CART:{
-      console.log("ADD_TO_CART")
       var newItem = action.payload;//새로 추가된 상품
       var current = state.products;//기존 장바구니 상품
       
       const productList = newItem.map(p => {
         if(state.productIds.includes(String(p.gd_id))){
-          console.log("cart-dup")
           let idx;
           current.find((e,index)=>{ //중복 상품 인덱스 구해서 수량 더하기
             idx = index;
