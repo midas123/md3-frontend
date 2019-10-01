@@ -6,35 +6,35 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+moduhome3
+==========
 
-### `npm test`
+### 개요
+이전에 스프링 프레임워크로 만든 쇼핑몰 프로젝트를
+ 프론트엔드와 백엔드로 나누어 다시 구현함.
+완성한 프로젝트는 구글 클라우드 VM인스턴스에 docker를 설치하여 가상환경을 구성하고 프론트 엔드와 백엔드를 각 컨테이너에서 구동.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 구현 기능
+로그인(spring-security/JWT)
+상품 게시판(상품 정렬/페이징/카테고리/무한 스크롤)
+상품 상세페이지(옵션 선택/수량 변경)
+장바구니
+주문/결제(결제API)
 
-### `npm run build`
+### 개발 환경
+OS: 윈도우10
+IDE: 이클립스STS, 비주얼 스튜디오 코드
+react
+javascript
+springboot 2.16
+java8
+maven
+git
+mariaDB
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 배포 환경
+구글 클라우드 VM인스턴스
+리눅스 데비안
+docker-compose
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
