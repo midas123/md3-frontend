@@ -24,7 +24,7 @@ moduhome3
 * OS: 윈도우10
 * IDE: 이클립스STS, 비주얼 스튜디오 코드
 * react / javascript
-* springboot 2.16
+* springboot 2.16 / spring-security
 * java8
 * maven
 * git
