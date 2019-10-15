@@ -28,27 +28,34 @@ export default function(state = initialState, action) {
     case ADD_TO_CART:{
       var newItem = action.payload;//새로 추가된 상품
       var current = state.products;//기존 장바구니 상품
-      
-      const productList = newItem.map(p => {
+      console.log("newItem: "+JSON.stringify(newItem))
+      console.log("current: "+JSON.stringify(current))
+      const newList = newItem.map(p => {
         if(state.productIds.includes(String(p.gd_id))){
+          console.log("dup")
           let idx;
           current.find((e,index)=>{ //중복 상품 인덱스 구해서 수량 더하기
             idx = index;
             return e.gd_id == p.gd_id;
           })
+          let iq = current[idx].item_quantity;
+          current.splice(idx, 1);
           return {
             ...p,
-            item_quantity: p.item_quantity + current[idx].item_quantity
+            item_quantity: p.item_quantity + iq
           }
         } 
+        console.log("current2: "+JSON.stringify(state.products))
 
         return p;
       })
+      const productList = current.concat(newList);
       const ids = action.payload.map(i =>{ //새로 추가된 상품을 상품id 리스트에 추가
           if(!state.productIds.includes(i.gd_id)){
             return String(i.gd_id);
           }
       })
+      console.log("productList: "+JSON.stringify(productList))
         
       return {
         ...state,

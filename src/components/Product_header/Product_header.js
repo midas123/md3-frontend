@@ -10,7 +10,6 @@ class Container_Header extends React.Component {
 
     handleCategory = (category, e) => {
         e.preventDefault();
-        console.log("handlecategory: "+category)
         this.props.updateCategory(category);
     }
 
@@ -18,6 +17,7 @@ class Container_Header extends React.Component {
         const { app_sort } = this.props;
         const categories = 
         [
+          {category:"전체"}, 
           {category:"가구"}, 
           {category:"가전"},
           {category:"패브릭"},

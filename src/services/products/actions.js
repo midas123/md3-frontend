@@ -78,6 +78,8 @@ export const fetchProducts = (sortBy, pager, currentPage, category, callback) =>
             )
             .then(json => {
                 goodsList = json;
+                goodsList = goodsList.sort(compare['newest']);
+
                 var expires = (60*10);
                 var now = Date.now();  
                 var Expiration = now + expires*1000; 
@@ -104,8 +106,8 @@ export const fetchProducts = (sortBy, pager, currentPage, category, callback) =>
             if(!!sortBy){
                 goodsList = goodsList.sort(compare[sortBy]);
             }
-            
-            if(!!category){
+
+            if(!!category && category!=='전체'){
                 var list=[];
                 for(var i=0; goodsList.length>i; i++){
                     if(goodsList[i].goods_category1 === category){
@@ -120,20 +122,19 @@ export const fetchProducts = (sortBy, pager, currentPage, category, callback) =>
                 goodsList = goodsList.slice(pager.startIndex, pager.endIndex + 1);
             }
             
-            
             if (!!callback) {
                 callback();
             }
+            dispatch({
+                type: CURRENTPAGE_UPDATE,
+                payload : pager
+            });
 
             dispatch({
                 type: FETCH_PRODUCTS,
                 payload : goodsList
             });
     
-            dispatch({
-                type: CURRENTPAGE_UPDATE,
-                payload : pager
-            });
         }
 }    
 };

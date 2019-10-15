@@ -9,6 +9,7 @@ $mobile_device2 : "screen and (min-width: 568px) and (max-width:823px)";
         @media #{$mobile_device}{
             width: 100%;
             margin-bottom: 30px;
+            font-size: 14px;
         }
         @media #{$mobile_device2}{
             width: 60%;
@@ -29,7 +30,7 @@ $mobile_device2 : "screen and (min-width: 568px) and (max-width:823px)";
             color: inherit;
         }    
         .main-category-item{
-            padding:2px 7px 2px 7px;
+            padding:2px 5px 2px 5px;
             border: #6FB3CE 1px solid;
             color:#333333;
         }

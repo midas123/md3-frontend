@@ -23,7 +23,28 @@ class ProductList extends React.Component {
   componentDidMount() {
     window.addEventListener('scroll', this.handleOnScroll);
     window.addEventListener('scroll', this.handleScrollTopBtn);
-    this.initProductList();
+  }
+
+  componentWillReceiveProps(nextProps){
+    const wid = document.documentElement.getBoundingClientRect().width;
+    const { sort: nextSort, category:nextCategory } = nextProps;
+
+    let pager = nextProps.pager;
+    let category = this.props.category;
+    let sort = this.props.sort;
+  
+    if(category !== nextCategory){
+      this.setState({
+        currentScrollPage:1
+      })
+    }
+
+    if(wid < 824 && !!nextCategory && pager.currentPage ==1){
+    this.setState({
+      productList:nextProps.goodsList,
+      requestSent: false
+    })
+    }
   }
 
   componentWillUnmount() {
@@ -31,25 +52,18 @@ class ProductList extends React.Component {
     window.removeEventListener('scroll', this.handleScrollTopBtn);
   }
 
-  handleCategory = (category, e) => {
-    e.preventDefault();
-    this.props.updateCategory(category);
-  }
-
-  initProductList = () => {
-    const data = this.props.goodsList;
-    this.setState({productList: data});
-  }
-
-  loadProductList = () => {
-    if (this.state.requestSent) {
-      return;
+  handleScrollTopBtn = () => {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      this.setState({
+        scrollTopBtn:true
+      })
+    } else {
+      this.setState({
+        scrollTopBtn:false
+      })
     }
-    this.setState({ loading: true });
-    setTimeout(this.doLoad, 1000);
-    this.setState({ loading: false });
-    this.setState({requestSent: true});
   }
+
   handleOnScroll = () => {
     const wid = document.documentElement.getBoundingClientRect().width;
 
@@ -63,39 +77,46 @@ class ProductList extends React.Component {
         this.loadProductList();
       }
     } 
-
     return false;
-    
   }
-  handleScrollTopBtn = () => {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      this.setState({
-        scrollTopBtn:true
-      })
-    } else {
-      this.setState({
-        scrollTopBtn:false
-      })
-    }
-  }
-
-  doLoad = () => {
-    let currentScrollPage = this.state.currentScrollPage +1;
+  
+  loadProductList = () => {
     const { pager } = this.props;
+    if (this.state.requestSent || pager.currentPage == pager.endPage ) {
+      return;
+    }
+
+    this.setState({ loading: true });
+    setTimeout(this.doLoad, 1000);
+    this.setState({ 
+      loading: false,
+      requestSent: true });
+  }
+  updateCurrentPage= (currentScrollPage) => {
+    const { pager } = this.props;
+    this.setState({
+      currentScrollPage: currentScrollPage
+    });
     this.props.handleCurrentPage(currentScrollPage, pager);
-    const goodsList = this.state.productList.concat(this.props.goodsList);
     
+  }
+  
+  doLoad = () => {
+    var currentScrollPage = this.state.currentScrollPage;
+    this.updateCurrentPage(currentScrollPage+1);
+    var goodsList = this.state.productList.concat(this.props.goodsList);
     this.setState({
       productList: goodsList, 
-      requestSent: false,
-      currentScrollPage: currentScrollPage
+      requestSent: false
     });
   }
 
   render() {
+    const { pager } = this.props;
     const wid = document.documentElement.getBoundingClientRect().width;
     var { goodsList } = this.props;
-    if(wid<824){
+
+    if(wid<824 && pager.currentPage !== 1){
       goodsList = this.state.productList;
     }
 
@@ -104,7 +125,6 @@ class ProductList extends React.Component {
     bottom:0;
     `;
 
-    const { pager } = this.props;
     const products = goodsList.map(p => {
       return (
           <Product product={p} buyProduct={this.buyProduct} key={p.goods_id} />
@@ -117,7 +137,8 @@ class ProductList extends React.Component {
             <div className="product_list">
               {products}
               {this.state.scrollTopBtn &&
-            <button className="to-the-top-btn">맨 위로</button>}
+            <button className="to-the-top-btn" onClick={() => {
+                  window.scrollTo(0, 0)}}>맨 위로</button>}
             {this.state.loading && <FadeLoader color={'#000000'} css={override}/>}
             </div>
           {wid > 823 &&

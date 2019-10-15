@@ -88,9 +88,11 @@ class Product_Container extends React.Component {
       render(){
         var { pager }= this.props;
         const { goodsListSorted } = this.props;
+        const { sort } = this.props;
+        const { category } = this.props;
         const { allGoodsList } = this.props;
-
         const { app_sort } = this.props;
+
         var ranklist;
         if(app_sort){
           ranklist = app_sort.map((m,index) => {
@@ -104,7 +106,7 @@ class Product_Container extends React.Component {
               {app_sort ? 
               ranklist
               :  
-                <ProductList goodsList={goodsListSorted} pager={pager} handleCurrentPage={this.handleCurrentPage}/>
+                <ProductList goodsList={goodsListSorted} category={category} pager={pager} sort={sort} handleCurrentPage={this.handleCurrentPage}/>
               }
           </React.Fragment>
         );
