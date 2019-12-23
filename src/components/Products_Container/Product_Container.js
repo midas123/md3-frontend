@@ -86,14 +86,14 @@ class Product_Container extends React.Component {
         };
 
       render(){
-        var { pager }= this.props;
+        let { pager }= this.props;
         const { goodsListSorted } = this.props;
         const { sort } = this.props;
         const { category } = this.props;
         const { allGoodsList } = this.props;
         const { app_sort } = this.props;
 
-        var ranklist;
+        let ranklist;
         if(app_sort){
           ranklist = app_sort.map((m,index) => {
             return (<RankList goodsList={allGoodsList}  category={m.category} app_sort={m.sort} key={index}/>)

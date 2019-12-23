@@ -16,7 +16,8 @@
         width:76%;
     }
     input {
-        line-height: 22px;
+        line-height: 24px;
+        height: 24px;
     }
     .inner{
         display: flex;
@@ -60,19 +61,27 @@
     }
 }
 .valid-check-sign{
+    // margin-left: 20px;
+    // --borderWidth: 3px;
+    // --height: 16px;
+    // --width: 6px;
+    // --borderColor: #78b13f;
+    // .check{
+    //     transform: rotate(45deg);
+    //     height: var(--height);
+    //     width: var(--width);
+    //     border-bottom: var(--borderWidth) solid var(--borderColor);
+    //     border-right: var(--borderWidth) solid var(--borderColor);
+    // }
+
     margin-left: 20px;
-    --borderWidth: 3px;
-    --height: 16px;
-    --width: 6px;
-    --borderColor: #78b13f;
     .check{
         transform: rotate(45deg);
-        height: var(--height);
-        width: var(--width);
-        border-bottom: var(--borderWidth) solid var(--borderColor);
-        border-right: var(--borderWidth) solid var(--borderColor);
+        height: 16px;
+        width: 6px;
+        border-bottom: 3px solid #78b13f;
+        border-right: 3px solid #78b13f;
     }
-    
 }
 .zip-code-popup-box {
     width: 100%;

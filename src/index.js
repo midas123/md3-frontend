@@ -1,6 +1,12 @@
+import 'react-app-polyfill/ie11';
+import 'core-js/features/array/keys';
+import 'formdata-polyfill';
+import 'core-js/features/array/find';
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -17,6 +23,7 @@ import LoginForm from './components/Auth/LoginForm';
 import ScrollToTop from './services/util/ScrollTop';
 import MCart from './components/Cart/MCart';
 import Product_header from './components/Product_header/Product_header';
+
 
 
 const routing = (

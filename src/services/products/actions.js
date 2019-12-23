@@ -1,6 +1,7 @@
 import { FETCH_PRODUCTS, CURRENTPAGE_UPDATE, INITIAL_FETCH_PRODUCTS } from './actionType';
 import { API_BASE_URL } from '../../services/util/constant';
 
+
 const compare = {
     lowestprice: (a, b) => {
         a = Number(a.goodsDetail[0].goods_disprice);
@@ -73,10 +74,35 @@ export const fetchProducts = (sortBy, pager, currentPage, category, callback) =>
             localStorage.removeItem("goodsList");
 
             fetch(API_BASE_URL+'/api-product/goods/all')
-            .then(response =>  
-                response.json()
-            )
-            .then(json => {
+            // .then(response =>  
+            //     response.json()
+            // )
+            .then(function(response) {
+                if (response.status >= 400) {
+                    throw new Error("Bad response from server");
+                }
+                return response.json();
+            })
+            // .then(json => {
+            //     goodsList = json;
+            //     goodsList = goodsList.sort(compare['newest']);
+
+            //     var expires = (60*10);
+            //     var now = Date.now();  
+            //     var Expiration = now + expires*1000; 
+            //     localStorage.setItem("goodsList", JSON.stringify(goodsList));
+            //     localStorage.setItem("goodsListExpiration", Expiration);
+
+            //     if (!!callback) {
+            //         callback();
+            //     }
+
+            //     dispatch({
+            //         type: INITIAL_FETCH_PRODUCTS,
+            //         payload : goodsList
+            //     });
+            // })
+            .then(function(json) {
                 goodsList = json;
                 goodsList = goodsList.sort(compare['newest']);
 
@@ -94,9 +120,11 @@ export const fetchProducts = (sortBy, pager, currentPage, category, callback) =>
                     type: INITIAL_FETCH_PRODUCTS,
                     payload : goodsList
                 });
-            }).catch(function(error) {
-                console.log("error: "+error);
-            });
+                
+            })
+            // .catch(function(error) {
+            //     console.log("error: "+error);
+            // });
         } else {
             dispatch({
                 type: INITIAL_FETCH_PRODUCTS,

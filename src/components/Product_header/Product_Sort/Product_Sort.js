@@ -3,7 +3,7 @@ import SelectBox from './SelectBox';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { updateSort } from '../../services/sort/actions';
+import { updateSort } from '../../../services/sort/actions';
 
 const sortBy = [
     { value:'newest', label: '최신순'},

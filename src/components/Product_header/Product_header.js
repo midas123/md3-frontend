@@ -1,5 +1,5 @@
 import React from 'react';
-import Sort from '../Product_Sort/Product_Sort';
+import Sort from './Product_Sort/Product_Sort';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { updateCategory } from '../../services/category/actions';
