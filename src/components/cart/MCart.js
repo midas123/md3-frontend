@@ -27,17 +27,17 @@ class MCart extends React.Component {
       }
     }
     addProduct = product => {
-      const { cartProducts, updateCart } = this.props;
-      let productAlreadyInCart = false;
+      const { cartProducts} = this.props;
+      let isProductAlreadyInCart = false;
   
       cartProducts.forEach(cp => { //상품 중복시 수량 증가
         if (cp.gd_id === product.gd_id) {
           cp.item_quantity += product.item_quantity;
-          productAlreadyInCart = true;
+          isProductAlreadyInCart = true;
         }
       });
       
-      if (!productAlreadyInCart) { //장바구니 객채에 상품 추가
+      if (!isProductAlreadyInCart) { //장바구니 객채에 상품 추가
         cartProducts.push(product);
       } 
       this.props.updateCart(cartProducts); //장바구니 state 업데이트
@@ -45,7 +45,7 @@ class MCart extends React.Component {
 
 
     removeProduct = product => {
-      const { cartProducts, updateCart } = this.props;
+      const { cartProducts } = this.props;
   
       const index = cartProducts.findIndex(p => p.gd_id === product.gd_id);
       if (index >= 0) {
@@ -61,7 +61,7 @@ class MCart extends React.Component {
     openFloatCart = () => {
       this.setState({ isOpen: true });
       this.setState({ initial: false });
-      const { cartProducts, updateCart } = this.props;
+      const { cartProducts } = this.props;
       this.props.updateCart(cartProducts);
       };
     
@@ -123,7 +123,7 @@ class MCart extends React.Component {
           <div className="float-mcart__footer">
           <div className="clear-cart-btn" onClick={() => this.clearCart()}>장바구니 비우기</div>
 
-             <div className="quantity">총&nbsp;{cartTotal.productQuantity}개의 상품</div> 
+             <div className="quantity">총&nbsp;{cartTotal.totalQuantity}개의 상품</div> 
             <div className="sub">합계</div>
             <div className="sub-price">
               <p className="sub-price__val">

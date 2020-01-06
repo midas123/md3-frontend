@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { addToCart } from '../../services/cart/actions';
 import { readyOrder } from '../../services/order/actions';
+import { updateCart } from '../../services/total/actions';
 
 import { Redirect } from 'react-router';
 
@@ -67,13 +68,17 @@ class ProductOrder extends Component {
 }
 
 
+const mapStateToProps = state => ({
+    cartTotal: state.total.data
+  });
+
 const mapDispatchToProps = {
-     addToCart, readyOrder
+     addToCart, readyOrder, updateCart
 };
   
   
 export default connect(
-    null, mapDispatchToProps
+    mapStateToProps, mapDispatchToProps
 )(ProductOrder);
 
 

@@ -2,7 +2,7 @@ import { UPDATE_CART } from './actionTypes';
 
 const initialState = {
   data: {
-    productQuantity: 0,
+    totalQuantity: 0,
     // installments: 0,
     // totalPrice: 0,
     // currencyId: '원',

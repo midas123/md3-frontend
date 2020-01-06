@@ -1,7 +1,8 @@
 import { UPDATE_CART } from './actionTypes';
 
 export const updateCart = cartProducts => dispatch => {
-  let productQuantity = cartProducts.reduce((sum, p) => {
+  console.log("updateCart: "+JSON.stringify(cartProducts));
+  let totalQuantity = cartProducts.reduce((sum, p) => {
     sum += p.item_quantity;
     return sum;
   }, 0);
@@ -17,7 +18,7 @@ export const updateCart = cartProducts => dispatch => {
   // }, 0);
 
   let cartTotal = {
-    productQuantity,
+    totalQuantity,
     //installments,
     totalPrice,
     currencyId: '원',

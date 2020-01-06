@@ -24,10 +24,14 @@ class Header extends React.Component {
 
     userLogout(e){
         e.preventDefault();
-        console.log("userLogout");
         const { isLoggedIn } = this.props;
         if(isLoggedIn){
+            if(localStorage.getItem("Naver_accessToken") != null){
+                localStorage.removeItem("Naver_accessToken");
+            }
             this.props.logoutUser();
+
+           
         }
     }
 

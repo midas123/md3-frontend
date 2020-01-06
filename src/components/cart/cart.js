@@ -20,6 +20,7 @@ class Cart extends React.Component {
 
 
     componentWillReceiveProps(nextProps) {
+      console.log("componentWillReceiveProps:"+JSON.stringify(nextProps));
       if (nextProps.newProduct !== this.props.newProduct) {
         // this.addProduct(nextProps.newProduct);
       }
@@ -31,15 +32,15 @@ class Cart extends React.Component {
     }
     addProduct = product => {
       const { cartProducts, updateCart } = this.props;
-      let productAlreadyInCart = false;
+      let isProductAlreadyInCart = false;
       cartProducts.forEach(cp => { //상품 중복시 수량 증가
         if (cp.gd_id === product.gd_id) {
           cp.item_quantity += product.item_quantity;
-          productAlreadyInCart = true;
+          isProductAlreadyInCart = true;
         }
       });
       
-      if (!productAlreadyInCart) { //장바구니 객채에 상품 추가
+      if (!isProductAlreadyInCart) { //장바구니 객채에 상품 추가
         cartProducts.push(product);
       } 
       updateCart(cartProducts); //장바구니 state 업데이트
@@ -81,13 +82,13 @@ class Cart extends React.Component {
       }
       const { cartProducts } = this.props;
       const {
-        productQuantity
+        totalQuantity
         //totalPrice,
         //currencyFormat,
         //currencyId
       } = this.props.cartTotal;
   
-      if (!productQuantity) {
+      if (!totalQuantity) {
         alert('장바구니에 상품을 추가해주세요.');
       } else {
         this.props.readyOrder(cartProducts);
@@ -120,16 +121,18 @@ class Cart extends React.Component {
             onClick={() => this.openFloatCart()}
             className="bag bag--float-cart-closed"
           >
-            {!this.state.initial && ( 
+            {/* {!this.state.initial && ( 
               <span className="bag__quantity">{cartTotal.productQuantity}</span>
-            )}
+            )} */}
+              
+
           </span>
         )}
 
         <div className="float-cart__content">
           <div className="float-cart__header">
             <span className="bag">
-              <span className="bag__quantity">{cartTotal.productQuantity}</span>
+              {/* <span className="bag__quantity">{cartTotal.totalQuantity}</span> */}
             </span>
             <span className="header-title">장바구니</span>
 
@@ -148,12 +151,16 @@ class Cart extends React.Component {
           <div className="float-cart__footer">
           <div className="clear-cart-btn" onClick={() => this.clearCart()}>장바구니 비우기</div>
             <div className="sub">합계</div>
-            <div className="sub-price">
-              <p className="sub-price__val">
-                {util.formatPrice(cartTotal.totalPrice)}
-                  {cartTotal.currencyId}
-              </p>
-      
+            <div className="cart_total_box">
+              <div className="cart_total_quantity">
+              총 {cartTotal.totalQuantity} 개의 상품
+              </div>
+              <div className="sub-price">
+                <p className="sub-price__val">
+                  {util.formatPrice(cartTotal.totalPrice)}
+                    {cartTotal.currencyId}
+                </p>
+              </div>
             </div>
             <div className="cart-btn">
               <div onClick={() => this.proceedToCheckout()} className="buy-btn">

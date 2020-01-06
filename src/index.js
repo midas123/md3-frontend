@@ -19,10 +19,11 @@ import Product_Container from './components/Products_Container/Product_Container
 import ProductDetail from './components/Product/ProductDetail';
 import OrderContainer from './components/Order/OrderContainer';
 import OrderResult from './components/Order/OrderResult';
-import LoginForm from './components/Auth/LoginForm';
+import LoginContainer from './components/Auth/LoginContainer';
 import ScrollToTop from './services/util/ScrollTop';
 import MCart from './components/Cart/MCart';
 import Product_header from './components/Product_header/Product_header';
+import NaverLoginCallback from './components/Auth/NaverLoginCallback';
 
 
 
@@ -38,8 +39,10 @@ const routing = (
             <Route path="/goods/:id" component={ProductDetail} /> 
             <Route path="/order" component={OrderContainer} /> 
             <Route path="/orderResult" component={OrderResult} /> 
-            <Route path="/login" component={LoginForm} /> 
+            <Route path="/login" component={LoginContainer} /> 
             <Route path="/mcart" component={MCart} /> 
+            <Route path="/naver_login/callback" component={NaverLoginCallback} /> 
+
             <Footer/> 
     </ScrollToTop>
     </Router>
